@@ -25,6 +25,17 @@
   height: 80px;
   background: linear-gradient(to top, #6d8e65, rgba(0, 0, 0, 0));
 }
+
+
+.carousel.dark .item::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 200px;
+  background: linear-gradient(to bottom, #6d8e65, rgba(0, 0, 0, 0));
+}
 .carousel .item a {
   cursor: auto;
 }
