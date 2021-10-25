@@ -38,7 +38,7 @@
 }
 
 .card .imgContainer:hover .hoverLayer {
-  opacity: 1;
+  opacity: 0.85;
 }
 
 .card .hoverLayer a {
