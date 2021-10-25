@@ -1,8 +1,6 @@
 import styled from "styled-components";
 
 export const SigninBlock = styled.div`
-  padding: 60px 0;
-  margin: 80px 0;
   
 `;
 

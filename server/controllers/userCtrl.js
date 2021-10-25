@@ -40,7 +40,6 @@ module.exports = {
                     data: "Invalid email or password"
                 });
             }
-
             const result = compareSync(body.password, results.password);
             if (result) {
                 results.password = undefined;
@@ -50,7 +49,9 @@ module.exports = {
                 return res.json({
                     success: 1,
                     message: "login successfully",
-                    token: jsontoken
+                    token: jsontoken,
+                    name:results.name
+
                 });
             } else {
                 return res.json({
