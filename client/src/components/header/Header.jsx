@@ -20,6 +20,7 @@ const Header = ({ theme }) => {
                 <span>
                   <img src={mark}/>
                 </span>{' '}
+
               </Link>
             </li>
             <li>
@@ -27,16 +28,19 @@ const Header = ({ theme }) => {
                 <span>
                   Creative Enjoy Our Cinema
                 </span>{' '}
+
               </a>
             </li>
 
           </ul>
           <ul className={`${classes.menu} ${classes.menu2}`}>
             <li>
+
               <Link to={"/market"}>새싹마켓</Link>
             </li>
             <li>
               <Link to={"/contact"}>문의하기</Link>
+
             </li>
             <li>
               <Link to={"/login"}>로그인</Link>
@@ -46,6 +50,7 @@ const Header = ({ theme }) => {
         <nav className={classes.navigation}>
           <ul className={classes.links}>
             <li>
+
               <Link to={"/movie/reserve"}>예매</Link>
             </li>
             <li>
@@ -69,15 +74,10 @@ const Header = ({ theme }) => {
                 <span>
                   <i className="fas fa-bookmark"></i>
                 </span>{' '}
-                비회원예매
+
+                비회원 예매
+
               </a>
-            </li>
-            <li>
-              <button className={classes['btn-menu']}>
-                <span className={classes.icon}>
-                  <i className="fas fa-bars"></i>
-                </span>
-              </button>
             </li>
           </ul>
         </nav>
