@@ -3,6 +3,7 @@ const fs = require('fs');
 const cors = require('cors');
 const path = require('path');
 const bodyParser = require('body-parser');
+const {swaggerUi,specs} = require('./swagger');
 
 const app = express();
 app.use(bodyParser.json());
@@ -20,5 +21,4 @@ app.use('/api/movie',require('./routes/movieRouter'));
 app.use('/api/user',require('./routes/userRouter'));
 app.use('/api/payment',require('./routes/paymentRouter'));
 app.use('/api/admin',require('./routes/adminRouter'));
-
-
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(specs));
