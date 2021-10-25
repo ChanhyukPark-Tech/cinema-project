@@ -6,6 +6,7 @@ import BranchPage from "./pages/branchPage/BranchPage";
 import MovieDetailPage from "./pages/movieDetailPage/MovieDetailPage";
 import ReservePage from "./pages/reservePage/ReservePage";
 import ProfilePage from "./pages/profilePage/ProfilePage";
+import EventPage from "./pages/eventPage/EventPage";
 
 function App() {
   return (
@@ -14,13 +15,13 @@ function App() {
           <Route exact path="/" component={HomePage} />
           <Route exact path="/contact" component={ContactPage} />
           <Route exact path="/market" component={MarketPage} />
+          <Route exact path="/event" component={EventPage} />
           <Route exact path="/branch/:id" component={BranchPage} />
           <Route exact path="/movie/:id" component={MovieDetailPage} />
           <Route exact path="/movie/reserve/:id" component={ReservePage} />
+          <Route exact path="/movie/reserve/" component={ReservePage} />
           <Route exact path="/profile" component={ProfilePage} />
           <Redirect from="*" to="/" />
-
-
       </Switch>
     </div>
   );

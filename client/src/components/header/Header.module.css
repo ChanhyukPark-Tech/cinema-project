@@ -18,6 +18,17 @@
 
 .header ul {
   list-style: none;
+  display: flex;
+  align-items: center;
+}
+
+.header ul span {
+  font-size: 1.0rem;
+}
+
+.header ul li img {
+  width: 45px;
+  border-radius: 50%;
 }
 
 .header a {

@@ -9,12 +9,35 @@
     box-sizing: border-box;
 }
 
+
 body {
     margin: 0;
     font-family: 'Noto Sans KR', 'Roboto', 'dotum', 'sans-serif';
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 }
+
+
+#root{
+    position: relative;
+}
+
+
+#root::before{
+    display: block;
+    content: "";
+    background: url("./images/background.png");
+    background-size:  contain;
+    background-repeat: repeat;
+    opacity: 0.3;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+
+
 
 a {
     text-decoration: none;

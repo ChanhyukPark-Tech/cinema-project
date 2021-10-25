@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import classes from './Header.module.css';
-
+import mark from '../../images/mark.png'
 const Header = ({ theme }) => {
   return (
     <header
@@ -16,53 +16,67 @@ const Header = ({ theme }) => {
           </h1>
           <ul className={`${classes.menu} ${classes.menu1}`}>
             <li>
+              <Link to={"/"}>
+                <span>
+                  <img src={mark}/>
+                </span>{' '}
+
+              </Link>
+            </li>
+            <li>
               <a href="##">
                 <span>
-                  <i className="fab fa-facebook"></i>
+                  Creative Enjoy Our Cinema
                 </span>{' '}
-                새싹마켓
+
               </a>
             </li>
+
           </ul>
           <ul className={`${classes.menu} ${classes.menu2}`}>
             <li>
-              <a href="##">고객센터</a>
+
+              <Link to={"/market"}>새싹마켓</Link>
             </li>
             <li>
-              <a href="##">로그인</a>
+              <Link to={"/contact"}>문의하기</Link>
+
+            </li>
+            <li>
+              <Link to={"/login"}>로그인</Link>
             </li>
           </ul>
         </div>
         <nav className={classes.navigation}>
           <ul className={classes.links}>
             <li>
-              <a href="/ticketing">영화 예매</a>
+
+              <Link to={"/movie/reserve"}>예매</Link>
             </li>
             <li>
-              <Link to="/movie">영화</Link>
+              <Link to={"/branch/1"}>영화관</Link>
             </li>
             <li>
-              <a href="##">상영 시간표</a>
-            </li>
-            <li>
-              <a href="##">이벤트</a>
+              <Link to={"/event"}>이벤트</Link>
             </li>
           </ul>
           <ul className={`${classes.menu} ${classes.menu3}`}>
             <li>
-              <a href="##">
+              <Link to={"/register"}>
                 <span>
                   <i className="fas fa-user"></i>
                 </span>{' '}
                 회원가입
-              </a>
+              </Link>
             </li>
             <li>
               <a href="##">
                 <span>
                   <i className="fas fa-bookmark"></i>
                 </span>{' '}
+
                 비회원 예매
+
               </a>
             </li>
           </ul>
