@@ -35,9 +35,7 @@ const MovieCard = ({ movie, number, theme }) => {
               <span>{movie.ViewEvaluation}</span>
             </span>
           )}
-          <span className={classes.heart}>
-            <i className="fab fa-gratipay"></i>
-          </span>
+
         </div>
       </div>
     </div>

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import classes from './Header.module.css';
-
+import mark from '../../images/mark.png'
 const Header = ({ theme }) => {
   return (
     <header
@@ -16,70 +16,60 @@ const Header = ({ theme }) => {
           </h1>
           <ul className={`${classes.menu} ${classes.menu1}`}>
             <li>
-              <a href="##">
+              <Link to={"/"}>
                 <span>
-                  <i className="fab fa-facebook"></i>
+                  <img src={mark}/>
                 </span>{' '}
-                좋아요
-              </a>
+              </Link>
             </li>
             <li>
               <a href="##">
                 <span>
-                  <i className="fab fa-youtube"></i>
+                  Creative Enjoy Our Cinema
                 </span>{' '}
-                구독하기
               </a>
             </li>
+
           </ul>
           <ul className={`${classes.menu} ${classes.menu2}`}>
             <li>
-              <a href="##">멤버십</a>
+              <Link to={"/market"}>새싹마켓</Link>
             </li>
             <li>
-              <a href="##">고객센터</a>
+              <Link to={"/contact"}>문의하기</Link>
             </li>
             <li>
-              <a href="##">로그인</a>
+              <Link to={"/login"}>로그인</Link>
             </li>
           </ul>
         </div>
         <nav className={classes.navigation}>
           <ul className={classes.links}>
             <li>
-              <a href="/ticketing">예매</a>
+              <Link to={"/movie/reserve"}>예매</Link>
             </li>
             <li>
-              <Link to="/movie">영화</Link>
+              <Link to={"/branch/1"}>영화관</Link>
             </li>
             <li>
-              <a href="##">영화관</a>
-            </li>
-            <li>
-              <a href="##">이벤트</a>
-            </li>
-            <li>
-              <a href="##">스토어</a>
-            </li>
-            <li>
-              <a href="##">VOD</a>
+              <Link to={"/event"}>이벤트</Link>
             </li>
           </ul>
           <ul className={`${classes.menu} ${classes.menu3}`}>
             <li>
-              <a href="##">
+              <Link to={"/register"}>
                 <span>
                   <i className="fas fa-user"></i>
                 </span>{' '}
                 회원가입
-              </a>
+              </Link>
             </li>
             <li>
               <a href="##">
                 <span>
                   <i className="fas fa-bookmark"></i>
                 </span>{' '}
-                바로예매
+                비회원예매
               </a>
             </li>
             <li>
