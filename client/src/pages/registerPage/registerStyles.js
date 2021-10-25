@@ -3,10 +3,11 @@ import styled from "styled-components";
 export const SigninBlock = styled.div`
   padding: 60px 0;
   margin: 80px 0;
+  
 `;
 
 export const SigninFormBlock = styled.div`
-  background: #f5f5f5;
+  background: #8d8472;
   width: 100%;
   height: 360px;
 
@@ -36,10 +37,12 @@ export const SigninFormBlock = styled.div`
         border-radius: 4px;
         outline: none;
       }
+
       div {
         display: flex;
       }
-      select{
+
+      select {
         margin-top: 10px;
         display: block;
         width: 50%;
@@ -51,7 +54,7 @@ export const SigninFormBlock = styled.div`
         border-radius: 4px;
         outline: none;
       }
-      
+
 
       input + input {
         margin-top: 10px;
