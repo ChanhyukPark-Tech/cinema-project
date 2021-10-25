@@ -8,6 +8,7 @@ import ReservePage from "./pages/reservePage/ReservePage";
 import ProfilePage from "./pages/profilePage/ProfilePage";
 import EventPage from "./pages/eventPage/EventPage";
 import RegisterPage from "./pages/registerPage/RegisterPage";
+import LoginPage from "./pages/loginPage/LoginPage";
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
           <Route exact path="/movie/reserve/" component={ReservePage} />
           <Route exact path="/profile" component={ProfilePage} />
           <Route exact path="/register" component={RegisterPage} />
+          <Route exact path="/login" component={LoginPage} />
           <Redirect from="*" to="/" />
       </Switch>
     </div>

@@ -1,9 +1,10 @@
 import React, {useState, useEffect} from 'react';
-import {SigninBlock, SigninFormBlock} from "./registerStyles";
 import Title from "../../components/Title/Title";
+import {SigninBlock, SigninFormBlock} from "./registerStyles";
+import axios from "axios";
 
 
-const RegisterPage = ({error, onSubmit}) => {
+const RegisterPage = ({error, onSubmit,history}) => {
 
     useEffect(() => {
         return () => {
@@ -15,8 +16,8 @@ const RegisterPage = ({error, onSubmit}) => {
         email: '',
         password: '',
         confirmPassword: '',
-        gender: '',
-        dateEvent: '',
+        gender: '남성',
+        dateEvent: '동의',
     });
 
     const handleChange = (e) => {
@@ -28,7 +29,14 @@ const RegisterPage = ({error, onSubmit}) => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log(inputs)
+        axios.post('/api/user',inputs)
+            .then(res=>{
+                if(res.data.success == 1){
+                    history.push('/login')
+                }else{
+                    alert("회원가입실패")
+                 }
+            })
     };
 
     return (
