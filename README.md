@@ -6,4 +6,4 @@
 
 
 ## 주의사항
-절때 master로 push하지 마시고, branch 생성해서 자신 branch 에 push 해주시고 PR 날려주세요
+>절때 master로 push하지 마시고, branch 생성해서 자신 branch 에 push 해주시고 PR 날려주세요
