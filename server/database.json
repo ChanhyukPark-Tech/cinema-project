@@ -1,0 +1,7 @@
+{
+  "host" : "ceo-cinema.cczata6pib7x.ap-northeast-2.rds.amazonaws.com",
+  "user" : "CEO",
+  "password" : "tldldh1234",
+  "port" : "3306",
+  "database" : "parkPractice"
+}
