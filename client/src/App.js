@@ -7,6 +7,7 @@ import MovieDetailPage from "./pages/movieDetailPage/MovieDetailPage";
 import ReservePage from "./pages/reservePage/ReservePage";
 import ProfilePage from "./pages/profilePage/ProfilePage";
 import EventPage from "./pages/eventPage/EventPage";
+import RegisterPage from "./pages/registerPage/RegisterPage";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
           <Route exact path="/movie/reserve/:id" component={ReservePage} />
           <Route exact path="/movie/reserve/" component={ReservePage} />
           <Route exact path="/profile" component={ProfilePage} />
+          <Route exact path="/register" component={RegisterPage} />
           <Redirect from="*" to="/" />
       </Switch>
     </div>
