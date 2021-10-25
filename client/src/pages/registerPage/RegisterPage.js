@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import {SigninBlock, SigninFormBlock} from "./registerStyles";
+import Title from "../../components/Title/Title";
 
 
 const RegisterPage = ({error, onSubmit}) => {
@@ -31,6 +32,8 @@ const RegisterPage = ({error, onSubmit}) => {
     };
 
     return (
+        <>
+        <Title title={"회원가입"} span={"회원가입"}/>
         <SigninBlock>
             <div className="tabs"></div>
             <SigninFormBlock>
@@ -82,6 +85,7 @@ const RegisterPage = ({error, onSubmit}) => {
                 </div>
             </SigninFormBlock>
         </SigninBlock>
+        </>
     );
 };
 

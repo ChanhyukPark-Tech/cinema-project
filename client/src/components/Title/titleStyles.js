@@ -24,10 +24,10 @@ export const TitleStyled = styled.div`
 
     span {
       font-weight: 900;
-      color: rgba(109, 142, 101, .44);
+      color: rgba(109, 142, 101, .33);
       font-size: 5rem;
       position: absolute;
-      left: 40%;
+      left: 45%;
       top: 30%;
       z-index: -1;
       @media screen and (max-width: 620px) {
