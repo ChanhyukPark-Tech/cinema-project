@@ -14,7 +14,7 @@
 .card .index {
   position: absolute;
   bottom: 0;
-  color: #fff;
+  color: #97e683;
   font-size: 26px;
   font-style: italic;
   font-weight: bold;
@@ -23,7 +23,7 @@
 }
 
 .card .imgContainer .hoverLayer {
-  background-color: rgba(0, 0, 0, 0.6);
+  background-color: #6d8e65;
   position: absolute;
   top: 0;
   bottom: 0;
@@ -54,7 +54,7 @@
 }
 
 .card .info {
-  color: #fff;
+  color: #6d8e65;
   padding: 10px 0;
 }
 

@@ -22,8 +22,8 @@
   left: 0;
   right: 0;
   bottom: 0;
-  height: 140px;
-  background: linear-gradient(to top, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0));
+  height: 80px;
+  background: linear-gradient(to top, #6d8e65, rgba(0, 0, 0, 0));
 }
 .carousel .item a {
   cursor: auto;

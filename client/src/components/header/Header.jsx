@@ -20,22 +20,11 @@ const Header = ({ theme }) => {
                 <span>
                   <i className="fab fa-facebook"></i>
                 </span>{' '}
-                좋아요
-              </a>
-            </li>
-            <li>
-              <a href="##">
-                <span>
-                  <i className="fab fa-youtube"></i>
-                </span>{' '}
-                구독하기
+                새싹마켓
               </a>
             </li>
           </ul>
           <ul className={`${classes.menu} ${classes.menu2}`}>
-            <li>
-              <a href="##">멤버십</a>
-            </li>
             <li>
               <a href="##">고객센터</a>
             </li>
@@ -47,22 +36,16 @@ const Header = ({ theme }) => {
         <nav className={classes.navigation}>
           <ul className={classes.links}>
             <li>
-              <a href="/ticketing">예매</a>
+              <a href="/ticketing">영화 예매</a>
             </li>
             <li>
               <Link to="/movie">영화</Link>
             </li>
             <li>
-              <a href="##">영화관</a>
+              <a href="##">상영 시간표</a>
             </li>
             <li>
               <a href="##">이벤트</a>
-            </li>
-            <li>
-              <a href="##">스토어</a>
-            </li>
-            <li>
-              <a href="##">VOD</a>
             </li>
           </ul>
           <ul className={`${classes.menu} ${classes.menu3}`}>
@@ -79,15 +62,8 @@ const Header = ({ theme }) => {
                 <span>
                   <i className="fas fa-bookmark"></i>
                 </span>{' '}
-                바로예매
+                비회원 예매
               </a>
-            </li>
-            <li>
-              <button className={classes['btn-menu']}>
-                <span className={classes.icon}>
-                  <i className="fas fa-bars"></i>
-                </span>
-              </button>
             </li>
           </ul>
         </nav>
