@@ -18,6 +18,9 @@ const movieCtrl = {
                 res.send(rows);
             }
         )
+    },
+    modifyMovie : async (req,res)=>{
+        // update set ~~ 라는 정보로 기존의 영화정보를 업데이트시킨다.
     }
 }
 

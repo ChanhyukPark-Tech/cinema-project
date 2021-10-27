@@ -78,7 +78,7 @@ module.exports = {
     },
     deleteUser: (data, callBack) => {
         connection.query(
-            `delete from registration where id = ?`,
+            `delete from user where id = ?`,
             [data.id],
             (error, results, fields) => {
                 if (error) {
