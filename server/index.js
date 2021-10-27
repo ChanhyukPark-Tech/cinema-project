@@ -21,4 +21,7 @@ app.use('/api/movie',require('./routes/movieRouter'));
 app.use('/api/user',require('./routes/userRouter'));
 app.use('/api/payment',require('./routes/paymentRouter'));
 app.use('/api/admin',require('./routes/adminRouter'));
+app.use('/api/util',require('./routes/utilRouter'));
+app.use('/api/staff',require('./routes/staffRouter'));
+app.use('/api/ticket',require('./routes/ticketRouter'));
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(specs));

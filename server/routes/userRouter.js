@@ -37,9 +37,10 @@ router.get("/", checkToken, getUsers);
  *    post:
  *      tags:
  *      - user
- *      description: 회원가입
+ *      description: 입력한 정보를 기반으로 회원가입 시켜줌
  */
 router.post("/", createUser);
+
 router.get("/:id", checkToken, getUserByUserId);
 
 /**
@@ -48,10 +49,30 @@ router.get("/:id", checkToken, getUserByUserId);
  *    post:
  *      tags:
  *      - user
- *      description: 로그인
+ *      description: 로그인 ( 이메일과 패스워드를 입력받음)
  */
 router.post("/login", login);
+
+
+
+/**
+ * @swagger
+ *  /api/user/:
+ *    patch:
+ *      tags:
+ *      - user
+ *      description: 사용자 정보를 업데이트 시켜줌
+ */
 router.patch("/", checkToken, updateUsers);
+
+/**
+ * @swagger
+ *  /api/user/:
+ *    delete:
+ *      tags:
+ *      - user
+ *      description: 사용자 정보를 삭제 시켜줌
+ */
 router.delete("/", checkToken, deleteUser);
 
 module.exports = router;
