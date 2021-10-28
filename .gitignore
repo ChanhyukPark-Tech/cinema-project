@@ -24,3 +24,7 @@ yarn-error.log*
 /server/node_modules/
 !/server/database.json
 /server/database.json
+/client/package-lock.json
+/server/package-lock.json
+/client/node_modules
+/server/node_modules
