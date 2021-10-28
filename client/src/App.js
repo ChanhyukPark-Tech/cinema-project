@@ -9,6 +9,7 @@ import ProfilePage from "./pages/profilePage/ProfilePage";
 import EventPage from "./pages/eventPage/EventPage";
 import RegisterPage from "./pages/registerPage/RegisterPage";
 import LoginPage from "./pages/loginPage/LoginPage";
+import PracticePage from "./pages/pracicePage/PracticePage";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
           <Route exact path="/contact" component={ContactPage} />
           <Route exact path="/market" component={MarketPage} />
           <Route exact path="/event" component={EventPage} />
+          <Route exact path="/practice" component={PracticePage} />
           <Route exact path="/branch/:id" component={BranchPage} />
           <Route exact path="/movie/:id" component={MovieDetailPage} />
           <Route exact path="/movie/reserve/:id" component={ReservePage} />
