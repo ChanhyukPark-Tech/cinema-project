@@ -1,13 +1,15 @@
 import React, { useState } from "react";
 import classes from "./Calendar.module.css";
-
+import {playDates} from "../../data/reservePageDummyData";
 const DATE_WIDTH = 52.5;
 
-const Calendar = ({ playDates, onDateClick }) => {
+const Calendar = () => {
+
+
+
   const [slideDateIndex, setSlideDateIndex] = useState(0);
   const [currentDateIndex, setCurrentDateIndex] = useState(0);
 
-    console.log(playDates)
   const handleRightArrowClick = () => {
     if (slideDateIndex === playDates.length - 8) return;
     setSlideDateIndex(slideDateIndex + 1);
@@ -19,9 +21,7 @@ const Calendar = ({ playDates, onDateClick }) => {
 
   const handleDateClick = (year, month, day, index) => {
     setCurrentDateIndex(index);
-    onDateClick(
-      `${year}-${month > 9 ? month : "0" + month}-${day > 9 ? day : "0" + day}`
-    );
+
   };
   return (
     <div className={classes["calendar"]}>

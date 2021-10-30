@@ -6,7 +6,7 @@ const Layout = ({ children, theme }) => {
     return (
         <>
             <Header theme={theme} />
-            <main>{children}</main>
+            <main style={{marginTop:'110px',marginBottom:'110px'}}>{children}</main>
             <Footer />
         </>
     );
