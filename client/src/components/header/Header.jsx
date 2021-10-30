@@ -88,16 +88,15 @@ const Header = ({theme}) => {
                                 </Link>
                             </li>
                         }
-                        <li>
+
+                        {!userName && <li>
                             <a href="##">
-                <span>
-                  <i className="fas fa-bookmark"></i>
-                </span>{' '}
-
+                                <span>
+                                     <i className="fas fa-bookmark"></i>
+                                        </span>{' '}
                                 비회원 예매
-
                             </a>
-                        </li>
+                        </li>}
                     </ul>
                 </nav>
             </div>
