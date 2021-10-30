@@ -102,6 +102,7 @@ export const BranchTitleContainer = styled.div`
 
 export const LocalName = styled.div`
   background-color: ${props => props.active ? "#6d8e65" : ""};
+  transition: 0.5s ease-in-out;
   height: 10%;
   font-size: 1.3rem;
   display: flex;
@@ -111,6 +112,7 @@ export const LocalName = styled.div`
 
 export const BranchName = styled.div`
   background-color: ${props => props.active ? "#6d8e65" : ""};
+  transition: 0.5s ease-in-out;
   height: 10%;
   font-size: 1.3rem;
   display: flex;
