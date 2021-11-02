@@ -20,11 +20,8 @@ const MovieCard = ({ movie, number, theme }) => {
         </div>
       </div>
       <div className={classes.info}>
-        <p className={classes.title}>{movie.MovieNameKR}</p>
+        <p className={classes.title}>{movie.movieNm}</p>
         <div className={classes.subInfo}>
-          <span className={classes.rate}>
-            예매율 {movie.BookingRate.toFixed(1)}%
-          </span>
           {movie.DDay > 0 ? (
             <span className={classes.dday}>{`D-${movie.DDay}`}</span>
           ) : (
@@ -32,7 +29,7 @@ const MovieCard = ({ movie, number, theme }) => {
               <span className={classes.icon}>
                 <i className="fas fa-star"></i>
               </span>{' '}
-              <span>{movie.ViewEvaluation}</span>
+              <span>{movie.RepresentationMovieCode}</span>
             </span>
           )}
 

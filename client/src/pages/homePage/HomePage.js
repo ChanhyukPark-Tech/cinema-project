@@ -1,6 +1,5 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 
-import movieData from '../../data/movies.json';
 import carouselItems from '../../data/carouselItems01';
 import eventItems from "../../data/carouselItems02";
 import Carousel from "../../components/Carousel/Carousel";
@@ -9,10 +8,19 @@ import Movies from "../../components/Movies/Movies";
 import Title from "../../components/Title/Title";
 import Header from "../../components/header/Header";
 import Footer from "../../components/Footer/Footer";
+import axios from "axios";
 
-const movies = movieData.Movies.Items[0].Items;
+
 
 const HomePage = () => {
+    const [movies , setMovies] = useState([])
+    useEffect(()=>{
+        axios.get("/api/movie").then(data => {
+            setMovies(data.data)
+        })
+
+    },[])
+
     return (
         <>
             <Header/>
