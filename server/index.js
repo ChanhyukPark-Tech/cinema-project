@@ -24,4 +24,6 @@ app.use('/api/admin',require('./routes/adminRouter'));
 app.use('/api/util',require('./routes/utilRouter'));
 app.use('/api/staff',require('./routes/staffRouter'));
 app.use('/api/ticket',require('./routes/ticketRouter'));
+app.use('/api/event',require('./routes/eventRouter'));
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(specs));
+

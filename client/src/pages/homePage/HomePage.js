@@ -17,8 +17,8 @@ const HomePage = () => {
     useEffect(()=>{
         axios.get("/api/movie").then(data => {
             setMovies(data.data)
+            console.log(data.data)
         })
-
     },[])
 
     return (
