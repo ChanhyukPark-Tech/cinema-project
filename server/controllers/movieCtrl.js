@@ -21,7 +21,19 @@ const movieCtrl = {
     },
     modifyMovie : async (req,res)=>{
         // update set ~~ 라는 정보로 기존의 영화정보를 업데이트시킨다.
+    },
+
+    insertMovieDetail : async (req,res)=>{
+        const {MovieId} = req.body;
+        const sql = `SELECT * FROM movie where movie_id = '${MovieId}'`
+        connection.query(
+            sql,(error,rows) => {
+                if(error) throw error;
+                res.send(rows);
+            }
+        )
     }
+
 }
 
 module.exports = movieCtrl
