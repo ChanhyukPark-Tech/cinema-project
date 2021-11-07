@@ -41,7 +41,7 @@ const router = require("express").Router();
 router.route('/place')
     .get(utilCtrl.getPlaces)
 
-router.route('/Divison')
+router.route('/divison')
     .get(utilCtrl.getDivisons)
 
 

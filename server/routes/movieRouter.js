@@ -67,7 +67,7 @@ router.route('/')
     .post(movieCtrl.insertMovie)
 
 router.route('/movieDetail')
-    .post(movieCtrl.insertMovieDetail)
+    .post(movieCtrl.MovieDetail)
 
 router.route('/modifyMovie')
     .put(movieCtrl.modifyMovie)
