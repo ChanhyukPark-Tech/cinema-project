@@ -10,11 +10,23 @@ const router = require("express").Router();
  *    get:
  *      tags:
  *      - event
- *      description: 모든 이벤트에 대한 정보를 줄게.ㅊ
+ *      description: 모든 이벤트에 대한 정보를 줄게.
  */
+
+/**
+ * @swagger
+ *  /api/event/eventDetail:
+ *    post:
+ *      tags:
+ *      - event
+ *      description: 특정 영화에 관련된 이벤트만 가져오기
+ */
+
 router.route('/')
     .get(eventCtrl.getEvents)
-    .post(eventCtrl.getSpecifyEvents)
+
+router.route('/eventDetail')
+    .post(eventCtrl.getSpecifyEvent)
 
 // 첫번째 백에서는 다짜고짜 모든 정보를 다줌 니네가 알아서 필터해라
 
