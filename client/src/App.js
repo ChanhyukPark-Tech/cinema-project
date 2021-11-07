@@ -10,6 +10,7 @@ import EventPage from "./pages/eventPage/EventPage";
 import RegisterPage from "./pages/registerPage/RegisterPage";
 import LoginPage from "./pages/loginPage/LoginPage";
 import PracticePage from "./pages/pracicePage/PracticePage";
+import AdminPage from "./pages/adminPages/AdminPage";
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
           <Route exact path="/profile" component={ProfilePage} />
           <Route exact path="/register" component={RegisterPage} />
           <Route exact path="/login" component={LoginPage} />
+          <Route path="/admin" component={AdminPage} />
           <Redirect from="*" to="/" />
       </Switch>
     </div>
