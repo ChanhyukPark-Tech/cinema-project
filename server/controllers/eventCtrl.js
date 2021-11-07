@@ -8,7 +8,7 @@ const eventCtrl = {
         })
     },
 
-    getSpecifyEvents : async (req,res)=>{
+    getSpecifyEvent : async (req,res)=>{
         const {RepresentationMovieCode} = req.body;
         const sql = `SELECT * FROM event where RepresentationMovieCode = '${RepresentationMovieCode}'`
         connection.query(

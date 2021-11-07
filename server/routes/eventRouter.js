@@ -26,7 +26,7 @@ router.route('/')
     .get(eventCtrl.getEvents)
 
 router.route('/eventDetail')
-    .post(eventCtrl.getSpecifyEvents)
+    .post(eventCtrl.getSpecifyEvent)
 
 // 첫번째 백에서는 다짜고짜 모든 정보를 다줌 니네가 알아서 필터해라
 
