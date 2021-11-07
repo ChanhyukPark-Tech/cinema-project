@@ -1,6 +1,14 @@
 import styled from "styled-components";
 
-export const TitleStyled = styled.div`
+export const BackColor = styled.div`
+  background-color: #f6efd7;
+`;
+
+export const GridCardStyle = styled.div`
+  margin: 0 50px;
+`;
+
+export const EventTitleStyle = styled.div`
   margin: 10px;
   position: relative;
 
