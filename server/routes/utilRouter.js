@@ -57,6 +57,16 @@ const router = require("express").Router();
  */
 
 
+/**
+ * @swagger
+ *  /api/util/form:
+ *    post:
+ *      tags:
+ *      - util
+ *      description: 문의페이지에서 문의하는거 이름이랑 문의내용 넘어올거임
+ */
+
+
 router.route('/place')
     .get(utilCtrl.getPlaces)
     .post(utilCtrl.getPlace)
@@ -66,5 +76,8 @@ router.route('/divison')
 
 router.route('/placeDetail')
     .post(utilCtrl.getSpecifyPlace)
+
+router.route('/form')
+    .post(utilCtrl.sendPost)
 
 module.exports = router;
