@@ -15,7 +15,7 @@ body {
     font-family: 'Noto Sans KR', 'Roboto', 'dotum', 'sans-serif';
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    background-color: #f6efd7;
+    background-color: #f6efd7 !important;
 ;
 }
 
