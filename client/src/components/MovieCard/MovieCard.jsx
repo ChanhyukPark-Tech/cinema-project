@@ -13,7 +13,7 @@ const MovieCard = ({ movie, number, theme }) => {
         <div className={classes.hoverLayer}>
           <a href="##">예매하기</a>
           <Link
-            to={`/movie/movieDetailView?movie=${movie.RepresentationMovieCode}`}
+            to={`/movie/movieDetailPage?movie=${movie.RepresentationMovieCode}`}
           >
             상세정보
           </Link>

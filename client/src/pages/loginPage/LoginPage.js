@@ -3,7 +3,7 @@ import Title from "../../components/Title/Title";
 import {SigninBlock, SigninFormBlock} from "../registerPage/registerStyles";
 import axios from "axios";
 import {alertService} from "../../components/Alert/alert.service";
-
+import Header from "../../components/header/Header";
 
 const LoginPage = ({error, onSubmit,history}) => {
 
@@ -45,7 +45,8 @@ const LoginPage = ({error, onSubmit,history}) => {
 
     return (
         <>
-            <Title title={"로그인"} span={"로그인"}/>
+            <Header/>
+            <Title title={"로그인"}/>
             <SigninBlock>
                 <div className="tabs"></div>
                 <SigninFormBlock>

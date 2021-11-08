@@ -64,10 +64,13 @@ const Header = ({ theme }) => {
         <nav className={classes.navigation}>
           <ul className={classes.links}>
             <li>
-              <Link to={"/movie/reserve"}>예매</Link>
+              <Link to={"/movie/reserve"}>영화 예매</Link>
             </li>
             <li>
-              <Link to={"/branch/1"}>영화관</Link>
+              <Link to={"/branch/1"}>상영시간표</Link>
+            </li>
+            <li>
+              <Link to={"/branch/1"}>지점 안내</Link>
             </li>
             <li>
               <Link to={"/event"}>이벤트</Link>

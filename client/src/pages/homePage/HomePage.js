@@ -22,6 +22,7 @@ const HomePage = () => {
     <>
       <Header />
       <Carousel theme="dark" height={774} items={carouselItems} />
+      <Title title={"박스오피스 순위"} />
       <SectionMovies>
         <Movies theme="dark" movies={movies} activeNum={5} />
       </SectionMovies>
