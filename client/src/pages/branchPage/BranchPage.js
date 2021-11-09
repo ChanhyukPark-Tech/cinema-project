@@ -1,8 +1,13 @@
 import React from 'react';
+import Header from "../../components/header/Header";
+import BranchSelection from "../../components/BranchSelection/BranchSelection";
 
 function BranchPage(props) {
     return (
-        <div>브랜치페이지입ㄴ다.</div>
+        <>
+            <Header/>
+            <BranchSelection/>
+        </>
     );
 }
 

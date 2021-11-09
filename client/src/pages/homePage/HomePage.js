@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-
 import carouselItems from "../../data/carouselItems01";
 import eventItems from "../../data/carouselItems02";
 import Carousel from "../../components/Carousel/Carousel";
@@ -11,6 +10,7 @@ import Footer from "../../components/Footer/Footer";
 import axios from "axios";
 
 const HomePage = () => {
+
   const [movies, setMovies] = useState([]);
   useEffect(() => {
     axios.get("/api/movie").then((data) => {

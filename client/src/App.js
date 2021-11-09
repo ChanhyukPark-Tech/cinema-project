@@ -11,6 +11,7 @@ import RegisterPage from "./pages/registerPage/RegisterPage";
 import LoginPage from "./pages/loginPage/LoginPage";
 import PracticePage from "./pages/pracicePage/PracticePage";
 import EventDetailPage from "./pages/eventDetailPage/eventDetailPage";
+import AdminPage from "./pages/adminPages/AdminPage";
 
 function App() {
   return (

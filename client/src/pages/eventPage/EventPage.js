@@ -1,5 +1,4 @@
-import React, { useState } from "react";
-
+import React, { useState, useEffect } from "react";
 import Header from "../../components/header/Header";
 import Footer from "../../components/Footer/Footer";
 import { events } from "../../data/eventPageDummyData";
@@ -13,6 +12,22 @@ import Fuse from "fuse.js";
 const { Search } = Input;
 
 function EventPage(props) {
+  /*
+  여기 찬혁오빠가 처음에해뒀던 부분
+  */
+//    useEffect(()=>{
+//         axios.get('/api/event').then(data=>{
+//             console.log(data)
+//         })
+//     },[])
+
+//     // 특정영화에대한 이벤트만 가져와줘
+//     const clickHandler = (movieId) => {
+//         axios.post('/api/event',movieId).then(data=>{
+//             console.log(data)
+//         })
+//     }
+  
   const [data, setData] = useState(events);
 
   const handleEvent = (e) => {
