@@ -8,6 +8,7 @@ const {
 } = require("../service/user.service");
 const { hashSync, genSaltSync, compareSync } = require("bcrypt");
 const { sign } = require("jsonwebtoken");
+const connection = require("../dbConfig");
 
 module.exports = {
     createUser: (req, res) => {
@@ -40,7 +41,7 @@ module.exports = {
                     data: "Invalid email or password"
                 });
             }
-            const result = compareSync(body.password, results.password);
+            const result = compareSync(body.password, results.pin);
             if (result) {
                 results.password = undefined;
                 const jsontoken = sign({ result: results }, "qwe1234", {
@@ -50,8 +51,8 @@ module.exports = {
                     success: 1,
                     message: "login successfully",
                     token: jsontoken,
-                    name:results.name
-
+                    name:results.Nm,
+                    member_id:results.member_id
                 });
             } else {
                 return res.json({
@@ -126,5 +127,14 @@ module.exports = {
                 message: "user deleted successfully"
             });
         });
+    },
+    getUserDetail : (req,res) => {
+        const {memberId} = req.body;
+        const sql = `SELECT * FROM member WHERE member_id = ${memberId}`
+
+        connection.query(sql,(error,rows) => {
+            if(error) throw error;
+            res.send(rows);
+        })
     }
 };

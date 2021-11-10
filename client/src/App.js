@@ -11,6 +11,7 @@ import RegisterPage from "./pages/registerPage/RegisterPage";
 import LoginPage from "./pages/loginPage/LoginPage";
 import PracticePage from "./pages/pracicePage/PracticePage";
 import AdminPage from "./pages/adminPages/AdminPage";
+import MyPage from "./pages/myPage/MyPage";
 
 function App() {
   return (
@@ -28,6 +29,7 @@ function App() {
           <Route exact path="/profile" component={ProfilePage} />
           <Route exact path="/register" component={RegisterPage} />
           <Route exact path="/login" component={LoginPage} />
+          <Route exact path="/mypage/:id" component={MyPage} />
           <Route path="/admin" component={AdminPage} />
           <Redirect from="*" to="/" />
       </Switch>
