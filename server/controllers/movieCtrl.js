@@ -24,8 +24,8 @@ const movieCtrl = {
     },
 
     MovieDetail : async (req,res)=>{
-        const {MovieId} = req.body;
-        const sql = `SELECT * FROM movie where movie_id = '${MovieId}'`
+        const {RepresentationMovieCode} = req.body;
+        const sql = `SELECT * FROM movie where RepresentationMovieCode = '${RepresentationMovieCode}'`
         connection.query(
             sql,(error,rows) => {
                 if(error) throw error;

@@ -1,0 +1,31 @@
+export const movies = [
+    {
+        id: 1,
+        movieCode: 0,
+        posterImgUrl: "http://img.movist.com/?img=/x00/05/54/31_p1.jpg",
+        viewGrade: "12세 이용가",
+        title: "이터널스",
+        reserveRank: 1,
+        reserveRate: 48.4,
+        viewCount: 1614390,
+        genre: "액션",
+        country: "미국",
+        releaseDate: "2021/11/03",
+        runningTime: 155,
+        director: "클로이 자오",
+        casting: "마동석",
+        castImgUrl: "https://caching.lottecinema.co.kr//Media/MovieFile/PersonImg/74000/73136_107_3.jpg",
+        character: "길가메시",
+        synopsis: "마블 스튜디오의 <이터널스>는 수 천년에 걸쳐 그 모습을 드러내지 않고 살아온 불멸의 히어로들이 <어벤져스: 엔드게임> 이후 인류의 가장 오래된 적 '데비안츠'에 맞서기 위해 다시 힘을 합치면서 벌어지는 이야기",
+        genderPreferenceMale: 48.5,
+        genderPreferenceFemale: 51.5,
+        agePreference10s: 7.0,
+        agePreference20s: 31.2,
+        agePreference30s: 25.1,
+        agePreference40s: 36.7,
+        trailer: "https://www.lottecinema.co.kr/NLCHS/Movie/MovieDetailView?movie=17885#none",
+        poster: "https://caching.lottecinema.co.kr//Media/MovieFile/MovieImg/202111/17885_105_1.jpg",
+        reviewCount: 2271,
+        totalScore: 7
+    }
+];

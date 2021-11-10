@@ -13,6 +13,7 @@ const HomePage = () => {
 
   const [movies, setMovies] = useState([]);
   useEffect(() => {
+    //데이터베이스에서 가져옴
     axios.get("/api/movie").then((data) => {
       setMovies(data.data);
     });
