@@ -5,7 +5,7 @@ const {
     getUserByUserId,
     getUsers,
     updateUsers,
-    deleteUser
+    deleteUser, getUserDetail
 } = require("../controllers/userCtrl");
 const {checkToken} = require("../auth/token_validation");
 
@@ -74,5 +74,18 @@ router.patch("/", checkToken, updateUsers);
  *      description: 사용자 정보를 삭제 시켜줌
  */
 router.delete("/", checkToken, deleteUser);
+
+/**
+ * @swagger
+ *  /api/user/userDetail:
+ *    post:
+ *      tags:
+ *      - user
+ *      description: 특정 사용자에 대한 상세정보를 전달함 member_id 를 post로 받음
+ */
+
+
+router.post("/userDetail",getUserDetail);
+
 
 module.exports = router;
