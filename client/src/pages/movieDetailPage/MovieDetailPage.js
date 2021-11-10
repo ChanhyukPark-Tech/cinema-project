@@ -1,88 +1,84 @@
-import React, {useEffect, useState} from 'react';
-import {Link, useParams} from "react-router-dom";
-import Modal from 'react-modal';
-import {CoolBlueButton} from "../marketPage/marketStyles";
-import axios from "axios";
+import React, { useEffect, useState} from 'react'
+import Header from '../../components/header/Header'
+import Footer from '../../components/Footer/Footer';
+import Title from '../../components/Title/Title';
+import GridCards from '../movieDetailPage/GridCard'; // 캐스팅정보를 담을 MovieDetail GridCard
+import {GridCardStyle, BackColor } from './MovieDetailPageStyles'
+import { Descriptions, Row }from 'antd';
+import { useParams } from 'react-router';
+import axios from 'axios';
+
 function MovieDetailPage(props) {
-    const params = useParams();
-    const [movieDetail, setMovieDetail] = useState([])
-    const [modalIsOpen, setModalIsOpen] = useState(false);
-    const [personDetail, setPersonDetail] = useState([]);
-    const getMovieDetail = () => {
-        return axios.post('http://localhost:4000/api/movie', {
-            id: params.id
-        }).then(x => {
-            console.log(x)
-            setMovieDetail(x)
+    const params  = useParams();
+    const [movie,setMovie] = useState([])
+    useEffect(()=>{
+        axios.post('/api/movie/movieDetail',{RepresentationMovieCode : params.id})
+        .then(data => {
+            console.log(data.data[0]);
+            setMovie(data.data[0])
         })
-    }
+    },[])
+    console.log(movie.PosterURL);
+    return (
+    <>
+    <BackColor>
+        <Header/>
+        <Title title={"영화 상세정보"}/>
 
+        <div style={{display:'flex', alignItems:'center'}}>
+            { /* PosterImage */ }
+            <div style={{
+                background: `linear-gradient(to bottom, rgba(0,0,0,0)
+                39%, rgba(0,0,0,0)
+                41%, rgba(0,0,0,0.65)
+                100%),
+                url('${movie.PosterURL}'), #1c1c1c`,
+                height: '500px',
+                width: '300px',
+                backgroundSize: '500px',
+                backgroundPosition: 'center, center',
+                position: 'relative'
+            }}>
+            </div>
 
-    useEffect(() => {
-        getMovieDetail()
-    }, [])
+            { /* Body */ }
+            <div style={{width: '85%', margin: '1rem auto'}}>
 
-    const openModal = (e) => {
-        const wantToFind = e.target.innerText
-        axios.get(`http://kobis.or.kr/kobisopenapi/webservice/rest/people/searchPeopleList.json?key=f5eef3421c602c6cb7ea224104795888&peopleNm=${wantToFind}`)
-            .then(x =>{
-                setPersonDetail(x.peopleListResult.peopleList[0])
-                    console.log(x.peopleListResult.peopleList[0])
-            }
-            )
-        setModalIsOpen(true)
-    }
+                { /* 영화 상세정보 Description */ }
+                <Descriptions bordered>
+                    <Descriptions.Item>{movie.watchGradeName}세 이용가 <strong>{movie.movieNm}</strong></Descriptions.Item>
+                    <Descriptions.Item label="관람객 평점">ㅇ.ㅇ점</Descriptions.Item>
+                    <br />
+                    <Descriptions.Item label="예매율"><strong>ㅇㅇ위</strong> ㅇㅇ%</Descriptions.Item>
+                    <Descriptions.Item label="관객수">{movie.audiAcc}명</Descriptions.Item>
+                    <br />
+                    <Descriptions.Item> {movie.genre} / {movie.nations}</Descriptions.Item>
+                    <Descriptions.Item>{movie.openDt} 개봉  | {movie.showTm}분</Descriptions.Item>
+                    <br />
+                    <Descriptions.Item label="감독">ㅇㅇㅇ </Descriptions.Item>
+                    <Descriptions.Item label="출연">ㅇㅇㅇ, ㅇㅇㅇ, ㅇㅇㅇ </Descriptions.Item>
+                    <br />
+                    <Descriptions.Item label="성별 선호도">남성 ㅇㅇ%, 여성 ㅇㅇ%</Descriptions.Item>
+                    <Descriptions.Item label="연령별 선호도">10대 ㅇㅇ% | 20대 ㅇㅇ% | 30대 ㅇㅇ% | 40대 ㅇㅇ%</Descriptions.Item>
+                    <br />
+                    <Descriptions.Item label="시놉시스">{movie.story} | 성별 선호도 | 연령별 선호도</Descriptions.Item>
+                </Descriptions>
+                <br />
+                {/* Actors Grid --> 더미데이터 내 배우 프로필 사진과 이름 넣어주기*/}
+                <GridCardStyle>
+                    <Row gutter={[50,50]}>
+                        {
+                            
+                        }
+                    </Row>
+                </GridCardStyle>
+            </div>
 
-    return ( // href => to
-        <>
-            <div>{movieDetail[0]?.title} 에 대한 정보를 클릭하셨네요</div>
-            <span onClick={openModal}>{movieDetail[0]?.person}</span>
-            <Link to={`/movie/reserve/${movieDetail[0]?.movieInfo_id}`}>
-                <CoolBlueButton>
-                    예약하로가기
-                </CoolBlueButton>
-            </Link>
-            <Link to={`/profile`}>
-                <CoolBlueButton>
-                    새로운테스트용
-                </CoolBlueButton>
-            </Link>
-
-            <Modal style={{
-                overlay: {
-                    position: 'fixed',
-                    top: 0,
-                    left: 0,
-                    right: 0,
-                    bottom: 0,
-                    backgroundColor: 'rgba(255, 255, 255, 0.75)'
-                },
-                content: {
-                    position: 'absolute',
-                    width: '300px',
-                    height: '300px',
-                    top: '40px',
-                    left: '40px',
-                    right: '40px',
-                    bottom: '40px',
-                    border: '1px solid #ccc',
-                    background: '#fff',
-                    overflow: 'auto',
-                    WebkitOverflowScrolling: 'touch',
-                    borderRadius: '4px',
-                    outline: 'none',
-                    padding: '20px'
-                }
-                }} isOpen={modalIsOpen}>
-                {personDetail.peopleNm}
-                {personDetail.peopleNmEn}
-                {personDetail.repRoleNm}
-                {personDetail.filmoNames}
-
-                <button onClick={() => setModalIsOpen(false)}>Modal close</button>
-            </Modal>
-        </>
+        </div>
+        <Footer/>
+    </BackColor>
+    </>
     );
-}
+};
 
-export default MovieDetailPage;
+export default MovieDetailPage

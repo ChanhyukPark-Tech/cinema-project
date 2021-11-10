@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import Title from "../../components/Title/Title";
+import Header from "../../components/header/Header";
 import {SigninBlock, SigninFormBlock} from "./registerStyles";
 import axios from "axios";
 
@@ -44,7 +45,8 @@ const RegisterPage = ({error, onSubmit,history}) => {
 
     return (
         <>
-        <Title title={"회원가입"} span={"회원가입"}/>
+        <Header/>
+        <Title title={"회원가입"}/>
         <SigninBlock>
             <div className="tabs"></div>
             <SigninFormBlock>

@@ -13,6 +13,7 @@ const HomePage = () => {
 
   const [movies, setMovies] = useState([]);
   useEffect(() => {
+    //데이터베이스에서 가져옴
     axios.get("/api/movie").then((data) => {
       setMovies(data.data);
       console.log(data.data);
@@ -23,6 +24,7 @@ const HomePage = () => {
     <>
       <Header />
       <Carousel theme="dark" height={774} items={carouselItems} />
+      <Title title={"박스오피스 순위"} />
       <SectionMovies>
         <Movies theme="dark" movies={movies} activeNum={5} />
       </SectionMovies>
