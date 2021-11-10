@@ -31,3 +31,18 @@ export const EventTitleStyle = styled.div`
     }
   }
 `;
+
+export const EventDateStyle = styled.div`
+  margin: 10px;
+  position: relative;
+
+  background-color: transparent;
+
+  h3 {
+    text-align: center;
+    color: #2c4b21;
+    font-weight: 800;
+    position: relative;
+    padding-bottom: 0.7rem;
+  
+`;
