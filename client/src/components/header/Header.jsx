@@ -5,9 +5,11 @@ import mark from "../../images/mark.png";
 
 const Header = ({ theme }) => {
   const [userName, setUserName] = useState("");
+  const [memberId, setMemberId] = useState("");
 
   useEffect(() => {
     setUserName(localStorage.getItem("name"));
+    setMemberId(localStorage.getItem("member_id"));
   }, []);
 
   return (
@@ -52,7 +54,9 @@ const Header = ({ theme }) => {
                   to={"/"}
                   onClick={() => {
                     localStorage.removeItem("name");
+                    localStorage.removeItem("member_id");
                     setUserName("");
+                    setMemberId("");
                   }}
                 >
                   로그아웃
@@ -85,7 +89,7 @@ const Header = ({ theme }) => {
               </li>
             )}
 
-            {!userName && (
+            {!userName ? (
               <li>
                 <a href="##">
                   <span>
@@ -94,6 +98,15 @@ const Header = ({ theme }) => {
                   비회원 예매
                 </a>
               </li>
+            ) : (
+                <li>
+                  <Link to={`/mypage/${memberId}`}>
+                  <span>
+                    <i className="fas fa-bookmark"></i>
+                  </span>{" "}
+                    {userName} 님 페이지로 가기
+                  </Link>
+                </li>
             )}
           </ul>
         </nav>
