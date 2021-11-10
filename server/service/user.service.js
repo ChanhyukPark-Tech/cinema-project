@@ -3,7 +3,7 @@ const connection = require("../dbConfig");
 module.exports = {
     create: (data, callBack) => {
         connection.query(
-            `insert into member(Nm,email,pin,sex,age,phoneNm,dateEventAgree,selfPR) values(?,?,?,?,?,?,?);
+            `insert into member(Nm,email,pin,sex,age,phoneNm,dateEventAgree,selfPR) values(?,?,?,?,?,?,?,?);
 `,
             [
                 data.name,
