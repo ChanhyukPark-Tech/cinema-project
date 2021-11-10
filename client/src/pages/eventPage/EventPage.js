@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import Header from "../../components/header/Header";
 import Footer from "../../components/Footer/Footer";
 import { events } from "../../data/eventPageDummyData";
@@ -15,19 +15,19 @@ function EventPage(props) {
   /*
   여기 찬혁오빠가 처음에해뒀던 부분
   */
-//    useEffect(()=>{
-//         axios.get('/api/event').then(data=>{
-//             console.log(data)
-//         })
-//     },[])
+  //    useEffect(()=>{
+  //         axios.get('/api/event').then(data=>{
+  //             console.log(data)
+  //         })
+  //     },[])
 
-//     // 특정영화에대한 이벤트만 가져와줘
-//     const clickHandler = (movieId) => {
-//         axios.post('/api/event',movieId).then(data=>{
-//             console.log(data)
-//         })
-//     }
-  
+  //     // 특정영화에대한 이벤트만 가져와줘
+  //     const clickHandler = (movieId) => {
+  //         axios.post('/api/event',movieId).then(data=>{
+  //             console.log(data)
+  //         })
+  //     }
+
   const [data, setData] = useState(events);
 
   const handleEvent = (e) => {
@@ -95,8 +95,11 @@ function EventPage(props) {
                 <React.Fragment key={index}>
                   <GridCards
                     image={event.imgUrl}
+                    contentUrl={event.contentUrl}
                     eventId={event.id}
-                    evnetName={event.title}
+                    title={event.title}
+                    startDate={event.startDate}
+                    endDate={event.endDate}
                   />
                 </React.Fragment>
               ))}

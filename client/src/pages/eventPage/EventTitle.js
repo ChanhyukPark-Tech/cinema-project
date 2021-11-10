@@ -1,5 +1,4 @@
-import React, { useEffect, useRef } from "react";
-import styled from "styled-components";
+import React from "react";
 import { EventTitleStyle } from "./eventStyles";
 
 function EventTitle({ title, span }) {
