@@ -13,6 +13,7 @@ import PracticePage from "./pages/pracicePage/PracticePage";
 import AdminPage from "./pages/adminPages/AdminPage";
 import EventDetailPage from "./pages/eventDetailPage/eventDetailPage";
 import MyPage from "./pages/myPage/MyPage";
+import AddPostPage from "./pages/marketPage/AddPostPage";
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
           <Route exact path="/" component={HomePage} />
           <Route exact path="/contact" component={ContactPage} />
           <Route exact path="/market" component={MarketPage} />
+          <Route exact path="/market/addPost" component={AddPostPage} />
           <Route exact path="/event" component={EventPage} />
           <Route exact path="/event/:id" component={EventDetailPage} />
           <Route exact path="/practice" component={PracticePage} />

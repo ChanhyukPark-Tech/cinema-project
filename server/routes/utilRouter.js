@@ -67,6 +67,25 @@ const router = require("express").Router();
  */
 
 
+/**
+ * @swagger
+ *  /api/util/addMarketPost:
+ *    post:
+ *      tags:
+ *      - util
+ *      description: 새싹 마켓 게시글 작성해주세요
+ */
+
+
+/**
+ * @swagger
+ *  /api/util/marketPosts:
+ *    post:
+ *      tags:
+ *      - util
+ *      description: 새싹 마켓 모든 게시물 가져오기
+ */
+
 router.route('/place')
     .get(utilCtrl.getPlaces)
     .post(utilCtrl.getPlace)
@@ -79,5 +98,12 @@ router.route('/placeDetail')
 
 router.route('/form')
     .post(utilCtrl.sendPost)
+
+
+router.route('/marketPosts')
+    .get(utilCtrl.getMarketPosts)
+
+router.route('/addMarketPost')
+    .post(utilCtrl.addMarketPost)
 
 module.exports = router;
