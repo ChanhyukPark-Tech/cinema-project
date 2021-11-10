@@ -34,6 +34,7 @@ const LoginPage = ({error, onSubmit,history}) => {
                         password: '',
                     })
                     localStorage.setItem("name",res.data.name)
+                    localStorage.setItem("member_id",res.data.member_id)
                     history.push('/')
                 }else{
                     alert("로그인실패")

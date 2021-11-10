@@ -16,6 +16,7 @@ const HomePage = () => {
     //데이터베이스에서 가져옴
     axios.get("/api/movie").then((data) => {
       setMovies(data.data);
+      console.log(data.data);
     });
   }, []);
 

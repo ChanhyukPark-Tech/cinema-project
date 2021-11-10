@@ -17,8 +17,11 @@ const RegisterPage = ({error, onSubmit,history}) => {
         email: '',
         password: '',
         confirmPassword: '',
+        phoneNm: '',
+        age: '',
         gender: '남성',
         dateEvent: '동의',
+        selfPR:'',
     });
 
     const handleChange = (e) => {
@@ -78,6 +81,20 @@ const RegisterPage = ({error, onSubmit,history}) => {
                                 value={inputs.confirmPassword}
                                 onChange={handleChange}
                             />
+                            <input
+                                type="text"
+                                name="phoneNm"
+                                placeholder="핸드폰 번호를 입력해주세요"
+                                value={inputs.phoneNm}
+                                onChange={handleChange}
+                            />
+                            <input
+                                type="text"
+                                name="age"
+                                placeholder="나이를 입력해주세요"
+                                value={inputs.age}
+                                onChange={handleChange}
+                            />
                             <div>
                                 <select value={inputs.gender} onChange={handleChange} name="gender">
                                     <option value="남성">남성</option>
@@ -88,6 +105,13 @@ const RegisterPage = ({error, onSubmit,history}) => {
                                     <option value="비동의">소개팅 이벤트에 동의하지 않음</option>
                                 </select>
                             </div>
+                            <input
+                                type="text"
+                                name="selfPR"
+                                placeholder="자기소개를 입력해주세요"
+                                value={inputs.selfPR}
+                                onChange={handleChange}
+                            />
                         </div>
                         <button type="submit">회원가입</button>
                     </form>

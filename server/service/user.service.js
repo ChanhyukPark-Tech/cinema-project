@@ -3,18 +3,22 @@ const connection = require("../dbConfig");
 module.exports = {
     create: (data, callBack) => {
         connection.query(
-            `insert into user(name,email,password,gender,dateEvent) values(?,?,?,?,?);
+            `insert into member(Nm,email,pin,sex,age,phoneNm,dateEventAgree,selfPR) values(?,?,?,?,?,?,?,?);
 `,
             [
                 data.name,
                 data.email,
                 data.password,
                 data.gender,
+                data.age,
+                data.phoneNm,
                 data.dateEvent,
+                data.selfPR,
             ],
             (error, results, rows) => {
                 if (error) {
                     callBack(error);
+                    console.log(error)
                 }
                 return callBack(null, rows);
             }
@@ -22,7 +26,7 @@ module.exports = {
     },
     getUserByUserEmail: (email, callBack) => {
         connection.query(
-            `select * from user where email = ?`,
+            `select * from member where email = ?`,
             [email],
             (error, results, fields) => {
                 if (error) {

@@ -127,7 +127,7 @@ function ContactPage() {
     )
 }
 
-const ContactPageStyled = styled.section`
+export const ContactPageStyled = styled.section`
   margin: 50px;
   .contact-section {
     display: grid;

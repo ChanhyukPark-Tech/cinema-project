@@ -9,8 +9,8 @@ const eventCtrl = {
     },
 
     getSpecifyEvent : async (req,res)=>{
-        const {RepresentationMovieCode} = req.body;
-        const sql = `SELECT * FROM event where RepresentationMovieCode = '${RepresentationMovieCode}'`
+        const {event_id} = req.body;
+        const sql = `SELECT * FROM event where event_id = '${event_id}'`
         connection.query(
             sql,(error,rows) => {
                 if(error) throw error;

@@ -1,19 +1,31 @@
 import React from "react";
 import { Col } from "antd";
+import { Link } from "react-router-dom";
+import { EventDateStyle } from "./eventStyles";
 
 function GridCards(props) {
   return (
     <Col lg={6} md={8} xs={24}>
       <div style={{ position: "relative" }}>
-        <a href={`/event/${props.eventId}`}>
+        <Link
+          to={{
+            pathname: `/event/${props.eventId}`,
+            state: {
+              title: props.title,
+              contentUrl: props.contentUrl,
+            },
+          }}
+        >
           <img
             style={{ width: "100%", height: "320px" }}
             src={props.image}
-            alt={props.eventName}
+            alt={props.title}
           />
-        </a>
+        </Link>
       </div>
-      <h3>2021.11.01 ~ 2021.12.01</h3>
+      <EventDateStyle>
+        <h3>{props.startDate + " ~ " + props.endDate}</h3>
+      </EventDateStyle>
     </Col>
   );
 }

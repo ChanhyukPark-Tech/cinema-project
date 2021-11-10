@@ -1,35 +1,28 @@
-import React, { useState, useEffect } from "react";
+import React, {useEffect, useState} from "react";
 import Header from "../../components/header/Header";
 import Footer from "../../components/Footer/Footer";
-import { events } from "../../data/eventPageDummyData";
 import GridCards from "./GridCard";
 import { GridCardStyle, BackColor } from "./eventStyles";
 import { Row } from "antd";
 import EventTitle from "./EventTitle";
 import { Input } from "antd";
-import axios from "axios";
 import Fuse from "fuse.js";
+import axios from "axios";
 const { Search } = Input;
 
 function EventPage(props) {
-  /*
-  여기 찬혁오빠가 처음에해뒀던 부분
-  */
-//    useEffect(()=>{
-//         axios.get('/api/event').then(data=>{
-//             console.log(data)
-//         })
-//     },[])
 
-//     // 특정영화에대한 이벤트만 가져와줘
-//     const clickHandler = (movieId) => {
-//         axios.post('/api/event',movieId).then(data=>{
-//             console.log(data)
-//         })
-//     }
-  
-  const [data, setData] = useState(events);
 
+  const [data, setData] = useState([]);
+  const [events,setEvents] = useState([]);
+
+  useEffect(()=>{
+    axios.get('/api/event/').then(data => {
+      setEvents(data.data)
+      setData(data.data)
+      console.log(data.data)
+    })
+  },[])
   const handleEvent = (e) => {
     searchData(e.target.value);
   };
@@ -40,7 +33,7 @@ function EventPage(props) {
       return;
     }
     const fuse = new Fuse(events, {
-      keys: ["title"],
+      keys: ["movieTitle"],
     });
     const result = fuse.search(pattern);
 
@@ -55,23 +48,7 @@ function EventPage(props) {
     }
   };
 
-  //  const [items, setItems] = useState();
-  //   const handleButton = async () => {
-  //     try {
-  //       const res = await axios.get("http://localhost:3031/naver/getNaverMovie", {
-  //         params: {
-  //           query: query,
-  //         },
-  //       });
-  //       if (res && res.status === 200) {
-  //         const { data } = res;
-  //         console.log(data);
-  //         setItems(data.items);
-  //       }
-  //     } catch (e) {
-  //       console.log("error ", e);
-  //     }
-  //   };
+
 
   return (
     <>
@@ -95,8 +72,11 @@ function EventPage(props) {
                 <React.Fragment key={index}>
                   <GridCards
                     image={event.imgUrl}
-                    eventId={event.id}
-                    evnetName={event.title}
+                    contentUrl={event.contentUrl}
+                    eventId={event.event_id}
+                    title={event.eventNm}
+                    startDate={event.startDt}
+                    endDate={event.endDt}
                   />
                 </React.Fragment>
               ))}

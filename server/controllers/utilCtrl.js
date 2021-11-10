@@ -22,21 +22,21 @@ const utilCtrl = {
         const {DetailDivisionCode} = req.body;
         const sql = `SELECT * FROM place WHERE DetailDivisionCode = '${DetailDivisionCode}' `
 
-        connection.query(sql,(error,rows)=>{
-            if(error) throw error;
+        connection.query(sql, (error, rows) => {
+            if (error) throw error;
             res.send(rows);
         })
     },
-    getSpecifyPlace : async (req,res) => {
+    getSpecifyPlace: async (req, res) => {
         const {CinemaID} = req.body;
         const sql = `SELECT * FROM place WHERE CinemaID = ${CinemaID} `
 
-        connection.query(sql,(error,rows)=>{
-            if(error) throw error;
+        connection.query(sql, (error, rows) => {
+            if (error) throw error;
             res.send(rows);
         })
     },
-    sendPost : async (req,res) => {
+    sendPost: async (req, res) => {
 
         let data = req.body;
         let smtpTransport = nodemailer.createTransport({
@@ -76,6 +76,25 @@ const utilCtrl = {
         })
 
         smtpTransport.close();
+    },
+    addMarketPost: async (req, res) => {
+        const {payinfoId, content, tag, member_id,today,title} = req.body;
+        const sql = `INSERT INTO marketPost(member_member_id,content,payinfo_id,tag,date,title)
+ VALUES(${member_id},'${content}',${payinfoId},'${tag}','${today}','${title}')`
+
+        connection.query(sql,(error,rows) => {
+            if(error) throw error;
+            res.json({success:1})
+            console.log("게시글 작성 성공!")
+        })
+    },
+
+    getMarketPosts : async (req,res) => {
+        const sql = `SELECT * FROM marketPost left join member on marketPost.member_member_id = member.member_id natural join payinfo natural join ticket natural join schedule foo join movie on foo.movie_movie_id = movie.movie_id`
+        connection.query(sql,(error,rows) => {
+            if(error) throw error;
+            res.send(rows);
+        })
     }
 }
 module.exports = utilCtrl
