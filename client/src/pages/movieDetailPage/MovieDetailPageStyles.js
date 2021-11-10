@@ -1,7 +1,18 @@
 import styled from "styled-components";
 
 export const BackColor = styled.div`
+  display: flex;
+  flex-direction: column;
   background-color: #f6efd7;
+  //.setlabelwidth {
+  //  th {
+  //    width: 30%;
+  //  }
+  //}
+  //.ant-descriptions-row{
+  //  margin: 50px 0;
+  //}
+  
 `;
 
 export const GridCardStyle = styled.div`

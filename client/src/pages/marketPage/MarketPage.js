@@ -9,7 +9,6 @@ import axios from "axios";
 
 function MarketPage(props) {
     const [posts, setPosts] = useState([]);
-    console.log(notices)
     const columns = [
         {
             title: '날짜',
