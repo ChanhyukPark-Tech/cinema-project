@@ -12,3 +12,8 @@
 
 ## 주의사항
 > 비번털리면 링딩동한테 죽으므로 절때 다른 repo 에 코드 공유 금지 local 과 현재 repo 에서만 작업
+
+
+## Skill Stack 
+
+![image](https://user-images.githubusercontent.com/69495129/141423441-258f2a50-74af-4081-8eca-054d73b46af1.png)
