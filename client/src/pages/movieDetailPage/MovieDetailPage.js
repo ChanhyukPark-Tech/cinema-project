@@ -121,7 +121,7 @@ function MovieDetailPage(props) {
                 </Modal>
                 
                 
-                <Button style={{width:'30%',height:'79px',margin:'0 auto'}}>바로예매하로 가기</Button>
+                <Button style={{width:'30%',height:'79px',margin:'0 auto'}}>바로예매하러 가기</Button>
                 <Footer/>
             </BackColor>
         </>

@@ -44,11 +44,11 @@ function BranchSelection(props) {
             <DivisionContainer curDivision={curDivision}>
                 {
                     divisions.map(division => (
-                        <div key={division.cinemaDivison_id} style={{
+                        <div key={division.DetailDivisionCode} style={{
                             cursor: 'pointer',
-                            backgroundColor: division.cinemaDivison_id === curDivision ? '#145407' : 'transparent',
-                            color: division.cinemaDivison_id === curDivision ? 'white' : ''
-                        }} onClick={() => divisionClickHandler(division.cinemaDivison_id)}>
+                            backgroundColor: division.DetailDivisionCode === curDivision ? '#145407' : 'transparent',
+                            color: division.DetailDivisionCode === curDivision ? 'white' : ''
+                        }} onClick={() => divisionClickHandler(division.DetailDivisionCode)}>
                             {division.GroupNameKR}({division.CinemaCount})
                         </div>
                     ))
