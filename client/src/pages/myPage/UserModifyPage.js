@@ -22,7 +22,7 @@ const RegisterPage = ({error, onSubmit,history}) => {
                     confirmPassword:'',
                     phoneNm : detail.phoneNm,
                     age:detail.age,
-                    gender:detail.sex,
+                    gender:detail.gender,
                     dateEvent:detail.dateEventAgree,
                     selfPR:detail.selfPR
                 }
