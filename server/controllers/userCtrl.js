@@ -97,7 +97,7 @@ module.exports = {
         const salt = genSaltSync(10);
         const hashedPassword = hashSync(password, salt);
         const sql = `UPDATE member SET pin='${hashedPassword}', age=${age},Nm='${name}', phoneNm=${phoneNm},
- email='${email}',sex='${gender}',dateEventAgree='${dateEvent}',selfPR='${selfPR}' WHERE member_id = ${id} `
+ email='${email}',gender='${gender}',dateEventAgree='${dateEvent}',selfPR='${selfPR}' WHERE member_id = ${id} `
 
         connection.query(sql,(error,rows)=>{
             if(error) throw error;

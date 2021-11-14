@@ -87,7 +87,7 @@ function MyPage({history}) {
             name:userDetail.Nm,
             age:userDetail.age,
             event: userDetail.dateEventAgree,
-            tags: [userDetail.sex],
+            tags: [userDetail.gender],
         }
     ]
 

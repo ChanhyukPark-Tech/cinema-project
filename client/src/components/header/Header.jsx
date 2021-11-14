@@ -32,9 +32,9 @@ const Header = ({ theme }) => {
               </Link>
             </li>
             <li>
-              <a href="##">
+              <Link to={'/'}>
                 <span>Creative Enjoy Our Cinema</span>{" "}
-              </a>
+              </Link>
             </li>
           </ul>
           <ul className={`${classes.menu} ${classes.menu2}`}>
