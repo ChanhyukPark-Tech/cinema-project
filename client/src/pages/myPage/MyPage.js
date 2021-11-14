@@ -3,13 +3,14 @@ import {Link, useParams} from "react-router-dom";
 import axios from "axios";
 import Header from "../../components/header/Header";
 import Title from "../../components/Title/Title";
-import {Space, Table, Tag} from "antd";
+import {Button, Space, Table, Tag} from "antd";
 
-function MyPage(props) {
+function MyPage({history}) {
     const params = useParams();
     const memberId = params.id;
     const [userDetail,setUserDetail] = useState([])
-
+    const auth = memberId === localStorage.getItem("member_id");
+    if(!auth) history.push('/')
     useEffect(() => {
         axios.post('/api/user/userDetail', {memberId:memberId})
             .then(data => {
@@ -17,20 +18,34 @@ function MyPage(props) {
             })
     }, [])
 
+
+
+
+    const deleteUser = (memberId) => {
+        axios.post('/api/user/delete',{member_id:memberId})
+            .then(data => {
+                alert(data.data.msg)
+                localStorage.removeItem("name");
+                localStorage.removeItem("member_id");
+                history.push('/')
+            })
+    }
+
+
     const columns = [
         {
-            title: 'Name',
+            title: '성함',
             dataIndex: 'name',
             key: 'name',
             render: text => <a>{text}</a>,
         },
         {
-            title: 'Age',
+            title: '나이',
             dataIndex: 'age',
             key: 'age',
         },
         {
-            title: 'event',
+            title: '소개팅 이벤트 동의여부',
             dataIndex: 'event',
             key: 'event',
         },
@@ -55,12 +70,12 @@ function MyPage(props) {
             ),
         },
         {
-            title: 'Action',
+            title: '회원정보',
             key: 'action',
             render: (text, record) => (
                 <Space size="middle">
                     <Link to={`/mypage/modify/${memberId}`}>회원정보수정 </Link>
-                    <a>Delete</a>
+                    <Button onClick={() => deleteUser(memberId)}>회원 탈퇴 </Button>
                 </Space>
             ),
         },

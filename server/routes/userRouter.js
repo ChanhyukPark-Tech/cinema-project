@@ -57,23 +57,23 @@ router.post("/login", login);
 
 /**
  * @swagger
- *  /api/user/:
- *    patch:
+ *  /api/user/modify:
+ *    post:
  *      tags:
  *      - user
- *      description: 사용자 정보를 업데이트 시켜줌
+ *      description: 사용자 정보를 수정 시켜줌
  */
-router.patch("/", checkToken, updateUsers);
+router.post("/modify", updateUsers);
 
 /**
  * @swagger
- *  /api/user/:
- *    delete:
+ *  /api/user/delete:
+ *    post:
  *      tags:
  *      - user
  *      description: 사용자 정보를 삭제 시켜줌
  */
-router.delete("/", checkToken, deleteUser);
+router.post("/delete", deleteUser);
 
 /**
  * @swagger

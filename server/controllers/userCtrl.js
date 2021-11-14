@@ -3,11 +3,9 @@ const {
     getUserByUserEmail,
     getUserByUserId,
     getUsers,
-    updateUser,
-    deleteUser
 } = require("../service/user.service");
-const { hashSync, genSaltSync, compareSync } = require("bcrypt");
-const { sign } = require("jsonwebtoken");
+const {hashSync, genSaltSync, compareSync} = require("bcrypt");
+const {sign} = require("jsonwebtoken");
 const connection = require("../dbConfig");
 
 module.exports = {
@@ -44,15 +42,15 @@ module.exports = {
             const result = compareSync(body.password, results.pin);
             if (result) {
                 results.password = undefined;
-                const jsontoken = sign({ result: results }, "qwe1234", {
+                const jsontoken = sign({result: results}, "qwe1234", {
                     expiresIn: "1h"
                 });
                 return res.json({
                     success: 1,
                     message: "login successfully",
                     token: jsontoken,
-                    name:results.Nm,
-                    member_id:results.member_id
+                    name: results.Nm,
+                    member_id: results.member_id
                 });
             } else {
                 return res.json({
@@ -94,46 +92,34 @@ module.exports = {
             });
         });
     },
-    updateUsers: (req, res) => {
-        const body = req.body;
+    updateUsers: async (req, res) => {
+        const {id, name, email, password, phoneNm, age, gender, dateEvent, selfPR} = req.body;
         const salt = genSaltSync(10);
-        body.password = hashSync(body.password, salt);
-        updateUser(body, (err, results) => {
-            if (err) {
-                console.log(err);
-                return;
-            }
-            return res.json({
-                success: 1,
-                message: "updated successfully"
-            });
-        });
+        const hashedPassword = hashSync(password, salt);
+        const sql = `UPDATE member SET pin='${hashedPassword}', age=${age},Nm='${name}', phoneNm=${phoneNm},
+ email='${email}',sex='${gender}',dateEventAgree='${dateEvent}',selfPR='${selfPR}' WHERE member_id = ${id} `
+
+        connection.query(sql,(error,rows)=>{
+            if(error) throw error;
+            res.json({msg:"회원정보수정성공",id:id})
+        })
     },
-    deleteUser: (req, res) => {
-        const data = req.body;
-        deleteUser(data, (err, results) => {
-            if (err) {
-                console.log(err);
-                return;
-            }
-            if (!results) {
-                return res.json({
-                    success: 0,
-                    message: "Record Not Found"
-                });
-            }
-            return res.json({
-                success: 1,
-                message: "user deleted successfully"
-            });
-        });
+    deleteUser: async (req, res) => {
+        const {member_id} = req.body;
+        console.log(member_id)
+        const sql = `DELETE FROM member WHERE member_id = ${member_id}`
+        connection.query(sql, (error, rows) => {
+            if (error) throw error;
+            res.json({msg: "회원탈퇴 완료"})
+        })
+
     },
-    getUserDetail : (req,res) => {
+    getUserDetail: (req, res) => {
         const {memberId} = req.body;
         const sql = `SELECT * FROM member WHERE member_id = ${memberId}`
 
-        connection.query(sql,(error,rows) => {
-            if(error) throw error;
+        connection.query(sql, (error, rows) => {
+            if (error) throw error;
             res.send(rows);
         })
     }
