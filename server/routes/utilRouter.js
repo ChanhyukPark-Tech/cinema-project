@@ -86,6 +86,15 @@ const router = require("express").Router();
  *      description: 새싹 마켓 모든 게시물 가져오기
  */
 
+/**
+ * @swagger
+ *  /api/util/marketPost:
+ *    post:
+ *      tags:
+ *      - util
+ *      description: 새싹 마켓 특정 게시물 가져오기
+ */
+
 router.route('/place')
     .get(utilCtrl.getPlaces)
     .post(utilCtrl.getPlace)
