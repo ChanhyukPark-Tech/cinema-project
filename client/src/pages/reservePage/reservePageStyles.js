@@ -5,6 +5,7 @@ export const ReserveEntireContainer = styled.div`
 `;
 export const ReserveContainer = styled.div`
   width: 100%;
+  
   display: flex;
   border: 2px solid black;
   border-radius: 4px;
@@ -13,11 +14,13 @@ export const ReserveContainer = styled.div`
 
 export const BranchContainer = styled.div`
   width: 100%;
+  height: 100%;
 `;
 
 export const MovieListContainer = styled.div`
   width: 100%;
   overflow: auto;
+  height: 100%;
 
   & > div:first-of-type {
     // 바로나오는 div 만 css 적용 영화선택만
@@ -42,6 +45,7 @@ export const MovieListContainer = styled.div`
 
 export const TimeListContainer = styled.div`
   width: 100%;
+  height: 100%;
 
   & > div:first-of-type {
     // 바로나오는 div 만 css 적용 영화선택만
@@ -66,7 +70,6 @@ export const TimeListContainer = styled.div`
 export const LocalContainer = styled.div`
   width: 100%;
   height: 100%;
-  border: 3px solid #8d8472;
   span {
     font-size: 0.8rem;
   }

@@ -99,7 +99,7 @@ router.route('/place')
     .get(utilCtrl.getPlaces)
     .post(utilCtrl.getPlace)
 
-router.route('/divison')
+router.route('/division')
     .get(utilCtrl.getDivisons)
 
 router.route('/placeDetail')

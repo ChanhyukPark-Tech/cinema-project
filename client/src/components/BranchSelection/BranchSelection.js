@@ -13,7 +13,7 @@ function BranchSelection(props) {
     const [curPlaceItem, setCurPlaceItem] = useState([])
 
     useEffect(() => {
-        axios.get('/api/util/divison').then(data => {
+        axios.get('/api/util/division').then(data => {
             setDivisions(data.data);
         })
         axios.post('/api/util/place', {DetailDivisionCode: 1}).then(data => {
