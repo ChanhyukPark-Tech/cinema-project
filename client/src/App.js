@@ -16,30 +16,35 @@ import EventDetailPage from "./pages/eventDetailPage/eventDetailPage";
 import MyPage from "./pages/myPage/MyPage";
 import AddPostPage from "./pages/marketPage/AddPostPage";
 import UserModifyPage from "./pages/myPage/UserModifyPage";
+import MarketDetailPage from "./pages/marketDetailPage/marketDetailPage";
 
 function App() {
   return (
     <div>
       <Switch>
-
-          <Route exact path="/" component={HomePage} />
-          <Route exact path="/contact" component={ContactPage} />
-          <Route exact path="/market" component={MarketPage} />
-          <Route exact path="/market/addPost" component={AddPostPage} />
-          <Route exact path="/event" component={EventPage} />
-          <Route exact path="/event/:id" component={EventDetailPage} />
-          <Route exact path="/practice" component={PracticePage} />
-          <Route exact path="/branch/" component={BranchPage} />
-          <Route exact path="/movie/reserve/" component={ReservePage} />
-          <Route exact path="/movie/:id" component={MovieDetailPage} />
-          <Route exact path="/movie/reserve/:id" component={ReservePage} />
-          <Route exact path="/profile" component={ProfilePage} />
-          <Route exact path="/register" component={RegisterPage} />
-          <Route exact path="/login" component={LoginPage} />
-          <Route exact path="/mypage/:id" component={MyPage} />
-          <Route exact path="/mypage/modify/:id" component={UserModifyPage} />
-          <Route path="/admin" component={AdminPage} />
-          <Redirect from="*" to="/" />
+        <Route exact path="/" component={HomePage} />
+        <Route exact path="/contact" component={ContactPage} />
+        <Route exact path="/market" component={MarketPage} />
+        <Route exact path="/market/addPost" component={AddPostPage} />
+        <Route
+          exact
+          path="/market/marketDetail/:id"
+          component={MarketDetailPage}
+        />
+        <Route exact path="/event" component={EventPage} />
+        <Route exact path="/event/:id" component={EventDetailPage} />
+        <Route exact path="/practice" component={PracticePage} />
+        <Route exact path="/branch/" component={BranchPage} />
+        <Route exact path="/movie/reserve/" component={ReservePage} />
+        <Route exact path="/movie/:id" component={MovieDetailPage} />
+        <Route exact path="/movie/reserve/:id" component={ReservePage} />
+        <Route exact path="/profile" component={ProfilePage} />
+        <Route exact path="/register" component={RegisterPage} />
+        <Route exact path="/login" component={LoginPage} />
+        <Route exact path="/mypage/:id" component={MyPage} />
+        <Route exact path="/mypage/modify/:id" component={UserModifyPage} />
+        <Route path="/admin" component={AdminPage} />
+        <Redirect from="*" to="/" />
       </Switch>
     </div>
   );
