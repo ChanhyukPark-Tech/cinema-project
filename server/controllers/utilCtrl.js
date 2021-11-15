@@ -95,6 +95,18 @@ const utilCtrl = {
             if(error) throw error;
             res.send(rows);
         })
+    },
+
+    MarketPost : async (req,res) => { // 11/15 추가
+        const {marketPost_id} = req.body;
+        const sql = `SELECT * FROM marketPost left join member on marketPost.member_member_id = member.member_id natural join payinfo natural join ticket natural join schedule foo join movie on foo.movie_movie_id = movie.movie_id WHERE marketPost_id = '${marketPost_id}' GROUP BY payinfo_id ;`
+        
+        connection.query(sql,(error,rows) => {
+            if(error) throw error;
+            res.send(rows);
+        })
     }
+
+
 }
 module.exports = utilCtrl
