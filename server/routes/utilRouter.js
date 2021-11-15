@@ -106,4 +106,7 @@ router.route('/marketPosts')
 router.route('/addMarketPost')
     .post(utilCtrl.addMarketPost)
 
+router.route('/marketPost')// 11/15 추가
+    .post(utilCtrl.MarketPost)
+
 module.exports = router;
