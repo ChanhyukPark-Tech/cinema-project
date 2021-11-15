@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react'
 import Header from '../../components/header/Header'
 import Footer from '../../components/Footer/Footer';
-import {GridCardStyle, BackColor} from './MovieDetailPageStyles'
+import { BackColor} from './MovieDetailPageStyles'
 import {Button, Descriptions, Row} from 'antd';
 import {useParams} from 'react-router';
 import axios from 'axios';
