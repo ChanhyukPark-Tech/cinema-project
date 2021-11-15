@@ -7,7 +7,7 @@ import { BackColor } from "../eventPage/eventStyles";
 import EventTitle from "../eventPage/EventTitle";
 import { useRouteMatch, useParams } from "react-router-dom";
 import { DetailInfoStyle, OneContentContainer } from "./marketDetailStyles";
-import { MarketContainer } from "../marketPage/marketStyles";
+import { MarketContainer, MarketTitleContainer } from "../marketPage/marketStyles";
 import axios from "axios";
 
 function MarketDetailPage(props) {
@@ -28,34 +28,31 @@ function MarketDetailPage(props) {
     <>
       <BackColor>
         <Header />
-        <EventTitle title={post.title} />
+        <MarketTitleContainer>
+        <h2>
+        {post.title} 
+        </h2>
+        </MarketTitleContainer>
         <MarketContainer>
           <DetailInfoStyle>
+            <div style={{width:"80%", margin:"3rem auto"}}>
+              <table>
+                <tr>
+                  <th>작성자</th> <td>{post.Nm}</td>
+                  <th>작성일</th> <td>{post.date}</td>
+                  <th>연락처</th> <td>{post.phoneNm}</td>
+                </tr>
+
+                <tr>
+                  <th>영화제목</th> <td>{post.movieNm}</td>
+                  <th>상영일자</th> <td>{post.ymd} {post.startDt}~{post.endDt}</td>
+                  <th>상영장소</th> <td>{post.theater_theater_id}지점 {post.place_place_id}관</td>
+                </tr>
+              </table>
+            </div>
             <OneContentContainer>
-              <h2>작성자</h2>
-              <h3>{post.Nm}</h3>
-            </OneContentContainer>
-            <OneContentContainer>
-              <h2>일시</h2>
-              <h3>{post.date}</h3>
-            </OneContentContainer>
-            <OneContentContainer>
-              <h2>글 제목</h2>
-              <h3>{post.title}</h3>
-            </OneContentContainer>
-            <OneContentContainer>
-              <h2>상세내용</h2>
+            <h3>내용</h3>
               <p>{post.content}</p>
-            </OneContentContainer>
-            <OneContentContainer>
-              <h2>영화제목</h2>
-              <h3>{post.movieNm}</h3>
-            </OneContentContainer>
-            <OneContentContainer>
-              <h2>장소 및 시간</h2>
-              <h3>
-                {post.ymd} 🤪 {post.startDt} ~ {post.endDt}
-              </h3>
             </OneContentContainer>
           </DetailInfoStyle>
         </MarketContainer>
