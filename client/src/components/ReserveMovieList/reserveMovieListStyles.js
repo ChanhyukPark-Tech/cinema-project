@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 export const ReserveMovieCardContainer = styled.div`
   display: flex;
-  border: ${props => props.selected ? '5px solid black' : '1px solid black'};
+  border: ${props => props.selected ? '3px solid #6D8E65' : '0px solid #6D8E65'};
   img{
     width: 7vh;
     height: 10vh;

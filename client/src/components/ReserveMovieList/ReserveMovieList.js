@@ -3,6 +3,7 @@ import {GradeContainer, ReserveMovieCardContainer, ReserveMovieCardContentContai
 
 
 const getViewGradeIconOptions = (viewGradeCode) => {
+    viewGradeCode  = viewGradeCode * 1;
     const options = {};
     if (viewGradeCode === 0) {
         options.color = '#5BC77E';
@@ -20,13 +21,14 @@ const getViewGradeIconOptions = (viewGradeCode) => {
     return options;
 };
 
-function ReserveMovieCard({name, grade, rating, imgUrl, releasedDate, setStep, setMovieCode, mi, movieCode}) {
+function ReserveMovieCard({name, grade, rating, imgUrl, releasedDate, setStep, setMovieCode, mi, movieCode,setSelectedMovie,selectedMovie}) {
     const gradeStyles = getViewGradeIconOptions(grade)
     return (
         <ReserveMovieCardContainer
-            selected={mi === movieCode}
+            selected={selectedMovie === movieCode}
             onClick={() => {
                 setStep(3)
+                setSelectedMovie(movieCode)
                 setMovieCode(mi)
             }}>
             <img src={imgUrl}/>
@@ -37,14 +39,13 @@ function ReserveMovieCard({name, grade, rating, imgUrl, releasedDate, setStep, s
                     </GradeContainer>
                     <div style={{fontWeight: 'bold'}}>
                         {name}
-
                     </div>
                 </div>
                 <div>
-                    {rating}
+                    ⭐️ {rating}
                 </div>
                 <div>
-                    {releasedDate}
+                    개봉일 👉 {releasedDate.substring(0,10)}
                 </div>
             </ReserveMovieCardContentContainer>
         </ReserveMovieCardContainer>

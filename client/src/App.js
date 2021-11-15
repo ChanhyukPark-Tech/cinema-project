@@ -17,6 +17,8 @@ import MyPage from "./pages/myPage/MyPage";
 import AddPostPage from "./pages/marketPage/AddPostPage";
 import UserModifyPage from "./pages/myPage/UserModifyPage";
 import MarketDetailPage from "./pages/marketDetailPage/marketDetailPage";
+import SeatSelectPage from "./pages/reservePage/SeatSelectPage";
+import MenuPage from "./pages/menuPage/MenuPage";
 
 function App() {
   return (
@@ -35,7 +37,9 @@ function App() {
         <Route exact path="/event/:id" component={EventDetailPage} />
         <Route exact path="/practice" component={PracticePage} />
         <Route exact path="/branch/" component={BranchPage} />
+        <Route exact path="/menu/" component={MenuPage} />
         <Route exact path="/movie/reserve/" component={ReservePage} />
+        <Route exact path="/movie/reserve/seat/:id" component={SeatSelectPage} />
         <Route exact path="/movie/:id" component={MovieDetailPage} />
         <Route exact path="/movie/reserve/:id" component={ReservePage} />
         <Route exact path="/profile" component={ProfilePage} />

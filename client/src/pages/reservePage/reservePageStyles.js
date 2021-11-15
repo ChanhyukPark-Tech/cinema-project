@@ -118,3 +118,8 @@ export const BranchName = styled.div`
   justify-content: center;
   align-items: center;
 `;
+
+export const TimeContentContainer = styled.div`
+  display: flex;
+  align-items: center;
+`

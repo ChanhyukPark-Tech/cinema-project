@@ -12,7 +12,7 @@ import {
     TimeListContainer,
 } from "./reservePageStyles";
 import Title from "../../components/Title/Title";
-import {Steps} from "antd";
+import {Button, Steps} from "antd";
 
 import Header from "../../components/header/Header";
 import ReserveTimeList from "../../components/ReserveTimeList/ReserveTimeList";
@@ -20,28 +20,44 @@ import axios from "axios";
 import ReserveMovieCard from "../../components/ReserveMovieList/ReserveMovieList";
 
 function ReservePage(props) {
+    let current = new Date();
     const {Step} = Steps;
     const [divisions, setDivisions] = useState([]);
     const [places, setPlaces] = useState([])
-    const [movies,setMovies] = useState([])
+    const [movies, setMovies] = useState([])
     const [step, setStep] = useState(0);
-
+    const [selectedMovie, setSelectedMovie] = useState(1);
     const [localCode, setLocalCode] = useState("1");
-    const [branchCode, setBranchCode] = useState(1);
+    const [branchCode, setBranchCode] = useState(1013);
     const [movieCode, setMovieCode] = useState(1);
+    const [selectedDate,setSelectedDate] = useState(current.getFullYear() + "-" + current.getMonth() + "-" + current.getDate())
+    const [times,setTimes] = useState([]);
 
-    const divisionClickHandler = (cinemaDivison_id) => {
-        axios.post('/api/util/place', {DetailDivisionCode: cinemaDivison_id}).then(data => {
-            setPlaces(data.data)
-        })
+    const getMovieTimesHandler = () => {
+        axios.post('/api/reserve/getReserveTimes',{CinemaID:branchCode,movie_movie_id:movieCode,ymd:selectedDate})
+            .then(data => {
+                console.log(data.data)
+                setTimes(data.data)
+            })
     }
 
 
-    const placeClickHandler = (CinemaID) =>{
-        axios.post('/api/reserve/getPlaceMovies',{CinemaID:CinemaID})
+    const divisionClickHandler = (e, cinemaDivison_id) => {
+        e.preventDefault();
+        axios.post('/api/util/place', {DetailDivisionCode: cinemaDivison_id}).then(data => {
+            setPlaces(data.data)
+        })
+
+
+    }
+
+
+
+    const placeClickHandler = (e, CinemaID) => {
+        e.preventDefault();
+        axios.post('/api/reserve/getPlaceMovies', {CinemaID: CinemaID})
             .then(data => {
                 setMovies(data.data)
-                console.log(data.data)
             })
     }
 
@@ -99,7 +115,7 @@ function ReservePage(props) {
                                         active={localCode === item.DetailDivisionCode}
                                         onClick={(e) => {
                                             setStep(1);
-                                            divisionClickHandler(item.DetailDivisionCode)
+                                            divisionClickHandler(e, item.DetailDivisionCode)
                                             localClickHandler(e, item.DetailDivisionCode);
                                         }}
                                     >
@@ -113,9 +129,9 @@ function ReservePage(props) {
                                     places.map(item => {
                                         return <BranchName
                                             active={branchCode === item.CinemaID}
-
                                             onClick={(e) => {
-                                                placeClickHandler(item.CinemaID);
+                                                setStep(2);
+                                                placeClickHandler(e, item.CinemaID);
                                                 branchClickHandler(e, item.CinemaID)
                                             }
                                             }>
@@ -129,31 +145,37 @@ function ReservePage(props) {
                     <MovieListContainer>
                         <div>영화 선택</div>
                         <div>
-                            {/*{movies.map((movie) => (*/}
-                            {/*  <ReserveMovieCard*/}
-                            {/*    movieCode={movieCode}*/}
-                            {/*    setMovieCode={setMovieCode}*/}
-                            {/*    setStep={setStep}*/}
-                            {/*    name={movie.name}*/}
-                            {/*    grade={movie.grade}*/}
-                            {/*    rating={movie.rating}*/}
-                            {/*    imgUrl={movie.imgUrl}*/}
-                            {/*    releasedDate={movie.releasedDate}*/}
-                            {/*    mi={movie.mi}*/}
-                            {/*  />*/}
-                            {/*))}*/}
+                            {movies && movies.map((movie) => (
+                                <ReserveMovieCard
+                                    movieCode={movie.movie_id}
+                                    setMovieCode={setMovieCode}
+                                    setStep={setStep}
+                                    name={movie.movieNm}
+                                    grade={movie.watchGradeName}
+                                    rating={movie.rate}
+                                    imgUrl={movie.PosterURL}
+                                    releasedDate={movie.openDt}
+                                    mi={movie.movie_id}
+                                    setSelectedMovie={setSelectedMovie}
+                                    selectedMovie={selectedMovie}
+                                />
+                            ))}
                         </div>
                     </MovieListContainer>
                     <TimeListContainer>
                         <div>시간표</div>
                         <div>
                             <ReserveTimeList
+                                getMovieTimesHandler={getMovieTimesHandler}
+                                times={times}
+                                setSelectedDate={setSelectedDate}
                                 localCode={localCode}
                                 branchCode={branchCode}
                                 movieCode={movieCode}
                             />
                         </div>
                     </TimeListContainer>
+
                 </ReserveContainer>
             </ReserveEntireContainer>
         </>
