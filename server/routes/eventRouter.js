@@ -22,11 +22,23 @@ const router = require("express").Router();
  *      description: 특정 영화에 관련된 이벤트만 가져오기
  */
 
+/**
+ * @swagger
+ *  /api/event/promotionCode:
+ *    post:
+ *      tags:
+ *      - event
+ *      description: 프로모션 코드를 주면 그에 해당하는 이벤트의 row 를 넘겨주는 API
+ */
+
 router.route('/')
     .get(eventCtrl.getEvents)
 
 router.route('/eventDetail')
     .post(eventCtrl.getSpecifyEvent)
+
+router.route('/promotionCode')
+    .post(eventCtrl.getpromotionCode)
 
 // 첫번째 백에서는 다짜고짜 모든 정보를 다줌 니네가 알아서 필터해라
 
