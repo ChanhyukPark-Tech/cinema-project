@@ -27,8 +27,7 @@ const paymentCtrl = {
             const sql3 = `insert into seat(schedule_schedule_id, ticket_ticket_id, seatNm, gender, member_member_id)
             values (${schedule_schedule_id}, (SELECT max(ticket_id) FROM ticket),'${seat}', ${gender} ,${member_member_id});`
             connection.query(
-                sql3,(error,rows)=>{
-                    console.log("데이터들어갑니다용")
+                sql3,(error,rows)=>{                  
                     if(error) throw error;
     
                 }
