@@ -17,6 +17,7 @@ function GridCards(props) {
                 >
                     <img
                         style={{width: "100%", height: "300px"}}
+
                         src={props.image}
                         alt={props.title}
                     />
@@ -25,6 +26,7 @@ function GridCards(props) {
             <MenuDescriptionStyle>
                 <h3>{props.name}</h3>
                 <h4>{props.price + "원"}</h4>
+
             </MenuDescriptionStyle>
         </Col>
     );

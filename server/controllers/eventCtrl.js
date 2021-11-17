@@ -17,6 +17,17 @@ const eventCtrl = {
                 res.send(rows);
             }
         )
+    },
+
+    getpromotionCode : async (req,res)=>{
+        const {promotionCode} = req.body;
+        const sql = `SELECT * FROM event where promotionCode = '${promotionCode}'`
+        connection.query(
+            sql,(error,rows) => {
+                if(error) throw error;
+                res.send(rows);
+            }
+        )
     }
 
 }

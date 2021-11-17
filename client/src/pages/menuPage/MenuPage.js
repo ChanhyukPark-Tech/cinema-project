@@ -17,6 +17,7 @@ function MenuPage(props) {
 
     useEffect(()=>{
         axios.get('/api/store/').then(data => {
+
             setMenu(data.data)
             setData(data.data)
             console.log(data.data)
@@ -33,6 +34,7 @@ function MenuPage(props) {
         }
         const fuse = new Fuse(menu, {
             keys: ["itemNm"],
+
         });
         const result = fuse.search(pattern);
 
@@ -60,6 +62,7 @@ function MenuPage(props) {
                     onsearch={(value) => console.log(value)}
                     onChange={handleMenu}
                     style={{width:600}}
+
                 />
             </div>
             <GridCardStyle>
@@ -71,6 +74,7 @@ function MenuPage(props) {
                                 title={menu.itemNm}
                                 name={menu.itemNm}
                                 price={menu.itemPrice}
+
                             />
                         </React.Fragment>
                     ))}

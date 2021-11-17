@@ -51,4 +51,5 @@ export const MenuDescriptionStyle = styled.div`
     font-weight: 500;
     position: relative;
     padding-bottom: 0.3rem;
+
 `;
