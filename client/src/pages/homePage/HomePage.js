@@ -9,8 +9,8 @@ import Header from "../../components/header/Header";
 import Footer from "../../components/Footer/Footer";
 import axios from "axios";
 
-const HomePage = () => {
-
+const HomePage = ({history}) => {
+  if(localStorage.getItem("name")) history.push('/admin')
   const [movies, setMovies] = useState([]);
   useEffect(() => {
     //데이터베이스에서 가져옴

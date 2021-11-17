@@ -130,4 +130,7 @@ router.route('/marketPost')// 11/15 추가
 router.route('/deleteMarketPost')// 11/15 추가
     .post(utilCtrl.deleteMarketPost)
 
+// router.route('/doTest')
+//     .post(utilCtrl.doTest)
+
 module.exports = router;

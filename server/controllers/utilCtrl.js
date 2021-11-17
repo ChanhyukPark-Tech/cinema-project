@@ -121,7 +121,25 @@ const utilCtrl = {
             if(error) throw error;
             res.send(rows);
         })
-    }
+    },
+    //
+    // doTest: async (req,res) => {
+    //
+    //     const {seats} = req.body;
+    //     console.log(seats)
+    //     // for(let i = 0 ; i <seats.length ; i++){
+    //     //
+    //     // }
+    //     seats.map(seat => {
+    //         const sql = ` INSERT INTO arrayTest(seat) VALUES('${seat}')`
+    //
+    //         connection.query(sql, (error, rows) => {
+    //             console.log("들어감요")
+    //             if (error) throw error
+    //             console.log(rows)
+    //         })
+    //     })
+    // }
 
 
 }
