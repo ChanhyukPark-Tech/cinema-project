@@ -19,7 +19,7 @@ function MenuPage(props) {
         axios.get('/api/store/').then(data => {
             setMenu(data.data)
             setData(data.data)
-            console.log(data)
+            console.log(data.data)
         })
     },[])
     const handleMenu = (e) => {
@@ -32,7 +32,7 @@ function MenuPage(props) {
             return;
         }
         const fuse = new Fuse(menu, {
-            keys: [],
+            keys: ["itemNm"],
         });
         const result = fuse.search(pattern);
 
@@ -56,10 +56,10 @@ function MenuPage(props) {
                 style={{display: "flex", justifyContent: "center", padding: "2rem"}}
             >
                 <Search
-                    placeholder="영화를 검색하시면 영화와 관련된 이벤트 메뉴들을 보여드립니다."
+                    placeholder="검색을 통해 원하는 메뉴를 골라보세요!"
                     onsearch={(value) => console.log(value)}
                     onChange={handleMenu}
-                    style={{width:200}}
+                    style={{width:600}}
                 />
             </div>
             <GridCardStyle>
@@ -67,10 +67,10 @@ function MenuPage(props) {
                     {data && data.map((menu, index) =>(
                         <React.Fragment key={index}>
                             <GridCards
-                                image={menu.imgUrl}
-                                title={menu.title}
-                                name={menu.name}
-                                price={menu.price}
+                                image={menu.posterURL}
+                                title={menu.itemNm}
+                                name={menu.itemNm}
+                                price={menu.itemPrice}
                             />
                         </React.Fragment>
                     ))}
