@@ -1,4 +1,3 @@
-const { setMaxListeners } = require('npmlog');
 const connection = require('../dbConfig')
 
 const paymentCtrl = {
