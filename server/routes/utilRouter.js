@@ -95,6 +95,15 @@ const router = require("express").Router();
  *      description: 새싹 마켓 특정 게시물 가져오기
  */
 
+/**
+ * @swagger
+ *  /api/util/deleteMarketPost:
+ *    delete:
+ *      tags:
+ *      - util
+ *      description: marketPost_Id보낼테니 그에 해당하는 새싹마켓 한 row 삭제하는 API
+ */
+
 router.route('/place')
     .get(utilCtrl.getPlaces)
     .post(utilCtrl.getPlace)
@@ -116,6 +125,9 @@ router.route('/addMarketPost')
     .post(utilCtrl.addMarketPost)
 
 router.route('/marketPost')// 11/15 추가
-    .post(utilCtrl.MarketPost)
+    .post(utilCtrl.marketPost)
+
+router.route('/deleteMarketPost')// 11/15 추가
+    .post(utilCtrl.deleteMarketPost)
 
 module.exports = router;
