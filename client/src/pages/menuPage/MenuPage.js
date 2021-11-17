@@ -16,10 +16,10 @@ function MenuPage(props) {
     const [menu, setMenu] = useState([]);
 
     useEffect(()=>{
-        axios.get('/api/menu/').then(data => {
+        axios.get('/api/store/').then(data => {
             setMenu(data.data)
             setData(data.data)
-            console.log(data.data)
+            console.log(data)
         })
     },[])
     const handleMenu = (e) => {
@@ -32,7 +32,7 @@ function MenuPage(props) {
             return;
         }
         const fuse = new Fuse(menu, {
-            keys: ["movieTitle"],
+            keys: [],
         });
         const result = fuse.search(pattern);
 
