@@ -34,7 +34,6 @@ function MenuPage(props) {
         }
         const fuse = new Fuse(menu, {
             keys: ["itemNm"],
-
         });
         const result = fuse.search(pattern);
 
