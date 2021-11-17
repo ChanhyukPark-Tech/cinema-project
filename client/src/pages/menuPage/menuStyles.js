@@ -43,6 +43,13 @@ export const MenuDescriptionStyle = styled.div`
     color: #2c4b21;
     font-weight: 800;
     position: relative;
-    padding-bottom: 0.7rem;
-  
+    padding-bottom: 0.1rem;
+  }
+  h4 {
+    text-align: center;
+    color: #2c4b21;
+    font-weight: 500;
+    position: relative;
+    padding-bottom: 0.3rem;
+
 `;
