@@ -1,0 +1,50 @@
+export const events = [
+    {
+      id: 1,
+      movieCode: 0, // 영화 관련 이벤트 상품일 경우 입력
+      title: "달콤팝콘",
+      imgUrl: "https://cdn.ppomppu.co.kr/zboard/data3/2018/0126/20180126230009_csxgkmde.jpg",
+      name: "달콤팝콘",
+      price: "6,000원",
+    },
+    {
+        id: 2,
+        movieCode: 0,
+        title: "치즈팝콘",
+        imgUrl: "https://cdn.ppomppu.co.kr/zboard/data3/2018/0126/20180126230009_csxgkmde.jpg",
+        name: "치즈팝콘",
+        price: "5,000원",
+      },
+      {
+        id: 3,
+        movieCode: 0,
+        title: "어니언팝콘",
+        imgUrl: "https://cdn.ppomppu.co.kr/zboard/data3/2018/0126/20180126230009_csxgkmde.jpg",
+        name: "어니언팝콘",
+        price: "5,000원",
+      },
+      {
+        id: 4,
+        movieCode: 0,
+        title: "패밀리콤보",
+        imgUrl: "https://cdn.ppomppu.co.kr/zboard/data3/2018/0126/20180126230009_csxgkmde.jpg",
+        name: "패밀리콤보",
+        price: "12,500원",
+      },
+      {
+        id: 5,
+        movieCode: 0,
+        title: "나쵸세트",
+        imgUrl: "https://cdn.ppomppu.co.kr/zboard/data3/2018/0126/20180126230009_csxgkmde.jpg",
+        name: "나쵸세트",
+        price: "11,000원",
+      },
+      {
+        id: 6,
+        movieCode: 0,
+        title: "찡오랑 오징어",
+        imgUrl: "https://cdn.ppomppu.co.kr/zboard/data3/2018/0126/20180126230009_csxgkmde.jpg",
+        name: "찡오랑 오징어",
+        price: "8,000원",
+      },
+];
