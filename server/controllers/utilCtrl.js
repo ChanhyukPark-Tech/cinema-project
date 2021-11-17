@@ -97,7 +97,7 @@ const utilCtrl = {
         })
     },
 
-    MarketPost : async (req,res) => { // 11/15 추가
+    marketPost : async (req,res) => { // 11/15 추가
         const {marketPost_id} = req.body;
         const sql = `SELECT * FROM seat
         left join member on seat.member_member_id = member.member_id 
@@ -105,7 +105,17 @@ const utilCtrl = {
         natural join payinfo 
         natural join ticket 
         natural join schedule foo join movie on foo.movie_movie_id = movie.movie_id WHERE marketPost_id = ${marketPost_id}
-        GROUP BY seatNm;`
+        GROUP BY seatNm`
+        
+        connection.query(sql,(error,rows) => {
+            if(error) throw error;
+            res.send(rows);
+        })
+    },
+
+    deleteMarketPost : async (req,res) => { // 11/15 추가
+        const {marketPost_id} = req.body;
+        const sql = `DELETE FROM movieDB.marketPost WHERE marketPost_id = '${marketPost_id}'`
         
         connection.query(sql,(error,rows) => {
             if(error) throw error;
