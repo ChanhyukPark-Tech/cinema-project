@@ -1,4 +1,4 @@
-export default startInsert = () => {
+export function startInsert(setSeats) {
   const seatsTemplate = [];
   let SeatColumn;
   let SeatNo;
@@ -32,5 +32,8 @@ export default startInsert = () => {
     }
   }
 
-  return seatsTemplate;
+ setSeats(seatsTemplate)
+
 };
+
+

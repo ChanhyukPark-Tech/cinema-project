@@ -1,9 +1,8 @@
-import React, { useState } from "react";
+import React, {useEffect, useState} from "react";
 import Header from "../../components/header/Header";
 import { useParams, useRouteMatch } from "react-router-dom";
 import styled, { css } from "styled-components";
-import startInsert from "./makeSeatTemplate";
-
+import {startInsert} from './makeSeatTemplate'
 const ScreenBlock = styled.div`
   width: 1170px;
   height: 470px;
@@ -118,7 +117,12 @@ const Seat = styled.div`
 function SeatSelectPage() {
   const params = useParams();
   const [seats, setSeats] = useState([]);
-  setSeats(startInsert);
+
+  useEffect(()=>{
+    startInsert(setSeats)
+
+
+  },[])
 
   const StepBlock = styled.div`
     width: 100%;
@@ -144,7 +148,7 @@ function SeatSelectPage() {
         <ScreenBlock>
           <div className="screen">SCREEN</div>
           <SeatsBlock width={seatsBlockWidth}>
-            {seats.map((seat) => (
+            {seats.length > 0 && seats.map((seat) => (
               <React.Fragment key={seat.SeatNo}>
                 <SeatRow x={0} y={seat.SeatYCoordinate / yScaleRatio - 60}>
                   {seat.SeatRow}
