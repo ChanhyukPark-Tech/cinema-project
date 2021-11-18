@@ -8,17 +8,16 @@ export function startInsert(setSeats) {
   let SweetSpotYN = "N";
   for (let i = 1; i < 11; i++) {
     SeatColumn = i;
-    if (i > 8) {
-      SweetSpotYN = "Y";
-    } else {
-      SweetSpotYN = "N";
-    }
-    let SeatXCoordinate = initialX + (i - 1) * 600;
+
+    let SeatXCoordinate = initialX + (i - 1) * 900;
     for (let j = 65; j < 75; j++) {
-      let SeatYCoordinate = initialY + (j - 65) * 662;
+      let SeatYCoordinate = initialY + (j - 65) * 930;
 
       let tempString = String.fromCharCode(j);
       SeatNo = `${tempString}${i}`;
+      if (j > 72) {
+        SweetSpotYN = "Y";
+      } else SweetSpotYN = "N";
 
       seatsTemplate.push({
         SeatColumn: i,
@@ -32,8 +31,5 @@ export function startInsert(setSeats) {
     }
   }
 
- setSeats(seatsTemplate)
-
-};
-
-
+  setSeats(seatsTemplate);
+}

@@ -10,7 +10,7 @@
 }
 .calendar ul {
   display: flex;
-  //justify-content: space-evenly;
+  /* justify-content: space-evenly; */
   transition: transform 0.3s ease;
 }
 .calendar ul li {
