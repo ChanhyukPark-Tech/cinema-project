@@ -10,7 +10,7 @@ import Footer from "../../components/Footer/Footer";
 import axios from "axios";
 
 const HomePage = ({history}) => {
-  if(localStorage.getItem("name")) history.push('/admin')
+  if(localStorage.getItem("name") === "관리자"ㄹ) history.push('/admin')
   const [movies, setMovies] = useState([]);
   useEffect(() => {
     //데이터베이스에서 가져옴

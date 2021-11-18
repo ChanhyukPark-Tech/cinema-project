@@ -132,7 +132,7 @@ const Header = ({theme}) => {
                                     비회원 예매
                                 </a>
                             </li>
-                        ) : userName === "관리자" ? <></> :  (
+                        ) : userName === "관리자" ? <></> : (
                             <li>
                                 <Link to={`/mypage/${memberId}`}>
                   <span>
