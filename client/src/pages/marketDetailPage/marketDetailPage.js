@@ -1,16 +1,14 @@
 import React, { useEffect, useState } from "react";
 
-import { SmileOutlined } from "@ant-design/icons";
 import Header from "../../components/header/Header";
 import Footer from "../../components/Footer/Footer";
 import { BackColor } from "../eventPage/eventStyles";
-import EventTitle from "../eventPage/EventTitle";
-import { useRouteMatch, useParams } from "react-router-dom";
+import {  useParams } from "react-router-dom";
 import { DetailInfoStyle, OneContentContainer } from "./marketDetailStyles";
 import { MarketContainer, MarketTitleContainer } from "../marketPage/marketStyles";
 import axios from "axios";
 
-function MarketDetailPage(props) {
+function MarketDetailPage() {
   const params = useParams();
 
   const [post, setPost] = useState([]);

@@ -19,6 +19,7 @@ import UserModifyPage from "./pages/myPage/UserModifyPage";
 import MarketDetailPage from "./pages/marketDetailPage/marketDetailPage";
 import SeatSelectPage from "./pages/reservePage/SeatSelectPage";
 import MenuPage from "./pages/menuPage/MenuPage";
+import PaymentPage from "./pages/reservePage/PaymentPage";
 
 function App() {
   return (
@@ -41,6 +42,7 @@ function App() {
         <Route exact path="/movie/reserve/" component={ReservePage} />
         <Route exact path="/movie/reserve/seat/:id" component={SeatSelectPage} />
         <Route exact path="/movie/:id" component={MovieDetailPage} />
+        <Route exact path="/movie/reserve/pay/" component={PaymentPage} />
         <Route exact path="/movie/reserve/:id" component={ReservePage} />
         <Route exact path="/profile" component={ProfilePage} />
         <Route exact path="/register" component={RegisterPage} />

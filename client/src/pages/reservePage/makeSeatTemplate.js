@@ -11,7 +11,7 @@ export function startInsert(setSeats) {
 
     let SeatXCoordinate = initialX + (i - 1) * 900;
     for (let j = 65; j < 75; j++) {
-      let SeatYCoordinate = initialY + (j - 65) * 930;
+      let SeatYCoordinate = initialY + (j - 65) * 870;
 
       let tempString = String.fromCharCode(j);
       SeatNo = `${tempString}${i}`;

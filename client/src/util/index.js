@@ -3,8 +3,8 @@ export const numberWithCommas = (x) => {
 };
 
 export const getViewGradeIconOptions = (viewGradeCode) => {
-  viewGradeCode = viewGradeCode * 1
   const options = {};
+  viewGradeCode = viewGradeCode * 1;
   if (viewGradeCode === 0) {
     options.color = '#5BC77E';
     options.text = '전체';
