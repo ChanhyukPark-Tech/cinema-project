@@ -17,7 +17,7 @@ const router = require("express").Router();
  *  /api/admin/monthTotal:
  *    get:
  *      tags:
- *      - event
+ *      - admin
  *      description: 특정 월을 보내면 그 월에 해당하는 매출합계 보여주기.
  */
 
@@ -26,7 +26,7 @@ const router = require("express").Router();
  *  /api/admin/genderTotal:
  *    post:
  *      tags:
- *      - event
+ *      - admin
  *      description: 성별에 따라서 남성 이라고 보내면 남성의 payinfo 에서 매출합계 보여주기
  */
 
