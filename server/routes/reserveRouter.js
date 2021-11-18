@@ -26,5 +26,6 @@ router.route('/getPlaceMovies')
 router.route('/getReserveTimes')
     .post(reserveCtrl.getReserveTimes)    
 
-
+router.route('/getCurMovie')
+    .post(reserveCtrl.getCurMovie)
 module.exports = router;

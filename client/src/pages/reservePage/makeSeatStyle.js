@@ -123,3 +123,54 @@ export const StepBlock = styled.div`
     }
   }
 `;
+
+
+
+export const PersonSeatCount = styled.div`
+  background: #fff;
+  width: 100%;
+  height: 117px;
+  padding: 0 20px;
+  display: flex;
+
+  .movie-info {
+    display: flex;
+    align-items: center;
+    img {
+      display: block;
+      width: 46px;
+      border-radius: 4px;
+    }
+    .text-info {
+      margin-left: 8px;
+      width: 270px;
+      .title {
+        display: flex;
+        align-items: center;
+        & > span {
+          font-size: 17px;
+          font-weight: bold;
+          margin-left: 4px;
+        }
+      }
+      .detail-info {
+        margin-top: 5px;
+        font-size: 11px;
+      }
+    }
+  }
+  .person-count-list {
+    width: 640px;
+    display: flex;
+    align-items: center;
+    .person-count-item {
+      display: flex;
+      align-items: center;
+      margin-left: 20px;
+      & > span {
+        font-size: 13px;
+        margin-right: 8px;
+      }
+    }
+  }
+`;

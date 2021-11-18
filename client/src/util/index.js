@@ -3,6 +3,7 @@ export const numberWithCommas = (x) => {
 };
 
 export const getViewGradeIconOptions = (viewGradeCode) => {
+  viewGradeCode = viewGradeCode * 1
   const options = {};
   if (viewGradeCode === 0) {
     options.color = '#5BC77E';

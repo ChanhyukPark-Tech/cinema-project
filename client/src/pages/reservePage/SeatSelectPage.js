@@ -9,28 +9,42 @@ import {
   SeatRow,
   Seat,
   StepBlock,
+  PersonSeatCount
 } from "./makeSeatStyle";
+import axios from "axios";
+import {getViewGradeIconOptions} from "../../util";
+import ViewGradeIcon from "../../components/ViewGradeIcon/ViewGradeIcon";
 
 function SeatSelectPage() {
   const params = useParams();
   const [seats, setSeats] = useState([]);
+  const [curMovie, setCurMovie] = useState([]);
+
+
 
   useEffect(() => {
     startInsert(setSeats);
+    axios.post('/api/reserve/getCurMovie',{schedule_id:params.id})
+        .then(data => {
+          setCurMovie(data.data[0])
+        })
   }, []);
 
   const xScaleRatio = 18;
   const yScaleRatio = 22;
   const seatsBlockWidth = 620;
-
+  const viewGradeIconOptions = getViewGradeIconOptions(
+      curMovie.watchGradeName
+  );
+  console.log(viewGradeIconOptions)
   return (
     <div>
       <Header />
       <StepBlock>
         <SectionTitle title={"인원/좌석 선택"} />
-        {/* <PersonSeatCount>
+        <PersonSeatCount>
           <div className="movie-info">
-            <img src={playMovieInfo.PosterURL} alt="poster" />
+            <img src={curMovie.PosterURL} alt="poster" />
             <div className="text-info">
               <div className="title">
                 <ViewGradeIcon
@@ -38,42 +52,42 @@ function SeatSelectPage() {
                   color={viewGradeIconOptions.color}
                   text={viewGradeIconOptions.text}
                 />
-                <span>{playMovieInfo.MovieNameKR}</span>
+                <span>{curMovie.movieNm}</span>
               </div>
               <div className="detail-info">
                 <div className="time">
-                  {`${playMovieInfo.divisions[0].times[0].PlayDt}(${playMovieInfo.divisions[0].times[0].PlayDayKR}) | ${playMovieInfo.divisions[0].times[0].StartTime}~${playMovieInfo.divisions[0].times[0].EndTime}`}
+                  {`${curMovie.ymd} | ${curMovie.startDt}~${curMovie.endDt}`}
                 </div>
-                <div className="screen">{`${playMovieInfo.divisions[0].CinemaNameKR} | ${playMovieInfo.divisions[0].times[0].ScreenNameKR} | ${playMovieInfo.divisions[0].ScreenDivisionNameKR}`}</div>
+                <div className="screen">{`${curMovie.CinemaNameKR} | ${curMovie.theaterNm} `}</div>
               </div>
             </div>
           </div>
-          <div className="person-count-list">
-            {customerDivision.map((division) => (
-              <div
-                key={division.CustomerDivisionCode}
-                className="person-count-item"
-              >
-                <span>{division.CustomerDivisionNameKR}</span>
-                <CountUpDown
-                  count={
-                    customerCount[division.CustomerDivisionNameUS.toLowerCase()]
-                  }
-                  onUpClick={() =>
-                    handleCustomerCountUpClick(
-                      division.CustomerDivisionNameUS.toLowerCase()
-                    )
-                  }
-                  onDownClick={() =>
-                    handleCustomerCountDownClick(
-                      division.CustomerDivisionNameUS.toLowerCase()
-                    )
-                  }
-                />
-              </div>
-            ))}
-          </div>
-        </PersonSeatCount> */}
+          {/*<div className="person-count-list">*/}
+          {/*  {customerDivision.map((division) => (*/}
+          {/*    <div*/}
+          {/*      key={division.CustomerDivisionCode}*/}
+          {/*      className="person-count-item"*/}
+          {/*    >*/}
+          {/*      <span>{division.CustomerDivisionNameKR}</span>*/}
+          {/*      <CountUpDown*/}
+          {/*        count={*/}
+          {/*          customerCount[division.CustomerDivisionNameUS.toLowerCase()]*/}
+          {/*        }*/}
+          {/*        onUpClick={() =>*/}
+          {/*          handleCustomerCountUpClick(*/}
+          {/*            division.CustomerDivisionNameUS.toLowerCase()*/}
+          {/*          )*/}
+          {/*        }*/}
+          {/*        onDownClick={() =>*/}
+          {/*          handleCustomerCountDownClick(*/}
+          {/*            division.CustomerDivisionNameUS.toLowerCase()*/}
+          {/*          )*/}
+          {/*        }*/}
+          {/*      />*/}
+          {/*    </div>*/}
+          {/*  ))}*/}
+          {/*</div>*/}
+        </PersonSeatCount>
         <ScreenBlock>
           <div className="screen">SCREEN</div>
           <SeatsBlock width={seatsBlockWidth}>

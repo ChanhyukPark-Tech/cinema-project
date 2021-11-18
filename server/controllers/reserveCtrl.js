@@ -24,6 +24,19 @@ WHERE movie.movie_id = foo.movie_movie_id GROUP BY (movieNm);`
             res.send(rows);
         })
     }
+    ,
+    getCurMovie : async (req,res) =>{
+        const {schedule_id} = req.body;
+        const sql = `SELECT * FROM (SELECT * FROM (SELECT * FROM schedule join movie on schedule.movie_movie_id = movie.movie_id WHERE schedule_id = ${schedule_id}) foo join theater
+on foo.theater_theater_id = theater.theater_id ) poo join place on poo.place_place_id = place.place_id
+ ;`
+
+        connection.query(sql,(error,rows) => {
+            if(error) throw error;
+            res.send(rows);
+
+        })
+    }
 }
 
 module.exports = reserveCtrl
