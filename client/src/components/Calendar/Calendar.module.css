@@ -5,10 +5,12 @@
 }
 .center-container {
   width: 420px;
+  margin: 0 auto;
   overflow: hidden;
 }
 .calendar ul {
   display: flex;
+  //justify-content: space-evenly;
   transition: transform 0.3s ease;
 }
 .calendar ul li {
