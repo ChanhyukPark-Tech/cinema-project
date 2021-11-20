@@ -26,7 +26,7 @@ const router = require("express").Router();
  *    post:
  *      tags:
  *      - reserve
- *      description: 상영일정에 현재 상영하는 영화를 보여준다.
+ *      description: 스케줄 아이디주면 그에대한 영화를 준다..
  */
 
 /**

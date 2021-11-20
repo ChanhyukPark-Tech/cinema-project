@@ -12,18 +12,30 @@ const router = require("express").Router();
 
 /**
  * @swagger
- *  /api/props/eventDetail:
+ *  /api/props/addProp:
  *    post:
  *      tags:
  *      - props
- *      description: 특정 영화에 관련된 이벤트만 가져오기
+ *      description: 문제가 있는 소품의 정보를 등록한다.
+ */
+
+/**
+ * @swagger
+ *  /api/props/deleteProp:
+ *    post:
+ *      tags:
+ *      - props
+ *      description: props_id주면 특정 문제가 있는 소품의 정보를 삭제한다.
  */
 
 
 router.route('/')
     .get(propsCtrl.getprops)
 
-// router.route('/eventDetail')
-//     .post(eventCtrl.getSpecifyEvent)
+router.route('/addProp')
+    .post(propsCtrl.addProp)
+
+router.route('/deleteProp')
+    .post(propsCtrl.deleteProp)
 
 module.exports = router;
