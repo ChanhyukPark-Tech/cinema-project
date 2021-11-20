@@ -2,7 +2,7 @@ const connection = require('../dbConfig')
 
 const propsCtrl = {
     getprops : async (req,res)=>{
-        connection.query(`SELECT * FROM event` ,(error,rows)=>{
+        connection.query(`SELECT * FROM props` ,(error,rows)=>{
             if(error) throw error;
             res.send(rows);
         })
