@@ -35,8 +35,44 @@ const router = require("express").Router();
  *  /api/admin/salesTotal:
  *    post:
  *      tags:
- *      - event
+ *      - admin
  *      description: 모든 월의 매출을가져옴 월별로 sum 해서
+ */
+
+/**
+ * @swagger
+ *  /api/admin/CountMember:
+ *    get:
+ *      tags:
+ *      - admin
+ *      description: 전체회원수를 알려줌
+ */
+
+/**
+ * @swagger
+ *  /api/admin/CountStaff:
+ *    post:
+ *      tags:
+ *      - admin
+ *      description: 특정지점 place_place_id의 직원수를 알려줌
+ */
+
+/**
+ * @swagger
+ *  /api/admin/MovieTop5:
+ *    get:
+ *      tags:
+ *      - admin
+ *      description: 예매율 top5 영화 보여줌
+ */
+
+/**
+ * @swagger
+ *  /api/admin/staffMonthDay:
+ *    post:
+ *      tags:
+ *      - admin
+ *      description: Month 와 Day를 보낼테니 그 날에 일하는 직원들을 일시작시간 기준으로 오름차순해서 보내주는 API 
  */
 
 
@@ -51,6 +87,18 @@ router.route('/genderTotal')
 
 router.route('/genderBothTotal')
     .get(adminCtrl.getBothGenderTotal)
+
+router.route('/countMember')
+    .get(adminCtrl.getCountMember)
+
+router.route('/countStaff')
+    .post(adminCtrl.getCountStaff)
+
+router.route('/movieTop5')
+    .get(adminCtrl.getMovieTop5)
+
+router.route('/staffMonthDay')
+    .post(adminCtrl.staffMonthDay)
 // month = 3 , currentMv = '독전' < state
 // month = 3 , currnetMv = '보이스'
 // month = 4 , currnetMv = '보이스'

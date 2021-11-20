@@ -36,7 +36,21 @@ on foo.theater_theater_id = theater.theater_id ) poo join place on poo.place_pla
             res.send(rows);
 
         })
+    },
+
+    getSeats : async (req,res) =>{
+        const {schedule_id} = req.body;
+        const sql = `select * from schedule
+        left join seat on schedule.schedule_id = seat.schedule_schedule_id
+        join member on seat.member_member_id = member.member_id where schedule_id = ${schedule_id} and member_id;`
+
+        connection.query(sql,(error,rows) => {
+            if(error) throw error;
+            res.send(rows);
+
+        })
     }
+
 }
 
 module.exports = reserveCtrl
