@@ -79,13 +79,13 @@ router.route('/genderTotal')
 router.route('/genderBothTotal')
     .get(adminCtrl.getBothGenderTotal)
 
-router.route('/CountMember')
+router.route('/countMember')
     .get(adminCtrl.getCountMember)
 
-router.route('/CountStaff')
+router.route('/countStaff')
     .post(adminCtrl.getCountStaff)
 
-router.route('/MovieTop5')
+router.route('/movieTop5')
     .get(adminCtrl.getMovieTop5)
 // month = 3 , currentMv = '독전' < state
 // month = 3 , currnetMv = '보이스'
