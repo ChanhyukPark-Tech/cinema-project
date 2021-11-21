@@ -275,6 +275,7 @@ function SeatSelectPage() {
                     <SeatsBlock width={seatsBlockWidth}>
                         {seats.length > 0 &&
                         seats.map((seat) => (
+                            seat.SeatXCoordinate &&
                             <React.Fragment key={seat.SeatNo}>
                                 <SeatRow x={0} y={seat.SeatYCoordinate / yScaleRatio - 60}>
                                     {seat.SeatRow}
