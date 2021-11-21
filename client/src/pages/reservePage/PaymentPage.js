@@ -6,7 +6,7 @@ import { getViewGradeIconOptions, numberWithCommas } from "../../util";
 import ViewGradeIcon from "../../components/ViewGradeIcon/ViewGradeIcon";
 import SectionTitle from "../../components/SectionTitle/SectionTitle";
 import Header from "../../components/header/Header";
-
+import PayPal from '../../components/paypalButton/Paypal'
 const { Search } = Input;
 const onSearch = (value) => console.log(value);
 
@@ -125,6 +125,9 @@ const PaymentPage = (props) => {
     seatNoList,
     price,
   } = props.location.state;
+
+
+
   const [discountRate, setDiscountRate] = useState(0.0);
   const [discountCost, setDiscountCost] = useState(0);
   const [finalCost, setFinalCost] = useState(price);
@@ -142,6 +145,11 @@ const PaymentPage = (props) => {
         );
       });
   };
+
+  const tranSuccess = async (payment) => {
+    console.log(payment)
+    console.log("결제완료했습니다")
+  }
 
   const viewGradeIconOptions = getViewGradeIconOptions(viewGradeCode);
   return (
@@ -220,7 +228,8 @@ const PaymentPage = (props) => {
                 원
               </span>
             </div>
-            <button className="btn-pay">결제하기</button>
+            <PayPal finalCost={finalCost ? finalCost : price} tranSuccess={tranSuccess}/>
+            {/*<button className="btn-pay">결제하기</button>*/}
           </Payment>
         </Section>
       </StepBlock>
