@@ -31,7 +31,7 @@ const paymentCtrl = {
         });
 
         seats.map((seat) => {
-            const sql3 = `insert into seat(schedule_schedule_id, ticket_ticket_id, seatNm, gender, member_member_id)
+            const sql3 = `insert into seat(schedule_schedule_id, ticket_ticket_id, seatNm, eventGender, member_member_id)
             values (${schedule_schedule_id}, (SELECT max(ticket_id) FROM ticket),'${seat}', ${gender} ,${member_member_id});`;
             connection.query(sql3, (error, rows) => {
                 if (error) throw error;

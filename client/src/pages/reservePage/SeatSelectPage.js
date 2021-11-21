@@ -347,7 +347,7 @@ function SeatSelectPage() {
                   startTime: curMovie.startDt,
                   endTime: curMovie.endDt,
                   seatNoList: activeSeats,
-                  price: price,
+                  price: price.replace(/,/g, ""),
                   gender: gender,
                   place_id: curMovie.place_id,
                 },

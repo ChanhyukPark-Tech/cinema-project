@@ -43,7 +43,7 @@ function App() {
         <Route exact path="/movie/reserve/" component={ReservePage} />
         <Route
           exact
-          path="/movie/reserve/success/:id"
+          path="/movie/reserve/success/"
           component={PaySuccessPage}
         />
         <Route
