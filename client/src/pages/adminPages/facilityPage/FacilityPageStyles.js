@@ -33,3 +33,24 @@ export const FacilityTitleContainer = styled.div`
         }
       }
 `
+
+export const OneContentContainer = styled.div`
+  align-items: center;
+  border: 1px solid #444444;
+  p {
+    text-align: center;
+    //width: 100%;
+    color: black;
+    font-size: 1.1rem;
+    font-weight: 600;
+    position: relative;
+    padding-top: 1.8rem;
+    padding-bottom: 30rem;
+    @media screen and (max-width: 496px) {
+      font-size: 2.8rem;
+    }
+    @media screen and (max-width: 370px) {
+      font-size: 2rem;
+    }
+  }
+  `

@@ -9,16 +9,52 @@ import { FacilityContainer } from './FacilityPageStyles';
 
 function FacilityPage(props) {
     const [posts, setPosts] = useState([]);
-    const lists = [
+    // 시설 관리: 모델명, 유형, 위치 지점, 단가, 재고 표시!
+    const propsLists = [
         {
-            title: "날짜",
+            title: "모델명",
+            dataIndex: "modelNm",
+            key: "modelNm",
+            render: (text, index) => {
+                return (
+                    <Link to={`/props/${index.props_id}`}>{text}</Link>
+                );
+            },
+        },
+        {
+            title: "시설 유형",
+            dataIndex: "propsType_propsType_id",
+            key: "propsType_propsType_id",
+        },
+        {
+            title: "단가",
+            dataIndex: "price",
+            key: "price",
+        },
+        {
+            title: "재고",
+            dataIndex: "amount",
+            key: "amount",
+        },
+    
+    ];
+
+    // 파손 시설 목록: 모델명, 파손 사항 텍스트, 처리중/처리완료 태그 표시
+    const damagePropsLists = [
+        {
+            title: "파손시설 모델명",
+            dataIndex: "modelNm",
+            key: "modelNm",
+        },
+        {
+            title: "등록 일자",
             dataIndex: "date",
             key: "date",
         },
         {
-            title: "제목",
-            dataIndex: "title",
-            key: "title",
+            title: "파손사항",
+            dataIndex: "damage",
+            key: "damage",
             render: (text, index) => {
                 return (
                     <Link to={`/props/${index.props_id}`}>{text}</Link>
@@ -60,11 +96,14 @@ function FacilityPage(props) {
         <Header/>
         <FacilityContainer>
             <Title title={"시설 관리"} />
+            <Table propsLists={propsLists} dataSource={posts} />
+            <Title title={"파손 시설 목록"} />
             <Button style={{marginBottom:"10px", borderColor: "#2c4b21"}}>
-                <Link to={"/props/addProp"}>파손 추가</Link>
+                <Link to={"prosp/addProp"}>파손 추가</Link>
             </Button>
-            <Table lists={lists} dataSource={posts} />
+            <Table damagePropsLists={damagePropsLists} dataSource={posts} />
         </FacilityContainer>
+        <Footer/>
         </>
     );
 }
