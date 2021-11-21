@@ -7,6 +7,7 @@ import ViewGradeIcon from "../../components/ViewGradeIcon/ViewGradeIcon";
 import SectionTitle from "../../components/SectionTitle/SectionTitle";
 import Header from "../../components/header/Header";
 import PayPal from "../../components/paypalButton/Paypal";
+
 const { Search } = Input;
 const onSearch = (value) => console.log(value);
 
@@ -129,10 +130,11 @@ const PaymentPage = (props) => {
     gender,
     place_id,
   } = props.location.state;
-
+  const history = props.history;
   const [discountRate, setDiscountRate] = useState(0.0);
   const [discountCost, setDiscountCost] = useState(0);
   const [finalCost, setFinalCost] = useState(price);
+  const [showSuccess, setShowSuccess] = useState(false);
   const promotionChangeHandler = (e) => {
     axios
       .post("/api/event/promotionCode", {
@@ -172,9 +174,15 @@ const PaymentPage = (props) => {
     axios.post("/api/payment/payComplete", data).then((data) => {
       console.log(data);
     });
+    setShowSuccess(true);
+
+    setTimeout(() => {
+      history.push("/movie/reserve/success");
+    }, 1000);
   };
 
   const viewGradeIconOptions = getViewGradeIconOptions(viewGradeCode);
+
   return (
     <>
       <Header />
@@ -251,11 +259,11 @@ const PaymentPage = (props) => {
                 원
               </span>
             </div>
+
             <PayPal
               finalCost={finalCost ? finalCost : price}
               tranSuccess={tranSuccess}
             />
-            {/*<button className="btn-pay">결제하기</button>*/}
           </Payment>
         </Section>
       </StepBlock>

@@ -215,6 +215,17 @@ function SeatSelectPage() {
         </PersonSeatCount>
         <ScreenBlock>
           <div className="screen">SCREEN</div>
+          <div style={{ display: "flex", alignItems: "center" }}>
+            <input
+              id="check1"
+              type="checkbox"
+              onChange={(e) => {
+                setWantDate(!wantDate);
+              }}
+            />
+            <label htmlFor="check1"></label>
+            <span>소개팅 이벤트 신청하기</span>
+          </div>
           <SeatsBlock width={seatsBlockWidth}>
             {seats.length > 0 &&
               seats.map((seat) => (
