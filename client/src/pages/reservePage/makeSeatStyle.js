@@ -92,6 +92,7 @@ export const Seat = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  transition: 0.5s all ease-in-out;
   ${({x, y}) => {
     if (x || y) {
       return css`
@@ -143,6 +144,41 @@ export const Seat = styled.div`
                     color: #fff;
                   `
                   : ""}
+
+  .arrow_box {
+    z-index: 3;
+    position: absolute;
+    width: 100px;
+    padding: 8px;
+    left: -25px;
+    bottom: -40px;
+    -webkit-border-radius: 8px;
+    -moz-border-radius: 8px;
+    border-radius: 8px;
+    background: #333;
+    color: #fff;
+    font-size: 14px;
+  }
+
+  //.arrow_box:after {
+  //  position: absolute;
+  //  bottom: 100%;
+  //  left: 50%;
+  //  width: 0;
+  //  height: 0;
+  //  margin-left: -10px;
+  //  border: solid transparent;
+  //  border-color: rgba(51, 51, 51, 0);
+  //  border-bottom-color: #333;
+  //  border-width: 10px;
+  //  pointer-events: none;
+  //  content: " ";
+  //}
+
+  div:hover + p.arrow_box {
+    display: block;
+  }
+  
 `;
 
 export const StepBlock = styled.div`

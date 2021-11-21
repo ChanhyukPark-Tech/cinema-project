@@ -27,6 +27,7 @@ export function startInsert(setSeats) {
         SeatXCoordinate,
         SeatYCoordinate,
         SweetSpotYN: SweetSpotYN,
+        selfPR : "",
       });
     }
   }

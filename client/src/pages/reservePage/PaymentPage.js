@@ -142,10 +142,10 @@ const PaymentPage = (props) => {
       })
       .then((data) => {
         setDiscountRate(data.data[0]?.discountRate);
-        setDiscountCost(data.data[0]?.discountRate * parseInt(price) * 1000);
+        setDiscountCost(data.data[0]?.discountRate * parseInt(price) );
         setFinalCost(
-          parseInt(price) * 1000 -
-            data.data[0]?.discountRate * parseInt(price) * 1000
+          parseInt(price)  -
+            data.data[0]?.discountRate * parseInt(price)
         );
       });
   };
