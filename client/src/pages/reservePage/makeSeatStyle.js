@@ -2,9 +2,36 @@ import styled, {css} from "styled-components";
 
 export const ScreenBlock = styled.div`
   width: 1170px;
-  height: 470px;
+  height: 550px;
   margin: 0 auto;
   overflow: hidden;
+
+  input[type="checkbox"] {
+    display: none;
+  }
+
+  input[type="checkbox"] + label {
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    border: 3px solid #e0e0e0;
+    position: relative;
+  }
+
+  input[id="check1"]:checked + label::after {
+    content: '✔';
+    font-size: 25px;
+    width: 30px;
+    height: 30px;
+    text-align: center;
+    position: absolute;
+    left: 0;
+    top: -15px;
+  }
+  span{
+    margin-left: 10px;
+    color: #6d8e65;
+  }
 
   &::-webkit-scrollbar {
     width: 4px;
@@ -89,11 +116,15 @@ export const Seat = styled.div`
         background: #e8e8e8;
         cursor: pointer;
       `;
+    } else if (status === 10) {
+      return css`
+        background: #9a818d;
+      `;
     } else if (status === 30) {
       return css`
         background: hotpink;
       `;
-    } else if (status === 50 || status === 23) {
+    } else if (status === 40 || status === 23) {
       return css`
         background: dodgerblue;
       `;

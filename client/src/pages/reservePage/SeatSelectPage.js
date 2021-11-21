@@ -21,8 +21,8 @@ function SeatSelectPage() {
     const [seats, setSeats] = useState([]);
     const [curMovie, setCurMovie] = useState([]);
     const [activeSeats, setActiveSeats] = useState([]);
-
-
+    const [dateInfo, setDateInfo] = useState([])
+    const [wantDate, setWantDate] = useState(false);
     useEffect(() => {
         startInsert(setSeats);
         axios.post('/api/reserve/getCurMovie', {schedule_id: params.id})
@@ -31,6 +31,48 @@ function SeatSelectPage() {
             })
     }, []);
 
+    useEffect(() => {
+        axios.post('/api/reserve/getSeats', {schedule_id: params.id})
+            .then(data => {
+                setDateInfo(data.data)
+            })
+    }, [])
+
+    useEffect(() => {
+        for (let i = 0; i < seats.length; i++) {
+            for (let j = 0; j < dateInfo.length; j++) {
+                if (seats[i].SeatNo === dateInfo[j].seatNm) {
+                    if (dateInfo[j].eventGender === '1') setSeats([...seats, seats[i].SeatStatusCode = 10])
+                    if (dateInfo[j].eventGender === '3') setSeats([...seats, seats[i].SeatStatusCode = 30])
+                    if (dateInfo[j].eventGender === '4') setSeats([...seats, seats[i].SeatStatusCode = 40])
+                }
+            }
+        }
+    }, [curMovie, dateInfo])
+
+    useEffect(()=>{
+        if(wantDate){
+            for (let i = 0; i < seats.length; i++) {
+                for (let j = 0; j < dateInfo.length; j++) {
+                    if (seats[i].SeatNo === dateInfo[j].seatNm) {
+                        if (dateInfo[j].eventGender === '1') setSeats([...seats, seats[i].SeatStatusCode = 10])
+                        if (dateInfo[j].eventGender === '3') setSeats([...seats, seats[i].SeatStatusCode = 30])
+                        if (dateInfo[j].eventGender === '4') setSeats([...seats, seats[i].SeatStatusCode = 40])
+                    }
+                }
+            }
+        }else{
+            for (let i = 0; i < seats.length; i++) {
+                for (let j = 0; j < dateInfo.length; j++) {
+                    if (seats[i].SeatNo === dateInfo[j].seatNm) {
+                        if (dateInfo[j].eventGender === '1') setSeats([...seats, seats[i].SeatStatusCode = 10])
+                        if (dateInfo[j].eventGender === '3') setSeats([...seats, seats[i].SeatStatusCode = 10])
+                        if (dateInfo[j].eventGender === '4') setSeats([...seats, seats[i].SeatStatusCode = 10])
+                    }
+                }
+            }
+        }
+    },[wantDate])
     const [customerCount, setCustomerCount] = useState({
         adult: 0,
         youth: 0,
@@ -207,9 +249,21 @@ function SeatSelectPage() {
                 </PersonSeatCount>
                 <ScreenBlock>
                     <div className="screen">SCREEN</div>
+                    <div style={{display:'flex' ,alignItems:'center'}}>
+                        <input
+                            id="check1"
+                            type="checkbox"
+                            onChange={e => {
+                                setWantDate(!wantDate)
+                            }}
+                        /><label htmlFor="check1"></label>
+                        <span >소개팅 이벤트 신청하기</span>
+                    </div>
+
+
                     <SeatsBlock width={seatsBlockWidth}>
                         {seats.length > 0 &&
-                        seats.map((seat) => (
+                        seats.map((seat) => (seat.SeatXCoordinate &&
                             <React.Fragment key={seat.SeatNo}>
                                 <SeatRow x={0} y={seat.SeatYCoordinate / yScaleRatio - 60}>
                                     {seat.SeatRow}
@@ -255,18 +309,18 @@ function SeatSelectPage() {
                     </div>
                     <button className="btn-pay">
                         <Link to={{
-                            pathname:`/movie/reserve/pay`,
-                            state:{
-                               movieName : curMovie.movieNm,
-                               posterUrl : curMovie.PosterURL,
-                                viewGradeCode:curMovie.watchGradeName,
-                                cinemaName:curMovie.CinemaNameKR,
-                                screenName:curMovie.theaterNm,
-                                playDate:curMovie.ymd,
-                                startTime:curMovie.startDt,
-                                endTime:curMovie.endDt,
-                                seatNoList:activeSeats,
-                                price:price
+                            pathname: `/movie/reserve/pay`,
+                            state: {
+                                movieName: curMovie.movieNm,
+                                posterUrl: curMovie.PosterURL,
+                                viewGradeCode: curMovie.watchGradeName,
+                                cinemaName: curMovie.CinemaNameKR,
+                                screenName: curMovie.theaterNm,
+                                playDate: curMovie.ymd,
+                                startTime: curMovie.startDt,
+                                endTime: curMovie.endDt,
+                                seatNoList: activeSeats,
+                                price: price
                             }
                         }}>
                             결제하기
