@@ -23,8 +23,9 @@ function SeatSelectPage() {
   const [seats, setSeats] = useState([]);
   const [curMovie, setCurMovie] = useState([]);
   const [activeSeats, setActiveSeats] = useState([]);
+  const [dateInfo, setDateInfo] = useState([]);
+  const [wantDate, setWantDate] = useState(false);
   const [gender, setGender] = useState(1);
-
   useEffect(() => {
     startInsert(setSeats);
     axios
@@ -45,6 +46,58 @@ function SeatSelectPage() {
       });
   }, []);
 
+  useEffect(() => {
+    axios
+      .post("/api/reserve/getSeats", { schedule_id: params.id })
+      .then((data) => {
+        setDateInfo(data.data);
+      });
+  }, []);
+
+  useEffect(() => {
+    for (let i = 0; i < seats.length; i++) {
+      for (let j = 0; j < dateInfo.length; j++) {
+        if (seats[i].SeatNo === dateInfo[j].seatNm) {
+          if (dateInfo[j].eventGender === "1")
+            setSeats([...seats, (seats[i].SeatStatusCode = 10)]);
+          if (dateInfo[j].eventGender === "3")
+            setSeats([...seats, (seats[i].SeatStatusCode = 30)]);
+          if (dateInfo[j].eventGender === "4")
+            setSeats([...seats, (seats[i].SeatStatusCode = 40)]);
+        }
+      }
+    }
+  }, [curMovie, dateInfo]);
+
+  useEffect(() => {
+    if (wantDate) {
+      for (let i = 0; i < seats.length; i++) {
+        for (let j = 0; j < dateInfo.length; j++) {
+          if (seats[i].SeatNo === dateInfo[j].seatNm) {
+            if (dateInfo[j].eventGender === "1")
+              setSeats([...seats, (seats[i].SeatStatusCode = 10)]);
+            if (dateInfo[j].eventGender === "3")
+              setSeats([...seats, (seats[i].SeatStatusCode = 30)]);
+            if (dateInfo[j].eventGender === "4")
+              setSeats([...seats, (seats[i].SeatStatusCode = 40)]);
+          }
+        }
+      }
+    } else {
+      for (let i = 0; i < seats.length; i++) {
+        for (let j = 0; j < dateInfo.length; j++) {
+          if (seats[i].SeatNo === dateInfo[j].seatNm) {
+            if (dateInfo[j].eventGender === "1")
+              setSeats([...seats, (seats[i].SeatStatusCode = 10)]);
+            if (dateInfo[j].eventGender === "3")
+              setSeats([...seats, (seats[i].SeatStatusCode = 10)]);
+            if (dateInfo[j].eventGender === "4")
+              setSeats([...seats, (seats[i].SeatStatusCode = 10)]);
+          }
+        }
+      }
+    }
+  }, [wantDate]);
   const [customerCount, setCustomerCount] = useState({
     adult: 0,
     youth: 0,
@@ -228,25 +281,31 @@ function SeatSelectPage() {
           </div>
           <SeatsBlock width={seatsBlockWidth}>
             {seats.length > 0 &&
-              seats.map((seat) => (
-                <React.Fragment key={seat.SeatNo}>
-                  <SeatRow x={0} y={seat.SeatYCoordinate / yScaleRatio - 60}>
-                    {seat.SeatRow}
-                  </SeatRow>
-                  <Seat
-                    x={seat.SeatXCoordinate / xScaleRatio}
-                    y={seat.SeatYCoordinate / yScaleRatio - 60}
-                    status={seat.SeatStatusCode}
-                    sweetSpot={seat.SweetSpotYN === "Y" ? true : false}
-                    active={activeSeats.includes(seat.SeatNo)}
-                    onClick={() =>
-                      handleSeatClick(seat.SeatNo, seat.SeatStatusCode)
-                    }
-                  >
-                    {seat.SeatColumn}
-                  </Seat>
-                </React.Fragment>
-              ))}
+              seats.map(
+                (seat) =>
+                  seat.SeatXCoordinate && (
+                    <React.Fragment key={seat.SeatNo}>
+                      <SeatRow
+                        x={0}
+                        y={seat.SeatYCoordinate / yScaleRatio - 60}
+                      >
+                        {seat.SeatRow}
+                      </SeatRow>
+                      <Seat
+                        x={seat.SeatXCoordinate / xScaleRatio}
+                        y={seat.SeatYCoordinate / yScaleRatio - 60}
+                        status={seat.SeatStatusCode}
+                        sweetSpot={seat.SweetSpotYN === "Y" ? true : false}
+                        active={activeSeats.includes(seat.SeatNo)}
+                        onClick={() =>
+                          handleSeatClick(seat.SeatNo, seat.SeatStatusCode)
+                        }
+                      >
+                        {seat.SeatColumn}
+                      </Seat>
+                    </React.Fragment>
+                  )
+              )}
           </SeatsBlock>
         </ScreenBlock>
 
