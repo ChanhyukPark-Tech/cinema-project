@@ -1,3 +1,4 @@
+// const staffCtrl = require("../controllers/staffCtrl")
 const router = require("express").Router();
 
 
@@ -8,7 +9,7 @@ const router = require("express").Router();
  *    post:
  *      tags:
  *      - staff
- *      description: 날짜에 해당하는 근무표를 제공
+ *      description: 날짜에 해당하는 근무표를 제공 
  */
 
 /**
@@ -29,15 +30,6 @@ const router = require("express").Router();
  *      description: 현재 재고, 모델명 , 단가얼마다를 보여주고 수리요망이 있는경우 파손여부도 Text로 보내줌
  */
 
-/**
- * @swagger
- *  /api/staff/facility:
- *    post:
- *      tags:
- *      - staff
- *      description: 파손된 제품의 모델명과 , 파손여부(Text) 로 작성하여 입력완료를 누르면  api 호출
- */
-
 
 /**
  * @swagger
@@ -56,5 +48,8 @@ const router = require("express").Router();
  *      - staff
  *      description: 수정하려는 음식과 수정값을 입력으로 받아서 그 제품에 대한 재고를 변경
  */
+
+// router.route('/roster')
+//     .post(staffCtrl.getSpecifyEvent)
 
 module.exports = router;

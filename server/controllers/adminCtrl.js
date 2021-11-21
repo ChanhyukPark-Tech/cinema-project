@@ -70,6 +70,15 @@ const adminCtrl = {
             if(error) throw error;
             res.send(rows);
         })
+    },
+
+    staffMonthDay : async (req,res) => {
+        const {month,day} = req.body;
+        const sql = `SELECT * FROM workSchedule where month(Day) = ${month} AND day(Day) = ${day} order by attend ASC;`
+        connection.query(sql,(error,rows)=>{
+            if(error) throw error;
+            res.send(rows);
+        })
     }
 
 }

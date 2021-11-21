@@ -66,6 +66,15 @@ const router = require("express").Router();
  *      description: 예매율 top5 영화 보여줌
  */
 
+/**
+ * @swagger
+ *  /api/admin/staffMonthDay:
+ *    post:
+ *      tags:
+ *      - admin
+ *      description: Month 와 Day를 보낼테니 그 날에 일하는 직원들을 일시작시간 기준으로 오름차순해서 보내주는 API 
+ */
+
 
 router.route('/monthTotal')
     .post(adminCtrl.getmonthTotal)
@@ -87,6 +96,9 @@ router.route('/countStaff')
 
 router.route('/movieTop5')
     .get(adminCtrl.getMovieTop5)
+
+router.route('/staffMonthDay')
+    .post(adminCtrl.staffMonthDay)
 // month = 3 , currentMv = '독전' < state
 // month = 3 , currnetMv = '보이스'
 // month = 4 , currnetMv = '보이스'
