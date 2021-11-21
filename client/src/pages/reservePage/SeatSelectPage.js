@@ -9,7 +9,9 @@ import {
     SeatRow,
     Seat,
     StepBlock,
-    PersonSeatCount, SeatsInfoBlock, PersonSeatSummary
+    PersonSeatCount,
+    SeatsInfoBlock,
+    PersonSeatSummary,
 } from "./makeSeatStyle";
 import axios from "axios";
 import {getViewGradeIconOptions, numberWithCommas} from "../../util";
@@ -23,12 +25,24 @@ function SeatSelectPage() {
     const [activeSeats, setActiveSeats] = useState([]);
     const [dateInfo, setDateInfo] = useState([])
     const [wantDate, setWantDate] = useState(false);
+    const [gender, setGender] = useState(1);
     useEffect(() => {
         startInsert(setSeats);
         axios.post('/api/reserve/getCurMovie', {schedule_id: params.id})
             .then(data => {
                 setCurMovie(data.data[0])
             })
+
+        axios
+            .post("/api/user/userDetail", {
+                memberId: localStorage.getItem("member_id"),
+            })
+            .then((data) => {
+                if (data.data[0].gender === "여성") setGender(1);
+                else {
+                    setGender(2);
+                }
+            });
     }, []);
 
     useEffect(() => {
@@ -50,8 +64,8 @@ function SeatSelectPage() {
         }
     }, [curMovie, dateInfo])
 
-    useEffect(()=>{
-        if(wantDate){
+    useEffect(() => {
+        if (wantDate) {
             for (let i = 0; i < seats.length; i++) {
                 for (let j = 0; j < dateInfo.length; j++) {
                     if (seats[i].SeatNo === dateInfo[j].seatNm) {
@@ -61,7 +75,7 @@ function SeatSelectPage() {
                     }
                 }
             }
-        }else{
+        } else {
             for (let i = 0; i < seats.length; i++) {
                 for (let j = 0; j < dateInfo.length; j++) {
                     if (seats[i].SeatNo === dateInfo[j].seatNm) {
@@ -72,7 +86,7 @@ function SeatSelectPage() {
                 }
             }
         }
-    },[wantDate])
+    }, [wantDate])
     const [customerCount, setCustomerCount] = useState({
         adult: 0,
         youth: 0,
@@ -123,34 +137,33 @@ function SeatSelectPage() {
                     ? [...activeSeats, seatNo]
                     : activeSeats
         );
-        console.log(price)
+        console.log(price);
     };
-
 
     const customerDivision = [
         {
             CustomerDivisionCode: 10,
             CustomerDivisionNameKR: "성인",
-            CustomerDivisionNameUS: "Adult"
+            CustomerDivisionNameUS: "Adult",
         },
         {
             CustomerDivisionCode: 20,
             CustomerDivisionNameKR: "청소년",
-            CustomerDivisionNameUS: "Youth"
+            CustomerDivisionNameUS: "Youth",
         },
 
         {
             CustomerDivisionCode: 12,
             CustomerDivisionNameKR: "어린이",
-            CustomerDivisionNameUS: "kids"
+            CustomerDivisionNameUS: "kids",
         },
 
         {
             CustomerDivisionCode: 11,
             CustomerDivisionNameKR: "장애인",
-            CustomerDivisionNameUS: "Disabled"
+            CustomerDivisionNameUS: "Disabled",
         },
-    ]
+    ];
 
 
     const fees = [
@@ -159,7 +172,7 @@ function SeatSelectPage() {
             MovieFee: 13000,
             SeatBlockCode: 1,
             ServiceFee: 0,
-            TicketCode: 10
+            TicketCode: 10,
         },
         {
             CustomerDivisionCode: 11,
@@ -173,16 +186,16 @@ function SeatSelectPage() {
             MovieFee: 5000,
             SeatBlockCode: 1,
             ServiceFee: 0,
-            TicketCode: 12
+            TicketCode: 12,
         },
         {
             CustomerDivisionCode: 20,
             MovieFee: 5000,
             SeatBlockCode: 1,
             ServiceFee: 0,
-            TicketCode: 20
-        }
-    ]
+            TicketCode: 20,
+        },
+    ];
     const price = numberWithCommas(
         fees.reduce((acc, item) => {
             const key = customerDivision
@@ -194,7 +207,6 @@ function SeatSelectPage() {
             return acc + customerCount[key] * item.MovieFee;
         }, 0)
     );
-
 
     return (
         <div>
@@ -249,21 +261,20 @@ function SeatSelectPage() {
                 </PersonSeatCount>
                 <ScreenBlock>
                     <div className="screen">SCREEN</div>
-                    <div style={{display:'flex' ,alignItems:'center'}}>
+                    <div style={{display: "flex", alignItems: "center"}}>
                         <input
                             id="check1"
                             type="checkbox"
-                            onChange={e => {
-                                setWantDate(!wantDate)
+                            onChange={(e) => {
+                                setWantDate(!wantDate);
                             }}
-                        /><label htmlFor="check1"></label>
-                        <span >소개팅 이벤트 신청하기</span>
+                        />
+                        <label htmlFor="check1"></label>
+                        <span>소개팅 이벤트 신청하기</span>
                     </div>
-
-
                     <SeatsBlock width={seatsBlockWidth}>
                         {seats.length > 0 &&
-                        seats.map((seat) => (seat.SeatXCoordinate &&
+                        seats.map((seat) => (
                             <React.Fragment key={seat.SeatNo}>
                                 <SeatRow x={0} y={seat.SeatYCoordinate / yScaleRatio - 60}>
                                     {seat.SeatRow}
@@ -308,24 +319,29 @@ function SeatSelectPage() {
                         총 합계 <span className="result">{price}</span>원
                     </div>
                     <button className="btn-pay">
-                        <Link to={{
-                            pathname: `/movie/reserve/pay`,
-                            state: {
-                                movieName: curMovie.movieNm,
-                                posterUrl: curMovie.PosterURL,
-                                viewGradeCode: curMovie.watchGradeName,
-                                cinemaName: curMovie.CinemaNameKR,
-                                screenName: curMovie.theaterNm,
-                                playDate: curMovie.ymd,
-                                startTime: curMovie.startDt,
-                                endTime: curMovie.endDt,
-                                seatNoList: activeSeats,
-                                price: price
-                            }
-                        }}>
+                        <Link
+                            to={{
+                                pathname: `/movie/reserve/pay`,
+                                state: {
+                                    schedule_schedule_id: params.id,
+                                    RepresentationMovieCode: curMovie.RepresentationMovieCode,
+                                    movieName: curMovie.movieNm,
+                                    posterUrl: curMovie.PosterURL,
+                                    viewGradeCode: curMovie.watchGradeName,
+                                    cinemaName: curMovie.CinemaNameKR,
+                                    screenName: curMovie.theaterNm,
+                                    playDate: curMovie.ymd,
+                                    startTime: curMovie.startDt,
+                                    endTime: curMovie.endDt,
+                                    seatNoList: activeSeats,
+                                    price: price,
+                                    gender: gender,
+                                    place_id: curMovie.place_id,
+                                },
+                            }}
+                        >
                             결제하기
                         </Link>
-
                     </button>
                 </PersonSeatSummary>
             </StepBlock>
@@ -334,3 +350,17 @@ function SeatSelectPage() {
 }
 
 export default SeatSelectPage;
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -6,7 +6,7 @@ import { getViewGradeIconOptions, numberWithCommas } from "../../util";
 import ViewGradeIcon from "../../components/ViewGradeIcon/ViewGradeIcon";
 import SectionTitle from "../../components/SectionTitle/SectionTitle";
 import Header from "../../components/header/Header";
-import PayPal from '../../components/paypalButton/Paypal'
+import PayPal from "../../components/paypalButton/Paypal";
 const { Search } = Input;
 const onSearch = (value) => console.log(value);
 
@@ -114,6 +114,8 @@ const Payment = styled.div`
 
 const PaymentPage = (props) => {
   const {
+    schedule_schedule_id,
+    RepresentationMovieCode,
     movieName,
     posterUrl,
     viewGradeCode,
@@ -124,9 +126,9 @@ const PaymentPage = (props) => {
     endTime,
     seatNoList,
     price,
+    gender,
+    place_id,
   } = props.location.state;
-
-
 
   const [discountRate, setDiscountRate] = useState(0.0);
   const [discountCost, setDiscountCost] = useState(0);
@@ -146,10 +148,31 @@ const PaymentPage = (props) => {
       });
   };
 
+  let current = new Date();
+
+  const data = {
+    payMethod: "페이팔",
+    payDt:
+      current.getFullYear() +
+      "-" +
+      current.getMonth() +
+      "-" +
+      current.getDate(),
+    originalPrice: price.replace(/,/g, ""),
+    totalPrice: finalCost,
+    member_member_id: localStorage.getItem("member_id"),
+    RepresentationMovieCode: RepresentationMovieCode,
+    schedule_schedule_id: schedule_schedule_id,
+    seats: seatNoList,
+    gender: gender,
+    place_id: place_id,
+  };
+
   const tranSuccess = async (payment) => {
-    console.log(payment)
-    console.log("결제완료했습니다")
-  }
+    axios.post("/api/payment/payComplete", data).then((data) => {
+      console.log(data);
+    });
+  };
 
   const viewGradeIconOptions = getViewGradeIconOptions(viewGradeCode);
   return (
@@ -211,7 +234,7 @@ const PaymentPage = (props) => {
             <div>
               <span className="price-desc">상품금액</span>
               <span>
-                <span className="price">{numberWithCommas(price)}</span>원
+                <span className="price">{price}</span>원
               </span>
             </div>
             <div>
@@ -228,7 +251,10 @@ const PaymentPage = (props) => {
                 원
               </span>
             </div>
-            <PayPal finalCost={finalCost ? finalCost : price} tranSuccess={tranSuccess}/>
+            <PayPal
+              finalCost={finalCost ? finalCost : price}
+              tranSuccess={tranSuccess}
+            />
             {/*<button className="btn-pay">결제하기</button>*/}
           </Payment>
         </Section>
