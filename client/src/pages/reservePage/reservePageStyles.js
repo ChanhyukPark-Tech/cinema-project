@@ -5,7 +5,7 @@ export const ReserveEntireContainer = styled.div`
 `;
 export const ReserveContainer = styled.div`
   width: 100%;
-  
+
   display: flex;
   border: 2px solid black;
   border-radius: 4px;
@@ -122,4 +122,4 @@ export const BranchName = styled.div`
 export const TimeContentContainer = styled.div`
   display: flex;
   align-items: center;
-`
+`;
