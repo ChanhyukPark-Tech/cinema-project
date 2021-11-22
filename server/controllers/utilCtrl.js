@@ -122,6 +122,17 @@ const utilCtrl = {
             res.send(rows);
         })
     },
+
+    UpdateMarketPost : async (req,res) => { // 11/15 추가
+        const {member_id,payinfo_id} = req.body;
+        const sql = `UPDATE payinfo set member_member_id = ${member_id} WHERE payinfo_id = ${payinfo_id};`
+        
+        connection.query(sql,(error,rows) => {
+            if(error) throw error;
+            res.send(rows);
+        })
+    }
+
     //
     // doTest: async (req,res) => {
     //
