@@ -148,7 +148,7 @@ router.route('/getPlacePayTop10')
     .get(adminCtrl.getPlacePayTop10)
 
 router.route('/getMonthPay')
-    .get(adminCtrl.getMonthPay)
+    .post(adminCtrl.getMonthPay)
 
 router.route('/getRecentTicketTop5')
     .get(adminCtrl.getRecentTicketTop5)
