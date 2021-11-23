@@ -5,6 +5,7 @@ import FacilityPage from "./facilityPage/FacilityPage";
 import AddPropPage from "./facilityPage/AddPropPage";
 import PropsDetailPage from "./facilityPage/PropsDetailPage";
 import SalesPage from "./salesPage/SalesPage";
+import WorkSchedulePage from "./workSchedulePage/WorkSchedulePage";
 
 
 function AdminPage({match,history}) {
@@ -18,6 +19,7 @@ function AdminPage({match,history}) {
             <Route path={`${path}/sales`} component={SalesPage}/>
             <Route path={`${path}/props/addProp`} component={AddPropPage}/>
             <Route path={`${path}/propsDetail`} component={PropsDetailPage}/>
+            <Route path={`${path}/schedule`} component={WorkSchedulePage}/>
         </Switch>
     );
 }

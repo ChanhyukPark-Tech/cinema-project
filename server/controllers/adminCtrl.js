@@ -84,10 +84,10 @@ const adminCtrl = {
     
 
     getPlacePayTop10 : async (req,res) => {  // 4번
-        const sql = `select AA.place_id, total
+        const sql = `select AA.place_id, total,CinemaNameKR
         from(
-        select place_id, sum(totalPrice) total
-        from payinfo
+        select place_id,CinemaNameKR ,sum(totalPrice) total
+        from payinfo join place using(place_id)
         group by place_id
         order by total desc
         ) AA LIMIT 10;`

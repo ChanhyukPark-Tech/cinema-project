@@ -1,29 +1,68 @@
 import React, {useEffect, useState} from 'react';
 import Header from "../../../components/header/Header";
-import {Line} from 'react-chartjs-2'
+import {Line, Bar} from 'react-chartjs-2'
 import axios from "axios";
+import {makeGenderData, makeTopSalesData, makeTotalSalesData} from "./chartConfig";
+import {AdminMainPageContainer, ThreeChartContainer} from "./adminMainPageStyles";
+import {Card, Col, Row, Statistic} from "antd";
 
 function AdminMainPage({history}) {
+    const [topSalesTotal, setTopSalesTotal] = useState([])
     const [salesTotal, setSalesTotal] = useState([])
     const [genderTotal, setGenderTotal] = useState([])
-    const [labels,setLabels] = useState([])
-    const [datas,setDatas] = useState([]);
-    const [genderLabels,setGenderLabels] = useState([])
-    const [genderDatas,setGenderDatas] = useState([]);
-    useEffect(()=>{
+    const [labels, setLabels] = useState([])
+    const [datas, setDatas] = useState([]);
+    const [genderLabels, setGenderLabels] = useState([])
+    const [genderDatas, setGenderDatas] = useState([]);
+    const [topSalesLabels, setTopSalesLabels] = useState([])
+    const [topSalesDatas, setTopSalesDatas] = useState([]);
+    const [totalUser,setTotalUser] = useState(0);
+    const [myMember,setMyMember]= useState(0);
+    const [recentFive,setRecentFive] = useState([]);
+
+
+
+
+
+    useEffect(() => {
         axios.get('/api/admin/salesTotal').then(data => {
-            setSalesTotal(data.data.sort((a,b)=> {return a.month - b.month}));
+            setSalesTotal(data.data.sort((a, b) => {
+                return a.month - b.month
+            }));
         })
-        axios.get('/api/admin/genderBothTotal').then(data =>{
+        axios.get('/api/admin/genderBothTotal').then(data => {
             setGenderTotal(data.data)
         })
-    },[])
+        axios.get('/api/admin/getPlacePayTop10')
+            .then(data => {
+                setTopSalesTotal(data.data)
+            })
+        axios.get('/api/admin/countMember').then(data => {
+            setTotalUser(data.data[0].memberNumber)
+        })
 
-    useEffect(()=>{
+        axios.get('/api/admin/getRecentTicketTop5').then(data => {
+            console.log(data.data)
+        })
+
+    }, [])
+
+    useEffect(() => {
         let tempLabels = [];
         let tempDatas = [];
         let genderTempLabels = [];
         let genderTempDatas = [];
+        let topSalesTempLabels = [];
+        let topSalesTempDatas = [];
+
+        topSalesTotal.map(data => {
+            topSalesTempLabels.push(data.CinemaNameKR)
+            topSalesTempDatas.push(data.total);
+        })
+
+        setTopSalesLabels(topSalesTempLabels)
+        setTopSalesDatas(topSalesTempDatas)
+
 
         salesTotal.map(oneMonth => {
             tempLabels.push(oneMonth.month + "월")
@@ -41,85 +80,66 @@ function AdminMainPage({history}) {
         setGenderLabels(genderTempLabels)
         setGenderDatas(genderTempDatas)
 
-    },[salesTotal,genderTotal])
+    }, [salesTotal, genderTotal, topSalesTotal])
 
 
-    const salesData = {
-        labels: labels,
-        datasets: [
-            {
-                label: '월별매출현황',
-                fill: false,
-                lineTension: 0.1,
-                backgroundColor: 'rgba(75,192,192,0.4)',
-                borderColor: 'rgba(75,192,192,1)',
-                borderCapStyle: 'butt',
-                borderDash: [],
-                borderDashOffset: 0.0,
-                borderJoinStyle: 'miter',
-                pointBorderColor: 'rgba(75,192,192,1)',
-                pointBackgroundColor: '#fff',
-                pointBorderWidth: 1,
-                pointHoverRadius: 5,
-                pointHoverBackgroundColor: 'rgba(75,192,192,1)',
-                pointHoverBorderColor: 'rgba(220,220,220,1)',
-                pointHoverBorderWidth: 2,
-                pointRadius: 1,
-                pointHitRadius: 10,
-                data:datas
-            }
-        ]
-    };
+    const salesData = makeTotalSalesData(labels, datas)
+    const salesDataGender = makeGenderData(genderLabels, genderDatas);
+    const topSalesData = makeTopSalesData(topSalesLabels, topSalesDatas);
 
-
-
-
-    const salesDataGender = {
-        labels: genderLabels,
-        datasets: [
-            {
-                label: '성별별매출현황',
-                fill: false,
-                lineTension: 0.1,
-                backgroundColor: 'rgba(75,192,192,0.4)',
-                borderColor: 'rgba(75,192,192,1)',
-                borderCapStyle: 'butt',
-                borderDash: [],
-                borderDashOffset: 0.0,
-                borderJoinStyle: 'miter',
-                pointBorderColor: 'rgba(75,192,192,1)',
-                pointBackgroundColor: '#fff',
-                pointBorderWidth: 1,
-                pointHoverRadius: 5,
-                pointHoverBackgroundColor: 'rgba(75,192,192,1)',
-                pointHoverBorderColor: 'rgba(220,220,220,1)',
-                pointHoverBorderWidth: 2,
-                pointRadius: 1,
-                pointHitRadius: 10,
-                data:genderDatas
-            }
-        ]
-    };
     return (
-        <>
+        <AdminMainPageContainer>
             <Header/>
-            <div style={{width:'30%'}}>
-                <Line
-                    data={salesData}
-                    width={1}
-                    height={1}
+            <div className={"topTen"}>
+                <Bar
+                    data={topSalesData}
                 />
             </div>
 
-            <div style={{width:'30%'}}>
-                <Line
-                    data={salesDataGender}
-                    width={1}
-                    height={1}
-                />
+            <div className={"statistics"}>
+
+
+                <Row gutter={16}>
+                    <Col span={12}>
+                        <Card>
+
+                            <Statistic title="Active Users" value={totalUser}/>
+                        </Card>
+                    </Col>
+                    <Col span={12}>
+                        <Card>
+                            <Statistic title="우리지점 직원수" value={112893} precision={2}/>
+                        </Card>
+                    </Col>
+                </Row>
             </div>
 
-        </>
+            <ThreeChartContainer>
+                <div style={{width: '30%'}}>
+                    <Line
+                        data={salesData}
+                        width={1}
+                        height={1}
+                    />
+                </div>
+
+
+                <div style={{width: '30%'}}>
+                    <Bar
+                        data={salesDataGender}
+                        height={300}
+                    />
+                </div>
+
+                <div style={{width: '30%'}}>
+                    <Bar
+                        data={salesDataGender}
+                        height={300}
+                    />
+                </div>
+            </ThreeChartContainer>
+
+        </AdminMainPageContainer>
     );
 }
 

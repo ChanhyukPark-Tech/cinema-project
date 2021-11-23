@@ -61,7 +61,6 @@ function App() {
         <Route exact path="/mypage/:id" component={MyPage} />
         <Route exact path="/mypage/modify/:id" component={UserModifyPage} />
         <Route path="/admin" component={AdminPage} />
-        <Route path="props/addProp" component={AddPropPage} />
         <Redirect from="*" to="/" />
       </Switch>
     </div>
