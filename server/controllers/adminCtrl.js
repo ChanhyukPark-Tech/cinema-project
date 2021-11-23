@@ -1,4 +1,5 @@
 const connection = require('../dbConfig')
+let today = new Date();  
 
 const adminCtrl = {
 
@@ -75,6 +76,72 @@ const adminCtrl = {
     staffMonthDay : async (req,res) => {
         const {month,day} = req.body;
         const sql = `SELECT * FROM workSchedule where month(Day) = ${month} AND day(Day) = ${day} order by attend ASC;`
+        connection.query(sql,(error,rows)=>{
+            if(error) throw error;
+            res.send(rows);
+        })
+    },
+    
+
+    getPlacePayTop10 : async (req,res) => {  // 4번
+        const sql = `select AA.place_id, total
+        from(
+        select place_id, sum(totalPrice) total
+        from payinfo
+        group by place_id
+        order by total desc
+        ) AA LIMIT 10;`
+        connection.query(sql,(error,rows)=>{
+            if(error) throw error;
+            res.send(rows);
+        })
+    },
+
+    getMonthPay : async (req,res) => {   // 5번
+        const {place_id} = req.body;
+        const sql = `SELECT year(payDt) year, month(payDt) month,sum(totalPrice) totalPrice  FROM payinfo WHERE place_id = ${place_id}
+        group by month(payDt) order by month(payDt) asc; `
+        connection.query(sql,(error,rows)=>{
+            if(error) throw error;
+            res.send(rows);
+        })
+    },
+
+    getRecentTicketTop5 : async (req,res) => {  //6번
+        const sql = `select AA.place_id, total
+        from(
+        select place_id, sum(totalPrice) total
+        from payinfo
+        group by place_id
+        order by total desc
+        ) AA LIMIT 10;`
+        connection.query(sql,(error,rows)=>{
+            if(error) throw error;
+            res.send(rows);
+        })
+    },
+    
+    // getTodayPay : async (req,res) => {   // 8번
+    //     const {place_id} = req.body;
+    //     var today = new Date();
+    //     var year = today.getFullYear();
+    //     var month = ('0' + (today.getMonth() + 1)).slice(-2);
+    //     var day = ('0' + today.getDate()).slice(-2);
+    //     var dateString = year + '-' + month  + '-' + day;
+    //     console.log(dateString);
+    //     const sql = `SELECT place_id, payDt, sum(totalPrice) totalPrice FROM payinfo
+    //     WHERE place_id = ${place_id} AND payDt = "${dateString}";`
+    //     connection.query(sql,(error,rows)=>{
+    //         if(error) throw error;
+    //         res.send(rows);
+    //     })
+    // },
+
+    getLastMonthPlacePay : async (req,res) => {   // 9번
+        let month = today.getMonth(); 
+        const sql = `SELECT place_id, sum(totalPrice) totalPrice FROM payinfo
+        WHERE month(payDt) = ${month}
+        group by place_id order by place_id asc;`
         connection.query(sql,(error,rows)=>{
             if(error) throw error;
             res.send(rows);
