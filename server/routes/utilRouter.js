@@ -104,6 +104,15 @@ const router = require("express").Router();
  *      description: marketPost_Id보낼테니 그에 해당하는 새싹마켓 한 row 삭제하는 API
  */
 
+/**
+ * @swagger
+ *  /api/util/updateMarketPost:
+ *    post:
+ *      tags:
+ *      - util
+ *      description: payinfo_id 랑 새로운 member_id 보내주면 payinfo_id에 해당하는 한 줄에서 member_id를 기존의 것에서 새로 보낸것으로 교체
+ */
+
 router.route('/place')
     .get(utilCtrl.getPlaces)
     .post(utilCtrl.getPlace)
@@ -129,6 +138,9 @@ router.route('/marketPost')// 11/15 추가
 
 router.route('/deleteMarketPost')// 11/15 추가
     .post(utilCtrl.deleteMarketPost)
+
+router.route('/updateMarketPost')// 11/15 추가
+    .post(utilCtrl.updateMarketPost)
 
 // router.route('/doTest')
 //     .post(utilCtrl.doTest)
