@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { MarketContainer } from "./marketStyles";
 import { Link } from "react-router-dom";
 import { Button, Table, Tag } from "antd";
-import { notices } from "./notice";
 import Header from "../../components/header/Header";
 import Title from "../../components/Title/Title";
 import axios from "axios";
@@ -56,7 +55,6 @@ function MarketPage(props) {
 
   useEffect(() => {
     axios.get("/api/util/marketPosts").then((data) => {
-      console.log(data.data);
       setPosts(data.data);
     });
   }, []);
