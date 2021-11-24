@@ -38,6 +38,15 @@ const router = require("express").Router();
  *      description: 스케쥴 아이디 보내면 그 스케쥴에 예약된 좌석 보내주기 (예약된 좌석에 예약한 사람의 '한마디 소개'도 얻을 수 있다.'))
  */
 
+/**
+ * @swagger
+ *  /api/reserve/getReserveDelete:
+ *    delete:
+ *      tags:
+ *      - reserve
+ *      description: payinfo_id 를 보내면 그에 관련된 예매 정보들 삭제하는 api
+ */
+
 router.route('/getPlaceMovies')
     .post(reserveCtrl.getPlaceMovies)
 
@@ -49,4 +58,8 @@ router.route('/getCurMovie')
 
 router.route('/getSeats')
     .post(reserveCtrl.getSeats)
+
+router.route('/getReserveDelete')
+    .delete(reserveCtrl.getReserveDelete)
+    
 module.exports = router;

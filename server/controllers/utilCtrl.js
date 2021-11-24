@@ -131,7 +131,7 @@ const utilCtrl = {
             if(error) throw error;
             res.send(rows);
         })
-    }
+    },
 
     //
     // doTest: async (req,res) => {
@@ -151,6 +151,25 @@ const utilCtrl = {
     //         })
     //     })
     // }
+
+    getTicket : async (req,res) => {
+        // javascript 구조분해할당
+        const {member_id} = req.body;
+        const sql = `SELECT * FROM (payinfo
+            left join ticket on payinfo.payinfo_id = ticket.payinfo_payinfo_id
+            left join seat on ticket.ticket_id = seat.ticket_ticket_id
+            left join schedule on seat.schedule_schedule_id = schedule.schedule_id
+            left join movie on schedule.movie_movie_id = movie.movie_id)
+            WHERE payinfo.member_member_id = ${member_id};`
+        connection.query(
+            sql,(error,rows) => {
+                if(error) throw error;
+                res.send(rows);
+            }
+        )
+    }
+
+
 
 
 }
