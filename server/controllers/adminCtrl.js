@@ -143,6 +143,23 @@ const adminCtrl = {
             if(error) throw error;
             res.send(rows);
         })
+    },
+
+    getAgePay : async (req,res) => {   // 5번
+        const {place_id} = req.body;
+        const sql = `SELECT place_id,
+        sum(if(age between 10 and 19, totalPrice, 0)) as age_10,
+        sum(if(age between 20 and 29, totalPrice, 0)) as age_20,
+        sum(if(age between 30 and 39, totalPrice, 0)) as age_30,
+        sum(if(age between 40 and 49, totalPrice, 0)) as age_40,
+        sum(if(age between 50 and 59, totalPrice, 0)) as age_50
+        FROM payinfo
+        left join member on payinfo.member_member_id = member.member_id
+        WHERE place_id = ${place_id}; `
+        connection.query(sql,(error,rows)=>{
+            if(error) throw error;
+            res.send(rows);
+        })
     }
 
 }

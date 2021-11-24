@@ -120,6 +120,15 @@ const router = require("express").Router();
  *      description: 저번달 기준 지점별 매출 보여주기 (현재 달 자동으로 적용)
  */
 
+/**
+ * @swagger
+ *  /api/admin/getAgePay:
+ *    post:
+ *      tags:
+ *      - admin
+ *      description: place_Id 보내주면 10대 20대 30대 40대 50대 나이대별로 그지점에 해당하는 결재 금액을 보여줌
+ */
+
 router.route('/monthTotal')
     .post(adminCtrl.getmonthTotal)
 
@@ -158,6 +167,10 @@ router.route('/getRecentTicketTop5')
 
 router.route('/getLastMonthPlacePay')
     .get(adminCtrl.getLastMonthPlacePay)
+
+router.route('/getAgePay')
+    .post(adminCtrl.getAgePay)
+
 // month = 3 , currentMv = '독전' < state
 // month = 3 , currnetMv = '보이스'
 // month = 4 , currnetMv = '보이스'

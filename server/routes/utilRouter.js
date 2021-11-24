@@ -113,6 +113,15 @@ const router = require("express").Router();
  *      description: payinfo_id 랑 새로운 member_id 보내주면 payinfo_id에 해당하는 한 줄에서 member_id를 기존의 것에서 새로 보낸것으로 교체
  */
 
+/**
+ * @swagger
+ *  /api/util/getTecket:
+ *    post:
+ *      tags:
+ *      - util
+ *      description: member_id 를 보내주면 , 그사람이 예매한 결제정보(payinfo) 와 영화제목 영화시간 영화 상영관 등등 그사람이 예약한거에 대한 정보를 주는 API
+ */
+
 router.route('/place')
     .get(utilCtrl.getPlaces)
     .post(utilCtrl.getPlace)
@@ -141,6 +150,9 @@ router.route('/deleteMarketPost')// 11/15 추가
 
 router.route('/updateMarketPost')// 11/15 추가
     .post(utilCtrl.updateMarketPost)
+
+router.route('/getTecket')
+    .post(utilCtrl.getTecket)
 
 // router.route('/doTest')
 //     .post(utilCtrl.doTest)

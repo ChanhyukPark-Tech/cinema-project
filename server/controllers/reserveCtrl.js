@@ -49,6 +49,32 @@ on foo.theater_theater_id = theater.theater_id ) poo join place on poo.place_pla
             res.send(rows);
 
         })
+    },
+
+    getReserveDelete: async (req, res) => {
+        const {
+            payinfo_id
+        } = req.body;
+
+        const sql1 = ` DELETE FROM seat WHERE ticket_ticket_id = 
+        (SELECT ticket_id FROM ticket where payinfo_payinfo_id = ${payinfo_id});`;
+        connection.query(sql1, (error, rows) => {
+            if (error) throw error;
+        });
+
+        const sq3 = `DELETE FROM seat WHERE ticket_ticket_id = 
+        (SELECT ticket_id FROM ticket where payinfo_payinfo_id = ${payinfo_id});`
+        connection.query(
+            sq3,(error,rows) => {
+                if(error) throw error;
+            }
+        );
+
+        const sql2 = `DELETE FROM seat WHERE ticket_ticket_id = 
+        (SELECT ticket_id FROM ticket where payinfo_payinfo_id = ${payinfo_id});`;
+        connection.query(sql2, (error, rows) => {
+            if (error) throw error;
+        });
     }
 
 }

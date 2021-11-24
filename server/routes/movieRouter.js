@@ -49,7 +49,7 @@ const router = require("express").Router();
 
 /**
  * @swagger
- *  /api/movie/reviewMovies:
+ *  /api/movie/reviewMovie:
  *    post:
  *      tags:
  *      - movie
