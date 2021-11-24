@@ -40,16 +40,25 @@ const router = require("express").Router();
 
 /**
  * @swagger
- *  /api/movie/reviewMovie:
+ *  /api/movie/reviewMovieRatingUpdate:
  *    post:
  *      tags:
  *      - movie
- *      description: 사용자가 한 영화에 대해서 리뷰를 작성함
+ *      description: 사용자가 한 영화에 대해서 리뷰를 작성함, 이후 다시 평점 업데이트됩
  */
 
 /**
  * @swagger
- *  /api/movie/reviewMovie:
+ *  /api/movie/reviewMovies:
+ *    post:
+ *      tags:
+ *      - movie
+ *      description: 영화코드(RepresentationMovieCode)를 주면 그영화에 해당하는 모든리뷰  보여주기
+ */
+
+/**
+ * @swagger
+ *  /api/movie/reviewMovieDelete:
  *    delete:
  *      tags:
  *      - movie
@@ -72,6 +81,13 @@ router.route('/movieDetail')
 router.route('/modifyMovie')
     .put(movieCtrl.modifyMovie)
 
+router.route('/reviewMovies')
+    .post(movieCtrl.reviewMovies)
 
+router.route('/reviewMovieDelete')
+    .delete(movieCtrl.reviewMovieDelete)
+
+router.route('/reviewMovieRatingUpdate')
+    .post(movieCtrl.reviewMovieRatingUpdate)
 
 module.exports = router;
