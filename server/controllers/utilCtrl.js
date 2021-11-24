@@ -152,7 +152,7 @@ const utilCtrl = {
     //     })
     // }
 
-    getTecket : async (req,res) => {
+    getTicket : async (req,res) => {
         // javascript 구조분해할당
         const {member_id} = req.body;
         const sql = `SELECT * FROM (payinfo
