@@ -108,13 +108,10 @@ const adminCtrl = {
     },
 
     getRecentTicketTop5 : async (req,res) => {  //6번
-        const sql = `select AA.place_id, total
-        from(
-        select place_id, sum(totalPrice) total
-        from payinfo
-        group by place_id
-        order by total desc
-        ) AA LIMIT 10;`
+        const sql = `SELECT * FROM ticket
+        LEFT JOIN payinfo on ticket.payinfo_payinfo_id = payinfo.payinfo_id
+        LEFT JOIN movie on ticket.RepresentationMovieCode = movie.RepresentationMovieCode
+        GROUP BY payinfo_id ORDER BY payinfo_id DESC LIMIT 5;`
         connection.query(sql,(error,rows)=>{
             if(error) throw error;
             res.send(rows);
