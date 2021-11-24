@@ -115,7 +115,7 @@ const router = require("express").Router();
 
 /**
  * @swagger
- *  /api/util/getTecket:
+ *  /api/util/getTicket:
  *    post:
  *      tags:
  *      - util
@@ -151,8 +151,8 @@ router.route('/deleteMarketPost')// 11/15 추가
 router.route('/updateMarketPost')// 11/15 추가
     .post(utilCtrl.updateMarketPost)
 
-router.route('/getTecket')
-    .post(utilCtrl.getTecket)
+router.route('/getTicket')
+    .post(utilCtrl.getTicket)
 
 // router.route('/doTest')
 //     .post(utilCtrl.doTest)
