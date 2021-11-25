@@ -8,6 +8,24 @@ import axios from "axios";
 
 function MarketPage(props) {
   const [posts, setPosts] = useState([]);
+  const [userName, setUserName] = useState("");
+  const [memberId, setMemberId] = useState("");
+
+  useEffect(() => {
+    setUserName(localStorage.getItem("name"));
+    setMemberId(localStorage.getItem("member_id"));
+    //console.log(userName);
+  }, []);
+
+  const deleteHandler = (marketPost) => {
+    axios.post("/api/util/deleteMarketPost", {
+      marketPost_id: marketPost,
+    });
+    axios.get("/api/util/marketPosts").then((data) => {
+      setPosts(data.data);
+    });
+  };
+
   const columns = [
     {
       title: "날짜",
@@ -26,7 +44,20 @@ function MarketPage(props) {
       key: "title",
       render: (text, index) => {
         return (
-          <Link to={`/market/marketDetail/${index.marketPost_id}`}>{text}</Link>
+          <>
+            <Link to={`/market/marketDetail/${index.marketPost_id}`}>
+              {text}
+            </Link>
+
+            {memberId * 1 === index.member_id * 1 && (
+              <Button
+                onClick={(e) => deleteHandler(index.marketPost_id)}
+                danger
+              >
+                글삭제
+              </Button>
+            )}
+          </>
         );
       },
     },
@@ -56,6 +87,7 @@ function MarketPage(props) {
   useEffect(() => {
     axios.get("/api/util/marketPosts").then((data) => {
       setPosts(data.data);
+      console.log(posts);
     });
   }, []);
 
@@ -67,6 +99,7 @@ function MarketPage(props) {
         <Button style={{ marginBottom: "10px", borderColor: "#2c4b21" }}>
           <Link to={"/market/addPost"}>글작성</Link>
         </Button>
+
         <Table columns={columns} dataSource={posts} />
       </MarketContainer>
     </>

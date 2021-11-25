@@ -1,4 +1,4 @@
-const utilCtrl = require("../controllers/utilCtrl")
+const utilCtrl = require("../controllers/utilCtrl");
 const router = require("express").Router();
 
 /**
@@ -19,7 +19,7 @@ const router = require("express").Router();
  *      description: 원하는 지점의 상세정보를 제공
  */
 
- /**
+/**
  * @swagger
  *  /api/util/place:
  *    get:
@@ -28,7 +28,7 @@ const router = require("express").Router();
  *      description: 모든 지점 정보 제공
  */
 
- /**
+/**
  * @swagger
  *  /api/util/divison:
  *    get:
@@ -46,7 +46,6 @@ const router = require("express").Router();
  *      description: 한 지역에 해당하는 모든 지점 보내주기
  */
 
-
 /**
  * @swagger
  *  /api/util/placeDetail:
@@ -55,7 +54,6 @@ const router = require("express").Router();
  *      - util
  *      description: 한 지점에 해당하는 상세정보 보여주기
  */
-
 
 /**
  * @swagger
@@ -66,7 +64,6 @@ const router = require("express").Router();
  *      description: 문의페이지에서 문의하는거 이름이랑 문의내용 넘어올거임
  */
 
-
 /**
  * @swagger
  *  /api/util/addMarketPost:
@@ -75,7 +72,6 @@ const router = require("express").Router();
  *      - util
  *      description: 새싹 마켓 게시글 작성해주세요
  */
-
 
 /**
  * @swagger
@@ -98,7 +94,7 @@ const router = require("express").Router();
 /**
  * @swagger
  *  /api/util/deleteMarketPost:
- *    delete:
+ *    post:
  *      tags:
  *      - util
  *      description: marketPost_Id보낼테니 그에 해당하는 새싹마켓 한 row 삭제하는 API
@@ -122,37 +118,31 @@ const router = require("express").Router();
  *      description: member_id 를 보내주면 , 그사람이 예매한 결제정보(payinfo) 와 영화제목 영화시간 영화 상영관 등등 그사람이 예약한거에 대한 정보를 주는 API
  */
 
-router.route('/place')
-    .get(utilCtrl.getPlaces)
-    .post(utilCtrl.getPlace)
+router.route("/place").get(utilCtrl.getPlaces).post(utilCtrl.getPlace);
 
-router.route('/division')
-    .get(utilCtrl.getDivisons)
+router.route("/division").get(utilCtrl.getDivisons);
 
-router.route('/placeDetail')
-    .post(utilCtrl.getSpecifyPlace)
+router.route("/placeDetail").post(utilCtrl.getSpecifyPlace);
 
-router.route('/form')
-    .post(utilCtrl.sendPost)
+router.route("/form").post(utilCtrl.sendPost);
 
+router.route("/marketPosts").get(utilCtrl.getMarketPosts);
 
-router.route('/marketPosts')
-    .get(utilCtrl.getMarketPosts)
+router.route("/addMarketPost").post(utilCtrl.addMarketPost);
 
-router.route('/addMarketPost')
-    .post(utilCtrl.addMarketPost)
+router
+  .route("/marketPost") // 11/15 추가
+  .post(utilCtrl.marketPost);
 
-router.route('/marketPost')// 11/15 추가
-    .post(utilCtrl.marketPost)
+router
+  .route("/deleteMarketPost") // 11/15 추가
+  .post(utilCtrl.deleteMarketPost);
 
-router.route('/deleteMarketPost')// 11/15 추가
-    .post(utilCtrl.deleteMarketPost)
+router
+  .route("/updateMarketPost") // 11/15 추가
+  .post(utilCtrl.updateMarketPost);
 
-router.route('/updateMarketPost')// 11/15 추가
-    .post(utilCtrl.updateMarketPost)
-
-router.route('/getTicket')
-    .post(utilCtrl.getTicket)
+router.route("/getTicket").post(utilCtrl.getTicket);
 
 // router.route('/doTest')
 //     .post(utilCtrl.doTest)
