@@ -20,7 +20,7 @@
 }
 
 .header ul span {
-  font-size: 1.0rem;
+  font-size: 1rem;
 }
 
 .header ul li img {
@@ -30,7 +30,7 @@
 
 .header a {
   color: #6d8e65;
-  font-family: 'Noto Sans KR', sans-serif;
+  font-weight: bold;
 }
 
 .header.light a {
@@ -53,7 +53,7 @@
   transform: translate(-50%, -50%);
   font-size: 32px;
   text-transform: uppercase;
-  font-family: 'Do Hyeon', sans-serif;
+  font-family: "Do Hyeon", sans-serif;
   letter-spacing: 1px;
 }
 
@@ -105,7 +105,7 @@
 }
 
 .navigation .links li:not(:first-child) a::before {
-  content: '';
+  content: "";
   position: absolute;
   left: 0;
   top: 50%;

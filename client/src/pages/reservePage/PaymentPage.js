@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import styled, { css } from "styled-components";
-import { Input } from "antd";
+import { Input, Collapse } from "antd";
 import axios from "axios";
 import { getViewGradeIconOptions, numberWithCommas } from "../../util";
 import ViewGradeIcon from "../../components/ViewGradeIcon/ViewGradeIcon";
@@ -8,6 +8,10 @@ import SectionTitle from "../../components/SectionTitle/SectionTitle";
 import Header from "../../components/header/Header";
 import PayPal from "../../components/paypalButton/Paypal";
 
+function callback(key) {
+  console.log(key);
+}
+const { Panel } = Collapse;
 const { Search } = Input;
 const onSearch = (value) => console.log(value);
 
@@ -20,6 +24,9 @@ const StepBlock = styled.div`
 const Section = styled.section`
   ${({ width }) => css`
     width: ${width}px;
+  `}
+  ${({ height }) => css`
+    width: ${height}px;
   `}
 `;
 
@@ -67,7 +74,7 @@ const Payment = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-  height: 815px;
+  height: 200px;
 
   & > div {
     background: #414141;
@@ -142,10 +149,9 @@ const PaymentPage = (props) => {
       })
       .then((data) => {
         setDiscountRate(data.data[0]?.discountRate);
-        setDiscountCost(data.data[0]?.discountRate * parseInt(price) );
+        setDiscountCost(data.data[0]?.discountRate * parseInt(price));
         setFinalCost(
-          parseInt(price)  -
-            data.data[0]?.discountRate * parseInt(price)
+          parseInt(price) - data.data[0]?.discountRate * parseInt(price)
         );
       });
   };
@@ -230,10 +236,20 @@ const PaymentPage = (props) => {
             //onSearch={onSearch}
             onChange={promotionChangeHandler}
           />
-          <span className="price-desc">할인금액</span>
+
+          <Collapse defaultActiveKey={["1"]} onChange={callback}>
+            <Panel header="할인금액" key="1">
+              <h2 style={{ textAlign: "center" }}>
+                💰
+                {discountRate ? discountCost : 0}
+              </h2>
+            </Panel>
+          </Collapse>
+
+          {/* <span className="price-desc">할인금액</span>
           <span>
             <span className="price">{discountRate ? discountCost : 0}</span>원
-          </span>
+          </span> */}
           <PaymentMethod></PaymentMethod>
         </Section>
         <Section width={420}>
