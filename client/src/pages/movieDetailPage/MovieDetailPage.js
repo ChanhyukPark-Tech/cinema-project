@@ -2,12 +2,24 @@ import React, {useEffect, useState} from "react";
 import Header from "../../components/header/Header";
 import Footer from "../../components/Footer/Footer";
 import {BackColor} from "./MovieDetailPageStyles";
-import {Button, Comment, Descriptions, List, Row} from "antd";
+import {Button, Comment, Descriptions, List, Form, Avatar, Input} from "antd";
 import {useParams} from "react-router";
 import axios from "axios";
 import MainImage from "./MainImage";
 import Modal from "react-modal";
 import EventTitle from "../eventPage/EventTitle";
+import {Rate} from 'antd';
+import {FrownOutlined, MehOutlined, SmileOutlined} from '@ant-design/icons';
+
+const {TextArea} = Input;
+const customIcons = {
+    1: <FrownOutlined/>,
+    2: <FrownOutlined/>,
+    3: <MehOutlined/>,
+    4: <SmileOutlined/>,
+    5: <SmileOutlined/>,
+};
+
 
 // 영화진흥위원회 key fc7a2c4440818b39b9b1923fc8661d5e
 function MovieDetailPage(props) {
@@ -20,26 +32,38 @@ function MovieDetailPage(props) {
     const [modalIsOpen, setModalIsOpen] = useState(false);
     const [genres, setGenres] = useState([]);
     const [reviews, setReviews] = useState([]);
-    const reviewData = []
-    useEffect(()=>{
-        axios.post('/api/movie/reviewMovies',{RepresentationMovieCode: params.id})
-            .then(data => {
-                setReviews(data.data)
-                console.log(data.data)
-                data.data.map(oneReview => {
-                    setReviews([...reviews,{
-                        author: oneReview.Nm,
-                        avatar: 'https://joeschmoe.io/api/v1/random',
-                        content: (
-                            <p>
-                                {oneReview.content}
-                            </p>
-                        ),
-                        datetime: <p>✨{oneReview.rating}</p>
-                    }])
+    const [reviewText, setReviewText] = useState("")
+    const [submitting, setSubmitting] = useState(false);
+    const [faceRate, setFaceRate] = useState(3);
+
+
+    useEffect(() => {
+
+        const getReviews = async (req, res) => {
+            return await axios.post('/api/movie/reviewMovies', {RepresentationMovieCode: params.id})
+        }
+        const temp = [];
+
+        getReviews().then(res => {
+            res.data.map(oneReview => {
+                temp.push({
+                    author: oneReview.Nm,
+                    avatar: 'https://joeschmoe.io/api/v1/random',
+                    content: (
+                        <p>
+                            {oneReview.content}
+                        </p>
+                    ),
+                    datetime: <p>⭐{oneReview.rating}</p>
                 })
             })
-    },[])
+        })
+
+        setReviews(temp);
+
+
+    }, []);
+
 
     useEffect(() => {
         axios
@@ -69,6 +93,39 @@ function MovieDetailPage(props) {
                 setPersonFilmo(data.data.peopleListResult.peopleList[0].filmoNames);
             });
     };
+
+
+    const handleChange = e => {
+        setReviewText(e.target.value);
+    }
+
+    const handleSubmit = e => {
+        /// 백엔드로ㅓ 보내
+        // console.log(value)
+        const current = new Date();
+        const realMonth = current.getMonth() + 1;
+        let regDate = current.getFullYear() +
+            "-" +
+            realMonth +
+            "-" +
+            current.getDate()
+        const data = {
+            RepresentationMovieCode: params.id,
+            member_id: localStorage.getItem("member_id"),
+            content: reviewText,
+            regDt: regDate,
+            rating: faceRate
+        }
+
+        axios.post('/api/movie/reviewMovieRatingUpdate', {data})
+            .then(res => {
+                alert(res.data.msg)
+            }).catch((err) => {
+            console.log(err.message)
+        })
+
+
+    }
 
 
     return (
@@ -177,6 +234,25 @@ function MovieDetailPage(props) {
                 </Button>
 
                 <EventTitle title={"리뷰"}/>
+                <Rate allowHalf
+                      onChange={value => {
+                          setFaceRate(value)
+                      }}
+
+                      defaultValue={3} character={({index}) => {
+                    return customIcons[index + 1]
+                }}/> <Comment
+                avatar={<Avatar src="https://joeschmoe.io/api/v1/random" alt="Han Solo"/>}
+                content={
+                    <Editor
+                        onChange={handleChange}
+                        onSubmit={handleSubmit}
+                        submitting={submitting}
+                        value={reviewText}
+                    />
+                }
+            />
+
                 <List
                     className="comment-list"
                     itemLayout="horizontal"
@@ -198,5 +274,19 @@ function MovieDetailPage(props) {
         </>
     );
 }
+
+
+const Editor = ({onChange, onSubmit, submitting, value}) => (
+    <>
+        <Form.Item>
+            <TextArea rows={4} onChange={onChange} value={value}/>
+        </Form.Item>
+        <Form.Item>
+            <Button htmlType="submit" loading={submitting} onClick={onSubmit} type="primary">
+                Add Comment
+            </Button>
+        </Form.Item>
+    </>
+);
 
 export default MovieDetailPage;

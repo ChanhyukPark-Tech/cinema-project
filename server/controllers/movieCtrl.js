@@ -1,58 +1,58 @@
 const connection = require('../dbConfig')
 
 const movieCtrl = {
-    getMovies : async (req,res) =>{
-        connection.query('SELECT * FROM movie',(error,rows) => {
-            if(error) throw error;
+    getMovies: async (req, res) => {
+        connection.query('SELECT * FROM movie', (error, rows) => {
+            if (error) throw error;
             res.send(rows);
         })
     },
-    insertMovie : async (req,res) => {
+    insertMovie: async (req, res) => {
         // javascript 구조분해할당
-        const {movieId,title,person,genre,runningtime} = req.body;
+        const {movieId, title, person, genre, runningtime} = req.body;
         const sql = `INSERT INTO movie(movie_id,title,person,genre,runningtime)
  VALUES(${movieId},'${title}','${person}','${genre}',${runningtime});`
         connection.query(
-            sql,(error,rows) => {
-                if(error) throw error;
+            sql, (error, rows) => {
+                if (error) throw error;
                 res.send(rows);
             }
         )
     },
-    modifyMovie : async (req,res)=>{
+    modifyMovie: async (req, res) => {
         // update set ~~ 라는 정보로 기존의 영화정보를 업데이트시킨다.
     },
 
-    MovieDetail : async (req,res)=>{
+    MovieDetail: async (req, res) => {
         const {RepresentationMovieCode} = req.body;
         const sql = `SELECT * FROM movie where RepresentationMovieCode = '${RepresentationMovieCode}'`
         connection.query(
-            sql,(error,rows) => {
-                if(error) throw error;
+            sql, (error, rows) => {
+                if (error) throw error;
                 res.send(rows);
             }
         )
     },
 
-    reviewMovies : async (req,res) => {
+    reviewMovies: async (req, res) => {
         // javascript 구조분해할당
         const {RepresentationMovieCode} = req.body;
         const sql = `SELECT * FROM review join member ON review.member_member_id = member.member_id WHERE movie_RepresentationMovieCode = "${RepresentationMovieCode}";`
         connection.query(
-            sql,(error,rows) => {
-                if(error) throw error;
+            sql, (error, rows) => {
+                if (error) throw error;
                 res.send(rows);
             }
         )
     },
-    
-    reviewMovieDelete : async (req,res) => {
+
+    reviewMovieDelete: async (req, res) => {
         // javascript 구조분해할당
         const {RepresentationMovieCode, member_id} = req.body;
         const sql = `DELETE FROM review WHERE movie_RepresentationMovieCode = "${RepresentationMovieCode}" AND member_member_id = ${member_id};`
         connection.query(
-            sql,(error,rows) => {
-                if(error) throw error;
+            sql, (error, rows) => {
+                if (error) throw error;
                 res.send(rows);
             }
         )
@@ -60,25 +60,37 @@ const movieCtrl = {
 
     reviewMovieRatingUpdate: async (req, res) => {
         const {
-            
             RepresentationMovieCode,
             member_id,
             content,
             regDt,
             rating
-
-        } = req.body;
-
+        } = req.body.data;
+        let flag = true;
+        
         const sql1 = ` INSERT INTO review VALUES("${RepresentationMovieCode}", ${member_id}, "${content}", "${regDt}", ${rating});`;
         connection.query(sql1, (error, rows) => {
+            try{
+
             if (error) throw error;
+            }catch (err){
+                flag = false
+                console.log("중복 리뷰발생")
+            }
         });
+
 
         const sq3 = `set sql_safe_updates=0;`
         connection.query(
-            sq3,(error,rows) => {
-                if(error) throw error;
-                res.send(rows);
+            sq3, (error, rows) => {
+                if (error) throw error;
+                if(flag){
+                    
+                res.json({msg:"리뷰등록완료"});
+                }else {
+                    res.json({msg:"중복리뷰발생"});
+                    
+                }
             }
         )
 
