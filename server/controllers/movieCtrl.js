@@ -37,7 +37,7 @@ const movieCtrl = {
     reviewMovies : async (req,res) => {
         // javascript 구조분해할당
         const {RepresentationMovieCode} = req.body;
-        const sql = `SELECT * FROM review WHERE movie_RepresentationMovieCode = "${RepresentationMovieCode}";`
+        const sql = `SELECT * FROM review join member ON review.member_member_id = member.member_id WHERE movie_RepresentationMovieCode = "${RepresentationMovieCode}";`
         connection.query(
             sql,(error,rows) => {
                 if(error) throw error;

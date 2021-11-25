@@ -13,6 +13,9 @@ export const BackColor = styled.div`
   //  margin: 50px 0;
   //}
   
+  .comment-list{
+    margin:0 10vw;
+  }
 `;
 
 export const GridCardStyle = styled.div`
@@ -42,3 +45,5 @@ export const MovieDetailTitleStyle = styled.div`
     }
   }
 `;
+
+
