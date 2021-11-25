@@ -120,6 +120,41 @@ export const BranchName = styled.div`
 `;
 
 export const TimeContentContainer = styled.div`
+  margin: 15px 0;
   display: flex;
+  flex-direction: column;
   align-items: center;
+  span{
+    border: solid 3px green;
+    padding: 3px;
+    border-radius: 50%;
+    font-weight: bold;
+    margin-bottom: 3px;
+  }
+  .ant-btn{
+    width: 200px;
+    height: 60px;
+    a{
+      font-size: 25px;
+      font-weight: bold;
+    }
+    
+    
+  }
+
+  .line{
+  z-index: 30;
+    color: black;
+    background-color: black;
+    height: 30px;
+  }
 `;
+
+
+
+export const BorderLineContainer = styled.div`
+  margin-top: 10px;
+  width: 45%;
+  height: 1px;
+  background-color: rgba(20, 84, 7, 0.5);
+`

@@ -4,7 +4,7 @@ import { playDates } from "../../data/reservePageDummyData";
 
 const DATE_WIDTH = 52.5;
 
-const Calendar = ({ setSelectedDate }) => {
+const Calendar = ({ setSelectedDate ,getMovieTimesHandler}) => {
   const today = new Date();
   const [ymd, setYmd] = useState("");
   let tempDates = [];
