@@ -326,7 +326,7 @@ function SeatSelectPage() {
                                         >
                                             {seat.SeatColumn}
                                             {
-                                                curSeatNumber === seat.SeatNo && seat.selfPR &&
+                                                curSeatNumber === seat.SeatNo && seat.selfPR && seat.SeatStatusCode != 10 &&
                                             <p class="arrow_box">{seat.selfPR}</p>
                                             }
                                         </Seat>

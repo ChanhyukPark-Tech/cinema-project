@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import classes from './Carousel.module.css';
 import LayerMovieTrailer from './LayerMovieTrailer';
 import {useLayerMovieTrailer} from "../../customHooks";
+import {Link} from "react-router-dom";
 
 const Carousel = ({ theme, height, width, items }) => {
   const [activeItem, setActiveItem] = useState(0);
@@ -52,17 +53,21 @@ const Carousel = ({ theme, height, width, items }) => {
                 item.video ? classes.playable : ''
               }`}
             >
-              <a href="#play" onClick={(e) => handleImgClick(e, index)}>
+
+              {height ===  774  ? <a href="#play" onClick={(e) => handleImgClick(e, index)}>
                 <div
-                  className={classes.imgContainer}
-                  style={{
-                    width: `${width ? `${width}px` : 'auto'}`,
-                    height: `${height ? `${height}px` : 'auto'}`,
-                  }}
+                    className={classes.imgContainer}
+                    style={{
+                      width: `${width ? `${width}px` : 'auto'}`,
+                      height: `${height ? `${height}px` : 'auto'}`,
+                    }}
                 >
-                  <img src={item.img} alt="poster" height={height} />
+                  <img src={item.img} alt="poster" height={height}/>
                 </div>
-              </a>
+              </a> :
+                  <Link to={"/event"}><img src={item.img} alt="poster" height={height}/></Link>
+
+              }
             </li>
           ))}
         </ul>
