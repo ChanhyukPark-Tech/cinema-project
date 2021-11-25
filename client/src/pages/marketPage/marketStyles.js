@@ -1,7 +1,6 @@
 import styled from "styled-components";
 
 export const MarketContainer = styled.div`
-  padding: 30px;
   height: 100%;
 `
 
@@ -33,3 +32,17 @@ export const MarketTitleContainer = styled.div`
     }
   }
 `;
+
+
+export const GIFTitleContainer = styled.div`
+
+  display: flex;
+  width: 100%;
+  margin: 0 auto;
+  justify-content: space-evenly;
+  align-content: center;
+  img{
+    width: 300px;
+    height: 200px;
+  }
+`
