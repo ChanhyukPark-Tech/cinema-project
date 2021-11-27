@@ -96,9 +96,9 @@ function MarketPage(props) {
             <Header/>
             <MarketContainer>
                 <GIFTitleContainer>
-                    <img src={sproutChar}/>
+                    <img src={sproutChar} alt={sproutChar}/>
                     <Title title={"새싹마켓"}/>
-                    <img src={sproutChar}/>
+                    <img src={sproutChar} alt={sproutChar}/>
                 </GIFTitleContainer>
                 <Button style={{marginBottom: "10px", borderColor: "#2c4b21"}}>
                     <Link to={"/market/addPost"}>글작성</Link>

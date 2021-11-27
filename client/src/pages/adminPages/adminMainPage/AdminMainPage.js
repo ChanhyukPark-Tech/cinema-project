@@ -16,12 +16,9 @@ function AdminMainPage({history}) {
     const [genderDatas, setGenderDatas] = useState([]);
     const [topSalesLabels, setTopSalesLabels] = useState([])
     const [topSalesDatas, setTopSalesDatas] = useState([]);
-    const [totalUser,setTotalUser] = useState(0);
-    const [myMember,setMyMember]= useState(0);
-    const [recentFive,setRecentFive] = useState([]);
-
-
-
+    const [totalUser, setTotalUser] = useState(0);
+    // const [myMember,setMyMember]= useState(0);
+    // const [recentFive,setRecentFive] = useState([]);
 
 
     useEffect(() => {
@@ -42,7 +39,6 @@ function AdminMainPage({history}) {
         })
 
         axios.get('/api/admin/getRecentTicketTop5').then(data => {
-            console.log(data.data)
         })
 
     }, [])
@@ -55,7 +51,7 @@ function AdminMainPage({history}) {
         let topSalesTempLabels = [];
         let topSalesTempDatas = [];
 
-        topSalesTotal.map(data => {
+        topSalesTotal.forEach(data => {
             topSalesTempLabels.push(data.CinemaNameKR)
             topSalesTempDatas.push(data.total);
         })
@@ -64,7 +60,7 @@ function AdminMainPage({history}) {
         setTopSalesDatas(topSalesTempDatas)
 
 
-        salesTotal.map(oneMonth => {
+        salesTotal.forEach(oneMonth => {
             tempLabels.push(oneMonth.month + "월")
             tempDatas.push(oneMonth.totalPrice)
         })
@@ -72,7 +68,7 @@ function AdminMainPage({history}) {
         setLabels(tempLabels)
         setDatas(tempDatas)
 
-        genderTotal.map(oneContent => {
+        genderTotal.forEach(oneContent => {
             genderTempLabels.push(oneContent.gender)
             genderTempDatas.push(oneContent.totalPrice)
         })

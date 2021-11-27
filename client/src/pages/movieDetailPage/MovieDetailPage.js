@@ -33,7 +33,7 @@ function MovieDetailPage(props) {
     const [genres, setGenres] = useState([]);
     const [reviews, setReviews] = useState([]);
     const [reviewText, setReviewText] = useState("")
-    const [submitting, setSubmitting] = useState(false);
+    const [submitting] = useState(false);
     const [faceRate, setFaceRate] = useState(3);
 
 
@@ -45,7 +45,7 @@ function MovieDetailPage(props) {
         const temp = [];
 
         getReviews().then(res => {
-            res.data.map(oneReview => {
+            res.data.map(oneReview => (
                 temp.push({
                     author: oneReview.Nm,
                     avatar: 'https://joeschmoe.io/api/v1/random',
@@ -56,13 +56,13 @@ function MovieDetailPage(props) {
                     ),
                     datetime: <p>⭐{oneReview.rating}</p>
                 })
-            })
+            ))
         })
 
         setReviews(temp);
 
 
-    }, []);
+    }, [params.id]);
 
 
     useEffect(() => {
@@ -81,7 +81,7 @@ function MovieDetailPage(props) {
                         setCompany(data.data.movieInfoResult.movieInfo.companys);
                     });
             });
-    }, []);
+    }, [params.id]);
 
     const peopleClickhandler = (personName) => {
         setModalIsOpen(true);

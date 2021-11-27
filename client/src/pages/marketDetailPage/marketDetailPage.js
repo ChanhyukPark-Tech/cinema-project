@@ -17,10 +17,9 @@ function MarketDetailPage() {
     axios
       .post("/api/util/marketPost", { marketPost_id: params.id })
       .then((data) => {
-        console.log(data.data);
         setPost(data.data[0]);
       });
-  }, []);
+  }, [params.id]);
 
   return (
     <>

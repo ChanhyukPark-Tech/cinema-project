@@ -2,10 +2,9 @@ import React, {useState, useEffect} from 'react';
 import Title from "../../components/Title/Title";
 import {SigninBlock, SigninFormBlock} from "../registerPage/registerStyles";
 import axios from "axios";
-import {alertService} from "../../components/Alert/alert.service";
 import Header from "../../components/header/Header";
 
-const LoginPage = ({error, onSubmit,history}) => {
+const LoginPage = ({error,history}) => {
 
     useEffect(() => {
         return () => {
@@ -28,7 +27,7 @@ const LoginPage = ({error, onSubmit,history}) => {
         e.preventDefault();
         axios.post('/api/user/login',inputs)
             .then(res => {
-                if(res.data.success == 1){
+                if(res.data.success === 1){
                     setInputs({
                         email: '',
                         password: '',

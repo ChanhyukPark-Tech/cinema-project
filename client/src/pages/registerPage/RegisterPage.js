@@ -35,7 +35,7 @@ const RegisterPage = ({error, onSubmit,history}) => {
         e.preventDefault();
         axios.post('/api/user',inputs)
             .then(res=>{
-                if(res.data.success == 1){
+                if(res.data.success === 1){
                     history.push('/login')
                 }else{
                     alert("회원가입실패")
