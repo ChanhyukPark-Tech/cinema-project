@@ -179,7 +179,6 @@ const PaymentPage = (props) => {
     setShowSuccess(true);
 
     setTimeout(() => {
-      console.log("떳어요",payinfoId)
       history.push({
         pathname: "/movie/reserve/success",
         state: {payinfo_id: payinfoId}
