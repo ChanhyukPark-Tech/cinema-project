@@ -137,6 +137,8 @@ function MovieDetailPage(props) {
                     title={movie.movieNm}
                     text={movie.openDt}
                 />
+                <br/>
+                <Button style={{width:'20%',height:'40px',margin:'0 auto',backgroundColor: "#748D69",color: "white"}}>예매하기</Button>
 
                 <div style={{alignItems: "center"}}>
                     {/* PosterImage */}
@@ -210,10 +212,6 @@ function MovieDetailPage(props) {
 
                     <button onClick={() => setModalIsOpen(false)}>Modal close</button>
                 </Modal>
-
-                <Button style={{width: "30%", height: "79px", margin: "30px auto"}}>
-                    바로예매하러 가기
-                </Button>
 
                 <EventTitle title={"리뷰"}/>
                 <Rate allowHalf
