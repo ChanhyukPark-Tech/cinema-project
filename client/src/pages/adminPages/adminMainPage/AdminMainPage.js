@@ -5,6 +5,7 @@ import axios from "axios";
 import {makeGenderData, makeTopSalesData, makeTotalSalesData} from "./chartConfig";
 import {AdminMainPageContainer, ThreeChartContainer} from "./adminMainPageStyles";
 import {Card, Col, Row, Statistic} from "antd";
+import Footer from "../../../components/Footer/Footer";
 
 function AdminMainPage({history}) {
     const [topSalesTotal, setTopSalesTotal] = useState([])
@@ -134,7 +135,7 @@ function AdminMainPage({history}) {
                     />
                 </div>
             </ThreeChartContainer>
-
+            <Footer/>
         </AdminMainPageContainer>
     );
 }

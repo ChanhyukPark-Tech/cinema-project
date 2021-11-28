@@ -12,31 +12,58 @@ export const BackColor = styled.div`
   //.ant-descriptions-row{
   //  margin: 50px 0;
   //}
-  
-  .ant-rate{
+
+  .ant-rate {
     display: flex;
     justify-content: space-evenly;
-    background: black;
     width: 12%;
     border-radius: 8px;
     margin-left: 42px;
+
+    .ant-rate-star-full {
+      svg {
+
+        color: #2c4b21;
+      }
+
+    }
+
+    .ant-rate-star-half {
+        color: #2c4b21;
+
+    }
+
+    .ant-rate-star-zero {
+      svg {
+        color: #97e683;
+
+      }
+
+    }
+
+    //svg{
+    //  color:green;
+    //}
   }
-  }
-  
-  .comment-list{
-    margin:0 10vw;
-    img{
+
+
+  .comment-list {
+    margin: 0 10vw;
+
+    img {
       width: 50px;
       height: 50px;
-      
+
     }
-    span{
+
+    span {
       font-size: 27px;
     }
-    div{
+
+    div {
       font-size: 23px;
-      
-      
+
+
     }
   }
 `;
