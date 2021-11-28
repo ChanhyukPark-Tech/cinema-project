@@ -147,6 +147,16 @@ const router = require("express").Router();
  *      description: 지점과 월을 보내주면 그 지점에 해당하는 월의 매출을 일별로 보여줌
  */
 
+
+/**
+ * @swagger
+ *  /api/admin/getStaffWage:
+ *    post:
+ *      tags:
+ *      - admin
+ *      description: place_id, month을 주면 그 지점의 해당하는 달에 직급별 인건비계산
+ */
+
 router.route('/monthTotal')
     .post(adminCtrl.getmonthTotal)
 
@@ -194,6 +204,9 @@ router.route('/getPlaceGenderPay')
 
 router.route('/getPlaceDayPay')
     .post(adminCtrl.getPlaceDayPay)
+
+router.route('/getStaffWage')
+    .post(adminCtrl.getStaffWage)
 // month = 3 , currentMv = '독전' < state
 // month = 3 , currnetMv = '보이스'
 // month = 4 , currnetMv = '보이스'
