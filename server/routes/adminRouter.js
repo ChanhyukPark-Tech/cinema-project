@@ -190,7 +190,7 @@ router.route('/getAgePay')
     .post(adminCtrl.getAgePay)
 
 router.route('/getPlaceGenderPay')
-    .get(adminCtrl.getPlaceGenderPay)
+    .post(adminCtrl.getPlaceGenderPay)
 
 router.route('/getPlaceDayPay')
     .post(adminCtrl.getPlaceDayPay)
