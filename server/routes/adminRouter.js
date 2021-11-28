@@ -129,6 +129,24 @@ const router = require("express").Router();
  *      description: place_Id 보내주면 10대 20대 30대 40대 50대 나이대별로 그지점에 해당하는 결재 금액을 보여줌
  */
 
+/**
+ * @swagger
+ *  /api/admin/getPlaceGenderPay:
+ *    get:
+ *      tags:
+ *      - admin
+ *      description: 지점별 남성과 여성의 전체 매출 보여줌
+ */
+
+/**
+ * @swagger
+ *  /api/admin/getPlaceDayPay:
+ *    post:
+ *      tags:
+ *      - admin
+ *      description: 지점과 월을 보내주면 그 지점에 해당하는 월의 매출을 일별로 보여줌
+ */
+
 router.route('/monthTotal')
     .post(adminCtrl.getmonthTotal)
 
@@ -171,6 +189,11 @@ router.route('/getLastMonthPlacePay')
 router.route('/getAgePay')
     .post(adminCtrl.getAgePay)
 
+router.route('/getPlaceGenderPay')
+    .get(adminCtrl.getPlaceGenderPay)
+
+router.route('/getPlaceDayPay')
+    .post(adminCtrl.getPlaceDayPay)
 // month = 3 , currentMv = '독전' < state
 // month = 3 , currnetMv = '보이스'
 // month = 4 , currnetMv = '보이스'
