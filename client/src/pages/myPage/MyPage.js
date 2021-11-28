@@ -8,21 +8,28 @@ import {Button, Space, Table, Tag} from "antd";
 function MyPage({history}) {
     const params = useParams();
     const memberId = params.id;
-    const [userDetail,setUserDetail] = useState([])
+    const [userDetail, setUserDetail] = useState([]);
+    const [reserveMovies, setReserveMovies] = useState([]);
+
     const auth = memberId === localStorage.getItem("member_id");
-    if(!auth) history.push('/')
+    if (!auth) history.push('/')
     useEffect(() => {
-        axios.post('/api/user/userDetail', {memberId:memberId})
+        axios.post('/api/user/userDetail', {memberId: memberId})
             .then(data => {
                 setUserDetail(data.data[0])
+            })
+
+        axios.post('/api/util/getTicket',{member_id:memberId})
+            .then(res => {
+                setReserveMovies(res.data);
+
+                console.log(res.data)
             })
     }, [memberId])
 
 
-
-
     const deleteUser = (memberId) => {
-        axios.post('/api/user/delete',{member_id:memberId})
+        axios.post('/api/user/delete', {member_id: memberId})
             .then(data => {
                 alert(data.data.msg)
                 localStorage.removeItem("name");
@@ -81,11 +88,53 @@ function MyPage({history}) {
         },
     ];
 
+
+
+    const reserveColumns = [
+        {
+            title: '결제일',
+            dataIndex: 'payDt',
+            key: 'payDt',
+            render: text => <span key={text}>{text.substring(0,10)}</span>,
+        },
+        {
+            title: '결제수단',
+            dataIndex: 'payMethod',
+            key: 'payMethod',
+            render: text => <span key={text}>{text}</span>,
+        },
+        {
+            title: '결제번호',
+            dataIndex: 'payinfo_id',
+            key: 'payinfo_id',
+            render: text => <span key={text}>{text}</span>,
+        },
+        {
+            title: '결제금액',
+            dataIndex: 'totalPrice',
+            key: 'totalPrice',
+            render: text => <span key={text}>{text}</span>,
+        },
+        {
+            title: '영화일시',
+            dataIndex: 'ymd',
+            key: 'ymd',
+            render: text => <span key={text}>{text}</span>,
+        },
+        {
+            title: '영화제목',
+            dataIndex: 'movieNm',
+            key: 'movieNm',
+            render: text => <span key={text}>{text}</span>,
+        }
+
+    ];
+
     const data = [
         {
-            key : userDetail.member_id,
-            name:userDetail.Nm,
-            age:userDetail.age,
+            key: userDetail.member_id,
+            name: userDetail.Nm,
+            age: userDetail.age,
             event: userDetail.dateEventAgree,
             tags: [userDetail.gender],
         }
@@ -97,11 +146,14 @@ function MyPage({history}) {
             <Header/>
             <Title title={`${userDetail.Nm}`}/>
 
-            <Table columns={columns} dataSource={data} />
+            <Table columns={columns} dataSource={data}/>
             <Title title={'회원한마디'}/>
-            <h3 style={{textAlign:'center', fontSize:'30px'}}>
+            <h3 style={{textAlign: 'center', fontSize: '30px'}}>
                 {userDetail.selfPR}
             </h3>
+
+            <Table columns={reserveColumns} dataSource={reserveMovies}/>
+
         </>
     );
 }
