@@ -142,60 +142,42 @@ function MovieDetailPage(props) {
                     {/* PosterImage */}
 
                     {/* Body */}
-                    <div style={{width: "85%", margin: "1rem auto"}}>
-                        {/* 영화 상세정보 Description */}
-                        <Descriptions bordered>
-                            <Descriptions.Item label="상영등급　">
-                                {movie.watchGradeName}세 이용가{" "}
-                            </Descriptions.Item>
-                            <Descriptions.Item label="관람객 평점　　">
-                                {movie.rate} 점
-                            </Descriptions.Item>
-                            <br/>
-                            <Descriptions.Item label="관객수">
-                                {movie.audiAcc}명
-                            </Descriptions.Item>
-                            <Descriptions.Item label="장르">
-                                {" "}
-                                {genres.map((genre) => {
-                                    return genre.genreNm + "❤";
-                                })}
-                            </Descriptions.Item>
-                            <br/>
-
-                            <Descriptions.Item label="국가">
-                                {" "}
-                                {movie.nations}
-                            </Descriptions.Item>
-                            <Descriptions.Item label="상영시간">
-                                {movie.showTm}분
-                            </Descriptions.Item>
-                            <br/>
-
-                            <Descriptions.Item label="감독">
-                                {directors.map((director) => director.peopleNm)}{" "}
-                            </Descriptions.Item>
-                            <Descriptions.Item label="출연">
-                                {people.map((person) => {
-                                    return (
-                                        <React.Fragment key={person.peopleNm}>
-                      <span
-                          onClick={() => peopleClickhandler(person?.peopleNm)}
-                      >
-                        ▪{person.peopleNm}▪　
-                      </span>
-                                        </React.Fragment>
-                                    );
-                                })}
-                            </Descriptions.Item>
-
-                            <br/>
-                            <Descriptions.Item label="제공사">
-                                {company[0]?.companyNm}
-                            </Descriptions.Item>
-                        </Descriptions>
-                        <br/>
-                    </div>
+                    <MovieDetailInfoStyle>
+                            <div style={{width:"95%", margin:"3rem auto"}}>
+                                <table>
+                                    <tr>
+                                        <th>제목</th> <td>{movie.movieNm}</td>
+                                        <th>상영등급</th> <td>{movie.watchGradeName}세 관람가</td>
+                                        <th>장르</th> <td>{genres.map(genre => {
+                                            return genre.genreNm + "🌱"
+                                            })}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>국가</th> <td>{movie.nations}</td>
+                                        <th>관객 수</th> <td>{movie.audiAcc}명</td>
+                                        <th>러닝타임</th> <td>{movie.showTm}분</td>
+                                    </tr>
+                                    <tr>
+                                        <th>감독</th> <td>{directors.map(director => (director.peopleNm))}</td>
+                                        <th>제공사</th> <td>{company[0]?.companyNm}</td>
+                                        <th>관람객 평점</th> <td>⭐{movie.rate} 점</td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </MovieDetailInfoStyle>
+                        <MovieDetailInfoStyle>
+                            <div style={{width: '95%', margin: '1rem auto'}}>
+                                <table>
+                                <th>출연</th> <td>{people.map(person => {
+                                                          return <React.Fragment key={person.peopleNm}>
+                                                          <span onClick={() => peopleClickhandler(person?.peopleNm)}>
+                                                          ▪{person.peopleNm}▪　
+                                                          </span>
+                                                          </React.Fragment>
+                                                          })}</td>
+                                </table>
+                            </div>
+                        </MovieDetailInfoStyle>
                 </div>
                 <Modal
                     style={{
