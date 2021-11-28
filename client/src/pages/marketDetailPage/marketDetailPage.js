@@ -14,16 +14,26 @@ import { Input, Button } from "antd";
 
 function MarketDetailPage() {
   const params = useParams();
-
   const [post, setPost] = useState([]);
   const [memberId, setMemberId] = useState(0);
   const [changeId, setChangeId] = useState("");
   const [payinfoId, setPayInfoId] = useState(0);
+  const [curId, setCurId] = useState(0);
 
   const handleChange = (e) => {
     setChangeId(e.target.value);
     console.log(changeId);
   };
+
+  useEffect(() => {
+    axios
+      .post("/api/util/marketPost", { marketPost_id: params.id })
+      .then((data) => {
+        setPost(data.data[0]);
+        console.log(data.data[0]);
+      });
+    //setCurId(post.member_id);
+  }, [params.id]);
 
   useEffect(() => {
     axios
@@ -64,7 +74,7 @@ function MarketDetailPage() {
                 <tbody>
                   <tr>
                     <th>작성자</th>
-                    <td>{post.Nm}</td>
+                    <td>dasdasdasdas</td>
                     <th>작성일</th>
                     <td>{post.date}</td>
                     <th>연락처</th>
@@ -91,6 +101,7 @@ function MarketDetailPage() {
               <h3>내용</h3>
               <p>{post.content}</p>
             </OneContentContainer>
+
             <Input.Group compact>
               <Input
                 style={{ width: "calc(100% - 800px)" }}

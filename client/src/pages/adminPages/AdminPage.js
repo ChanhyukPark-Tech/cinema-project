@@ -6,10 +6,11 @@ import AddPropPage from "./facilityPage/AddPropPage";
 import PropsDetailPage from "./facilityPage/PropsDetailPage";
 import SalesPage from "./salesPage/SalesPage";
 import WorkSchedulePage from "./workSchedulePage/WorkSchedulePage";
+import CreateProduct from "./createProduct/CreateProduct";
 
 
 function AdminPage({match,history}) {
-    if(localStorage.getItem("name") !== "관리자") history.push('/')
+    if(localStorage.getItem("name")?.substring(0,3) !== "관리자") history.push('/')
 
     const {path} = match;
     return (
@@ -20,6 +21,7 @@ function AdminPage({match,history}) {
             <Route path={`${path}/props/addProp`} component={AddPropPage}/>
             <Route path={`${path}/propsDetail`} component={PropsDetailPage}/>
             <Route path={`${path}/schedule`} component={WorkSchedulePage}/>
+            <Route path={`${path}/addMovie`} component={CreateProduct}/>
         </Switch>
     );
 }
