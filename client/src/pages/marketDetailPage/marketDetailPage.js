@@ -17,9 +17,10 @@ function MarketDetailPage() {
   const params = useParams();
 
   const [post, setPost] = useState([]);
-  const [memberId, setMemberId] = useState("");
+  const [memberId, setMemberId] = useState(0);
   const [changeId, setChangeId] = useState("");
   const [payinfoId, setPayInfoId] = useState(0);
+  const [curId, setCurId] = useState(0);
 
   const handleChange = (e) => {
     setChangeId(e.target.value);
@@ -27,17 +28,19 @@ function MarketDetailPage() {
   };
 
   useEffect(() => {
-    setMemberId(localStorage.getItem("member_id"));
-    console.log(memberId);
-  }, []);
-
-  useEffect(() => {
     axios
       .post("/api/util/marketPost", { marketPost_id: params.id })
       .then((data) => {
         setPost(data.data[0]);
+        console.log(data.data[0]);
       });
+    //setCurId(post.member_id);
   }, [params.id]);
+
+  useEffect(() => {
+    setMemberId(localStorage.getItem("member_id"));
+    console.log(memberId);
+  }, []);
 
   const changeIdHandler = (e) => {
     axios
@@ -85,16 +88,18 @@ function MarketDetailPage() {
               <h3>내용</h3>
               <p>{post.content}</p>
             </OneContentContainer>
-            <Input.Group compact>
-              <Input
-                style={{ width: "calc(100% - 800px)" }}
-                placeholder="변경하려는 회원의 아이디를 입력해주세요"
-                onChange={handleChange}
-              />
-              <Button type="primary" onClick={changeIdHandler}>
-                변경하기
-              </Button>
-            </Input.Group>
+            {memberId * 1 === post.member_id * 1 && (
+              <Input.Group compact>
+                <Input
+                  style={{ width: "calc(100% - 800px)" }}
+                  placeholder="변경하려는 회원의 아이디를 입력해주세요"
+                  onChange={handleChange}
+                />
+                <Button type="primary" onClick={changeIdHandler}>
+                  변경하기
+                </Button>
+              </Input.Group>
+            )}
           </DetailInfoStyle>
         </MarketContainer>
       </BackColor>
