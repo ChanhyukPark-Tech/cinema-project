@@ -163,9 +163,11 @@ const adminCtrl = {
     },
 
     getPlaceGenderPay : async (req,res) => {   // 11-28 지점별 성별별 매출
+        const {place_id} = req.body;
         const sql = `SELECT place_id, sum(if(gender = "남성", totalPrice,0)) as man, sum(if(gender = "여성", totalPrice,0)) as woman
         FROM payinfo left join member on payinfo.member_member_id = member.member_id
-        group by place_id order by place_id asc;`
+        WHERE place_id = ${place_id}
+        group by place_id order by place_id asc`
         connection.query(sql,(error,rows)=>{
             if(error) throw error;
             res.send(rows);
