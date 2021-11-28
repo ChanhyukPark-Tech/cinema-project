@@ -9,9 +9,11 @@ const movieCtrl = {
     },
     insertMovie: async (req, res) => {
         // javascript 구조분해할당
-        const {movieId, title, person, genre, runningtime} = req.body;
-        const sql = `INSERT INTO movie(movie_id,title,person,genre,runningtime)
- VALUES(${movieId},'${title}','${person}','${genre}',${runningtime});`
+        const {PosterURL, RepresentationMovieCode, genre, movieNm, nations,openDt,showTm,story ,watchGradeName} = req.body;
+        const realShowTm = showTm*1
+        console.log(openDt)
+        const sql = `INSERT INTO movie(PosterURL,RepresentationMovieCode,genre,movieNm,nations,openDt,showTm,story,watchGradeName)
+ VALUES('${PosterURL}','${RepresentationMovieCode}','${genre}','${movieNm}','${nations}','${openDt}',${realShowTm},'${story}','${watchGradeName}');`
         connection.query(
             sql, (error, rows) => {
                 if (error) throw error;
