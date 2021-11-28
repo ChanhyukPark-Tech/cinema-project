@@ -8,3 +8,9 @@ export const CalenderContainer = styled.div`
   }
 
 `
+
+export const SelectBarContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  
+`

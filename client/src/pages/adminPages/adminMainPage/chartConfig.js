@@ -1,4 +1,4 @@
-export const makeGenderData =(genderLabels , genderDatas) => {
+export const makeGenderData = (genderLabels, genderDatas) => {
     return {
         labels: genderLabels,
         datasets: [
@@ -21,13 +21,13 @@ export const makeGenderData =(genderLabels , genderDatas) => {
                 pointHoverBorderWidth: 2,
                 pointRadius: 1,
                 pointHitRadius: 10,
-                data:genderDatas
+                data: genderDatas
             }
         ]
     }
 }
 
-export const makeTotalSalesData = (labels,datas)=>{
+export const makeTotalSalesData = (labels, datas) => {
     return {
         labels: labels,
         datasets: [
@@ -50,13 +50,13 @@ export const makeTotalSalesData = (labels,datas)=>{
                 pointHoverBorderWidth: 2,
                 pointRadius: 1,
                 pointHitRadius: 10,
-                data:datas
+                data: datas
             }
         ]
     }
 }
 
-export const makeTopSalesData = (labels,datas)=>{
+export const makeTopSalesData = (labels, datas) => {
     return {
         labels: labels,
         datasets: [
@@ -79,7 +79,36 @@ export const makeTopSalesData = (labels,datas)=>{
                 pointHoverBorderWidth: 2,
                 pointRadius: 1,
                 pointHitRadius: 10,
-                data:datas
+                data: datas
+            }
+        ]
+    }
+}
+
+export const myPlaceGenderTotalPay = (labels, datas) => {
+    return {
+        labels: labels,
+        datasets: [
+            {
+                label: '우리지점 성별별 매출',
+                fill: false,
+                lineTension: 0.1,
+                backgroundColor: 'rgba(75,192,192,0.4)',
+                borderColor: 'rgba(75,192,192,1)',
+                borderCapStyle: 'butt',
+                borderDash: [],
+                borderDashOffset: 0.0,
+                borderJoinStyle: 'miter',
+                pointBorderColor: 'rgba(75,192,192,1)',
+                pointBackgroundColor: '#fff',
+                pointBorderWidth: 1,
+                pointHoverRadius: 5,
+                pointHoverBackgroundColor: 'rgba(75,192,192,1)',
+                pointHoverBorderColor: 'rgba(220,220,220,1)',
+                pointHoverBorderWidth: 2,
+                pointRadius: 1,
+                pointHitRadius: 10,
+                data: datas
             }
         ]
     }

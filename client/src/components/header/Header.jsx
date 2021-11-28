@@ -33,7 +33,7 @@ const Header = ({ theme }) => {
             </li>
             <li>
               <Link to={"/"}>
-                {userName.substring(0,3) === "관리자" ? (
+                {userName?.substring(0,3) === "관리자" ? (
                   <span>관리자 페이지 입니다</span>
                 ) : (
                   <span>Creative Enjoy Our Cinema</span>
@@ -42,7 +42,7 @@ const Header = ({ theme }) => {
             </li>
           </ul>
           <ul className={`${classes.menu} ${classes.menu2}`}>
-            {userName.substring(0,3) === "관리자" ? (
+            {userName?.substring(0,3) === "관리자" ? (
               <></>
             ) : (
               <>
@@ -77,7 +77,7 @@ const Header = ({ theme }) => {
         </div>
         <nav className={classes.navigation}>
           <ul className={classes.links}>
-            {userName.substring(0,3) === "관리자" ? (
+            {userName?.substring(0,3) === "관리자" ? (
               <>
                 <li>
                   <Link to={"/admin/sales"}>우리지점매출현황</Link>
@@ -123,7 +123,7 @@ const Header = ({ theme }) => {
 
             {!userName ? (
               <></>
-            ) : userName.substring(0,3) === "관리자" ? (
+            ) : userName?.substring(0,3) === "관리자" ? (
 
               <></>
             ) : (

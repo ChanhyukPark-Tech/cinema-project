@@ -55,7 +55,6 @@ function AdminMainPage({history}) {
             topSalesTempLabels.push(data.CinemaNameKR)
             topSalesTempDatas.push(data.total);
         })
-
         setTopSalesLabels(topSalesTempLabels)
         setTopSalesDatas(topSalesTempDatas)
 
