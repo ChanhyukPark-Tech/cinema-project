@@ -78,26 +78,26 @@ const utilCtrl = {
         smtpTransport.close();
     },
     addMarketPost: async (req, res) => {
-        const {payinfoId, content, tag, member_id,today,title} = req.body;
+        const {payinfoId, content, tag, member_id, today, title} = req.body;
         const sql = `INSERT INTO marketPost(member_member_id,content,payinfo_id,tag,date,title)
  VALUES(${member_id},'${content}',${payinfoId},'${tag}','${today}','${title}')`
 
-        connection.query(sql,(error,rows) => {
-            if(error) throw error;
-            res.json({success:1})
+        connection.query(sql, (error, rows) => {
+            if (error) throw error;
+            res.json({success: 1})
             console.log("게시글 작성 성공!")
         })
     },
 
-    getMarketPosts : async (req,res) => {
+    getMarketPosts: async (req, res) => {
         const sql = `SELECT * FROM marketPost left join member on marketPost.member_member_id = member.member_id natural join payinfo natural join ticket natural join schedule foo join movie on foo.movie_movie_id = movie.movie_id GROUP BY payinfo_id`
-        connection.query(sql,(error,rows) => {
-            if(error) throw error;
+        connection.query(sql, (error, rows) => {
+            if (error) throw error;
             res.send(rows);
         })
     },
 
-    marketPost : async (req,res) => { // 11/15 추가
+    marketPost: async (req, res) => { // 11/15 추가
         const {marketPost_id} = req.body;
         const sql = `SELECT * FROM seat
         left join member on seat.member_member_id = member.member_id 
@@ -106,34 +106,42 @@ const utilCtrl = {
         natural join ticket 
         natural join schedule foo join movie on foo.movie_movie_id = movie.movie_id WHERE marketPost_id = ${marketPost_id}
         GROUP BY seatNm`
-        
-        connection.query(sql,(error,rows) => {
-            if(error) throw error;
+
+        connection.query(sql, (error, rows) => {
+            if (error) throw error;
             res.send(rows);
         })
     },
 
-    deleteMarketPost : async (req,res) => { // 11/15 추가
+    deleteMarketPost: async (req, res) => { // 11/15 추가
         const {marketPost_id} = req.body;
         const sql = `DELETE FROM movieDB.marketPost WHERE marketPost_id = '${marketPost_id}'`
-        
-        connection.query(sql,(error,rows) => {
-            if(error) throw error;
+
+        connection.query(sql, (error, rows) => {
+            if (error) throw error;
             res.send(rows);
         })
     },
 
-    updateMarketPost : async (req,res) => { // 11/15 추가
-        const {member_id,payinfo_id} = req.body;
-        const sql = `UPDATE payinfo set member_member_id = ${member_id} WHERE payinfo_id = ${payinfo_id};`
+    updateMarketPost: async (req, res) => { // 11/15 추가
+        const {member_id, payinfo_id} = req.body;
+
+        const findId = `SELECT member_id FROM member WHERE Nm = '${member_id}';`
+        let realId;
+        connection.query(findId, (error, rows) => {
+            realId = rows.member_id
+        })
+
+
+        const sql = `UPDATE payinfo set member_member_id = ${realId} WHERE payinfo_id = ${payinfo_id};`
         const sql2 = `UPDATE marketPost SET tag = "판매완료" WHERE payinfo_id = ${payinfo_id}`
 
-        connection.query(sql,(error,rows) => {
-            if(error) throw error;
+        connection.query(sql, (error, rows) => {
+            if (error) throw error;
         })
-        
-        connection.query(sql2,(error,rows)=>{
-            if(error) throw error;
+
+        connection.query(sql2, (error, rows) => {
+            if (error) throw error;
             res.send("티켓 양도를 성공했습니다")
         })
     },
@@ -157,7 +165,7 @@ const utilCtrl = {
     //     })
     // }
 
-    getTicket : async (req,res) => {
+    getTicket: async (req, res) => {
         // javascript 구조분해할당
         const {member_id} = req.body;
         const sql = `SELECT * FROM (payinfo
@@ -167,14 +175,12 @@ const utilCtrl = {
             left join movie on schedule.movie_movie_id = movie.movie_id)
             WHERE payinfo.member_member_id = ${member_id};`
         connection.query(
-            sql,(error,rows) => {
-                if(error) throw error;
+            sql, (error, rows) => {
+                if (error) throw error;
                 res.send(rows);
             }
         )
     }
-
-
 
 
 }
