@@ -40,12 +40,15 @@ function MarketDetailPage() {
   }, [params.id]);
 
   const changeIdHandler = (e) => {
-    console.log(changeId);
-    console.log(post.payinfo_id);
-    axios.post("/api/util/deleteMarketPost", {
-      member_id: changeId,
-      payinfo_id: post.payinfo_id,
-    });
+    axios
+      .post("/api/util/updateMarketPost", {
+        member_id: changeId,
+        payinfo_id: post.payinfo_id,
+      })
+      .then((res) => {
+        console.log(res.data);
+        alert(res.data);
+      });
   };
 
   return (
