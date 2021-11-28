@@ -80,16 +80,19 @@ const Header = ({ theme }) => {
             {userName.substring(0,3) === "관리자" ? (
               <>
                 <li>
-                  <Link to={"/admin/facility"}>시설관리</Link>
+                  <Link to={"/admin/sales"}>우리지점매출현황</Link>
+                </li>
+                <li>
+                  <Link to={"/admin/schedule"}>직원근무표</Link>
+                </li>
+                <li>
+                  <Link to={"/admin/facility"}>입점시설관리</Link>
                 </li>
                 <li>
                   <Link to={"/admin/addMovie"}>영화관리</Link>
                 </li>
                 <li>
-                  <Link to={"/admin/sales"}>매출현황</Link>
-                </li>
-                <li>
-                  <Link to={"/admin/schedule"}>근태관리</Link>
+                  <Link to={"/admin/props"}>소품관리</Link>
                 </li>
               </>
             ) : (
@@ -121,6 +124,7 @@ const Header = ({ theme }) => {
             {!userName ? (
               <></>
             ) : userName.substring(0,3) === "관리자" ? (
+
               <></>
             ) : (
               <li>
