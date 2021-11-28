@@ -76,7 +76,6 @@ export const LocalContainer = styled.div`
 `;
 
 export const BranchListContainer = styled.div`
-  border: 3px solid #8d8472;
 
   height: 100%;
   width: 100%;

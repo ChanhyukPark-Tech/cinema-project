@@ -7,6 +7,7 @@ import ViewGradeIcon from "../../components/ViewGradeIcon/ViewGradeIcon";
 import SectionTitle from "../../components/SectionTitle/SectionTitle";
 import Header from "../../components/header/Header";
 import PayPal from "../../components/paypalButton/Paypal";
+import Footer from "../../components/Footer/Footer";
 
 
 const { Panel } = Collapse;
@@ -21,9 +22,6 @@ const StepBlock = styled.div`
 const Section = styled.section`
   ${({ width }) => css`
     width: ${width}px;
-  `}
-  ${({ height }) => css`
-    width: ${height}px;
   `}
 `;
 
@@ -154,13 +152,13 @@ const PaymentPage = (props) => {
   };
 
   let current = new Date();
-
+  const realMonth = current.getMonth() + 1;
   const data = {
     payMethod: "페이팔",
     payDt:
       current.getFullYear() +
       "-" +
-      current.getMonth() +
+        realMonth +
       "-" +
       current.getDate(),
     originalPrice: price.replace(/,/g, ""),
@@ -174,13 +172,18 @@ const PaymentPage = (props) => {
   };
 
   const tranSuccess = async (payment) => {
-    axios.post("/api/payment/payComplete", data).then((data) => {
-      console.log(data);
+    let payinfoId;
+    axios.post("/api/payment/payComplete", data).then((res) => {
+      payinfoId = res.data[0].payinfoId
     });
     setShowSuccess(true);
 
     setTimeout(() => {
-      history.push("/movie/reserve/success");
+      console.log("떳어요",payinfoId)
+      history.push({
+        pathname: "/movie/reserve/success",
+        state: {payinfo_id: payinfoId}
+      })
     }, 1000);
   };
 
@@ -225,7 +228,7 @@ const PaymentPage = (props) => {
         <Section width={480}>
           <SectionTitle title="결제수단" />
           <Search
-            placeholder="프로모션 코드를 입력해주세요!(공백제외)"
+            placeholder="프로모션 코드를 입력해주세요!"
             allowClear
             enterButton="적용하기"
             size="large"
@@ -242,11 +245,6 @@ const PaymentPage = (props) => {
               </h2>
             </Panel>
           </Collapse>
-
-          {/* <span className="price-desc">할인금액</span>
-          <span>
-            <span className="price">{discountRate ? discountCost : 0}</span>원
-          </span> */}
           <PaymentMethod></PaymentMethod>
         </Section>
         <Section width={420}>
@@ -280,6 +278,7 @@ const PaymentPage = (props) => {
           </Payment>
         </Section>
       </StepBlock>
+      <Footer />
     </>
   );
 };

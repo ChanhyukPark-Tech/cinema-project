@@ -21,25 +21,28 @@ export const DetailInfoStyle = styled.div`
       font-size: 2rem;
     }
   }
-  
+
   table {
     width: 100%;
     border: 1px solid #444444;
     border-collapse: collapse;
   }
-  th, td {
+  th,
+  td {
     border: 1px solid #444444;
     padding: 10px 5px;
     text-align: center;
   }
   th {
-    background-color: #748D69; color: white;
+    background-color: #748d69;
+    color: white;
   }
 `;
 
 export const OneContentContainer = styled.div`
   align-items: center;
   border: 1px solid #444444;
+  height: 40vh;
   p {
     text-align: center;
     //width: 100%;
@@ -60,7 +63,7 @@ export const OneContentContainer = styled.div`
   h3 {
     text-align: center;
     //width: 100%;
-    color: #748D69;
+    color: #748d69;
     font-size: 1.8rem;
     font-weight: 600;
     position: relative;
