@@ -67,10 +67,10 @@ function FacilityPage(props) {
             dataIndex: "tag",
             render: (tag) => {
                 let color = tag.length > 5 ? "geekblue" : "green";
-                if (tag=="완료") {
+                if (tag==="완료") {
                     color = "volcano";
                 }
-                if (tag=="처리중") {
+                if (tag==="처리중") {
                     color = "darkgray";
                 }
                 return (

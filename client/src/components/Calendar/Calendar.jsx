@@ -1,12 +1,10 @@
 import React, { useState } from "react";
 import classes from "./Calendar.module.css";
-import { playDates } from "../../data/reservePageDummyData";
 
 const DATE_WIDTH = 52.5;
 
-const Calendar = ({ setSelectedDate ,getMovieTimesHandler}) => {
+const Calendar = ({ setSelectedDate}) => {
   const today = new Date();
-  const [ymd, setYmd] = useState("");
   let tempDates = [];
   const WEEKDAY = ["일", "월", "화", "수", "목", "금", "토"];
   const WEEKDAYEN = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"];

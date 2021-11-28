@@ -47,7 +47,7 @@ function SeatSelectPage() {
                     setGender(2);
                 }
             });
-    }, []);
+    }, [params.id]);
 
     useEffect(() => {
         axios
@@ -55,22 +55,8 @@ function SeatSelectPage() {
             .then((data) => {
                 setDateInfo(data.data);
             });
-    }, []);
+    }, [params.id]);
 
-    // useEffect(() => {
-    //   for (let i = 0; i < seats.length; i++) {
-    //     for (let j = 0; j < dateInfo.length; j++) {
-    //       if (seats[i].SeatNo === dateInfo[j].seatNm) {
-    //         if (dateInfo[j].eventGender === "1")
-    //           setSeats([...seats, (seats[i].SeatStatusCode = 10)]);
-    //         if (dateInfo[j].eventGender === "3")
-    //           setSeats([...seats, (seats[i].SeatStatusCode = 30)]);
-    //         if (dateInfo[j].eventGender === "4")
-    //           setSeats([...seats, (seats[i].SeatStatusCode = 40)]);
-    //       }
-    //     }
-    //   }
-    // }, [curMovie, dateInfo]);
 
     useEffect(() => {
         if (wantDate) {
@@ -112,7 +98,7 @@ function SeatSelectPage() {
             }
             if (gender > 2) setGender(gender - 2);
         }
-    }, [wantDate, curMovie, dateInfo]);
+    }, [wantDate, curMovie, dateInfo, gender, seats]);
 
     const [customerCount, setCustomerCount] = useState({
         adult: 0,
@@ -326,7 +312,7 @@ function SeatSelectPage() {
                                         >
                                             {seat.SeatColumn}
                                             {
-                                                curSeatNumber === seat.SeatNo && seat.selfPR && seat.SeatStatusCode != 10 &&
+                                                curSeatNumber === seat.SeatNo && seat.selfPR && seat.SeatStatusCode !== 10 &&
                                             <p class="arrow_box">{seat.selfPR}</p>
                                             }
                                         </Seat>

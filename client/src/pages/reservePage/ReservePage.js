@@ -12,7 +12,7 @@ import {
     TimeListContainer,
 } from "./reservePageStyles";
 import Title from "../../components/Title/Title";
-import {Button, Steps} from "antd";
+import { Steps} from "antd";
 
 import Header from "../../components/header/Header";
 import ReserveTimeList from "../../components/ReserveTimeList/ReserveTimeList";
@@ -22,6 +22,8 @@ import ReserveMovieCard from "../../components/ReserveMovieList/ReserveMovieList
 function ReservePage() {
     let current = new Date();
     let curRealMonth = current.getMonth()+1
+    const today = current.getFullYear() + "-" + curRealMonth + "-" + current.getDate()
+
     const {Step} = Steps;
     const [divisions, setDivisions] = useState([]);
     const [places, setPlaces] = useState([]);
@@ -32,10 +34,9 @@ function ReservePage() {
     const [branchCode, setBranchCode] = useState(1013);
     const [movieCode, setMovieCode] = useState(1);
     const [selectedDate, setSelectedDate] = useState(
-        current.getFullYear() + "-" + curRealMonth + "-" + current.getDate()
+        today
     );
     const [times, setTimes] = useState([]);
-
     const getMovieTimesHandler = () => {
         axios
             .post("/api/reserve/getReserveTimes", {
@@ -86,7 +87,7 @@ function ReservePage() {
             .post("/api/reserve/getReserveTimes", {
                 CinemaID: 1013,
                 movie_movie_id: 1,
-                ymd: current.getFullYear() + "-" + curRealMonth + "-" + current.getDate(),
+                ymd: today,
             })
             .then((data) => {
                 setTimes(data.data);
@@ -169,6 +170,7 @@ function ReservePage() {
                             {movies &&
                             movies.map((movie) => (
                                 <ReserveMovieCard
+                                    key={movie.movie_id}
                                     movieCode={movie.movie_id}
                                     setMovieCode={setMovieCode}
                                     setStep={setStep}

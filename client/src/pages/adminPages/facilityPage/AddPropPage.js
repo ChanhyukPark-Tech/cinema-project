@@ -27,6 +27,8 @@ function AddPropPage(props) {
                 break;
             case "title":
                 setTitle(value);
+                break;
+
             default:
                 return;
         }

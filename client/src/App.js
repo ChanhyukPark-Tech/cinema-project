@@ -11,8 +11,6 @@ import RegisterPage from "./pages/registerPage/RegisterPage";
 import LoginPage from "./pages/loginPage/LoginPage";
 import PracticePage from "./pages/pracicePage/PracticePage";
 import AdminPage from "./pages/adminPages/AdminPage";
-import AddPropPage from "./pages/adminPages/facilityPage/AddPropPage";
-import TimeTablePage from "./pages/timeTablePage/TimeTablePage";
 import EventDetailPage from "./pages/eventDetailPage/eventDetailPage";
 import MyPage from "./pages/myPage/MyPage";
 import AddPostPage from "./pages/marketPage/AddPostPage";

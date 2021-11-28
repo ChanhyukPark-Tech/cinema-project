@@ -1,10 +1,8 @@
 import React, { useState } from "react";
 import Calendar from "../Calendar/Calendar";
-import { timeTable } from "../../data/reservePageDummyData";
-import {Avatar, Badge, Button, Tooltip} from "antd";
+import {Button} from "antd";
 import {BorderLineContainer, TimeContentContainer} from "../../pages/reservePage/reservePageStyles";
 import { Link } from "react-router-dom";
-import { SearchOutlined } from "@ant-design/icons";
 
 function ReserveTimeList({
   setSelectedDate,

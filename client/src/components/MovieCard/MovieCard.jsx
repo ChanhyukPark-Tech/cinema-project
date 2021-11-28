@@ -29,7 +29,7 @@ const MovieCard = ({ movie, number, theme }) => {
               <span className={classes.icon}>
                 <i className="fas fa-star"></i>
               </span>{' '}
-              <span>{movie.RepresentationMovieCode}</span>
+              <span>{movie.rate}</span>
             </span>
           )}
 

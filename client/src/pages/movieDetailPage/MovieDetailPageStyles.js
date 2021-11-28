@@ -13,8 +13,31 @@ export const BackColor = styled.div`
   //  margin: 50px 0;
   //}
   
+  .ant-rate{
+    display: flex;
+    justify-content: space-evenly;
+    background: black;
+    width: 12%;
+    border-radius: 8px;
+    margin-left: 42px;
+  }
+  }
+  
   .comment-list{
     margin:0 10vw;
+    img{
+      width: 50px;
+      height: 50px;
+      
+    }
+    span{
+      font-size: 27px;
+    }
+    div{
+      font-size: 23px;
+      
+      
+    }
   }
 `;
 

@@ -16,7 +16,7 @@ function MyPage({history}) {
             .then(data => {
                 setUserDetail(data.data[0])
             })
-    }, [])
+    }, [memberId])
 
 
 
@@ -37,7 +37,7 @@ function MyPage({history}) {
             title: '성함',
             dataIndex: 'name',
             key: 'name',
-            render: text => <a>{text}</a>,
+            render: text => <span key={text}>{text}</span>,
         },
         {
             title: '나이',

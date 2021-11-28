@@ -17,7 +17,7 @@ function EventDetailPage(props) {
               setEvent(data.data[0])
               }
           )
-  },[])
+  },[match.params.id])
   return (
     <>
       <BackColor>

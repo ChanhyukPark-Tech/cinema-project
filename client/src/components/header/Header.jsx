@@ -27,7 +27,7 @@ const Header = ({ theme }) => {
             <li>
               <Link to={"/"}>
                 <span>
-                  <img src={mark} />
+                  <img src={mark} alt={mark} />
                 </span>{" "}
               </Link>
             </li>

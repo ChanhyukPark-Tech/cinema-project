@@ -1,20 +1,17 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import styled, { css } from "styled-components";
 import { Input, Collapse } from "antd";
 import axios from "axios";
-import { getViewGradeIconOptions, numberWithCommas } from "../../util";
+import { getViewGradeIconOptions } from "../../util";
 import ViewGradeIcon from "../../components/ViewGradeIcon/ViewGradeIcon";
 import SectionTitle from "../../components/SectionTitle/SectionTitle";
 import Header from "../../components/header/Header";
 import PayPal from "../../components/paypalButton/Paypal";
 import Footer from "../../components/Footer/Footer";
 
-function callback(key) {
-  console.log(key);
-}
+
 const { Panel } = Collapse;
 const { Search } = Input;
-const onSearch = (value) => console.log(value);
 
 const StepBlock = styled.div`
   width: 1200px;
@@ -139,7 +136,7 @@ const PaymentPage = (props) => {
   const [discountRate, setDiscountRate] = useState(0.0);
   const [discountCost, setDiscountCost] = useState(0);
   const [finalCost, setFinalCost] = useState(price);
-  const [showSuccess, setShowSuccess] = useState(false);
+  const [showSuccess,setShowSuccess] = useState(false);
   const promotionChangeHandler = (e) => {
     axios
       .post("/api/event/promotionCode", {
@@ -235,7 +232,7 @@ const PaymentPage = (props) => {
             onChange={promotionChangeHandler}
           />
 
-          <Collapse defaultActiveKey={["1"]} onChange={callback}>
+          <Collapse defaultActiveKey={["1"]}>
             <Panel header="할인금액" key="1">
               <h2 style={{ textAlign: "center" }}>
                 💰

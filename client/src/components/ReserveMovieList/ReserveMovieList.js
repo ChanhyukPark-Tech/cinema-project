@@ -14,7 +14,7 @@ function ReserveMovieCard({name, grade, rating, imgUrl, releasedDate, setStep, s
                 setSelectedMovie(movieCode)
                 setMovieCode(mi)
             }}>
-            <img src={imgUrl}/>
+            <img src={imgUrl} alt={imgUrl}/>
             <ReserveMovieCardContentContainer>
                 <div style={{display: 'flex', alignItems: 'center'}}>
                     <GradeContainer color={gradeStyles.color}>
