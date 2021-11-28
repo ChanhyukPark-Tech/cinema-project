@@ -4,6 +4,7 @@ import axios from "axios";
 import Header from "../../components/header/Header";
 import Title from "../../components/Title/Title";
 import {Button, Space, Table, Tag} from "antd";
+import EventTitle from "../eventPage/EventTitle";
 
 function MyPage({history}) {
     const params = useParams();
@@ -19,7 +20,7 @@ function MyPage({history}) {
                 setUserDetail(data.data[0])
             })
 
-        axios.post('/api/util/getTicket',{member_id:memberId})
+        axios.post('/api/util/getTicket', {member_id: memberId})
             .then(res => {
                 setReserveMovies(res.data);
 
@@ -89,13 +90,12 @@ function MyPage({history}) {
     ];
 
 
-
     const reserveColumns = [
         {
             title: '결제일',
             dataIndex: 'payDt',
             key: 'payDt',
-            render: text => <span key={text}>{text.substring(0,10)}</span>,
+            render: text => <span key={text}>{text.substring(0, 10)}</span>,
         },
         {
             title: '결제수단',
@@ -144,15 +144,18 @@ function MyPage({history}) {
     return (
         <>
             <Header/>
-            <Title title={`${userDetail.Nm}`}/>
+            <div style={{margin:'0 2vw'}}>
 
-            <Table columns={columns} dataSource={data}/>
-            <Title title={'회원한마디'}/>
-            <h3 style={{textAlign: 'center', fontSize: '30px'}}>
-                {userDetail.selfPR}
-            </h3>
+                <Title title={`${userDetail.Nm}`}/>
 
-            <Table columns={reserveColumns} dataSource={reserveMovies}/>
+                <Table columns={columns} dataSource={data}/>
+                <Title title={'회원한마디'}/>
+                <h3 style={{textAlign: 'center', fontSize: '30px', margin: '40px 0'}}>
+                    {userDetail.selfPR}
+                </h3>
+                <EventTitle title={"예매내역"}/>
+                <Table columns={reserveColumns} dataSource={reserveMovies}/>
+            </div>
 
         </>
     );
