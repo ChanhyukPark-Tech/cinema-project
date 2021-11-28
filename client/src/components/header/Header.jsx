@@ -119,14 +119,7 @@ const Header = ({ theme }) => {
             )}
 
             {!userName ? (
-              <li>
-                <a href="##">
-                  <span>
-                    <i className="fas fa-bookmark"></i>
-                  </span>{" "}
-                  비회원 예매
-                </a>
-              </li>
+              <></>
             ) : userName === "관리자" ? (
               <></>
             ) : (

@@ -15,7 +15,6 @@ const paymentCtrl = {
             gender,
             place_id,
         } = req.body;
-        console.log(req.body);
         const sql1 = `insert into payinfo(payMethod,payDt,originalPrice,totalPrice,cancel,member_member_id, place_id) 
         values ('${payMethod}', '${payDt}', ${originalPrice}, ${totalPrice}, 0, ${member_member_id}, ${place_id});`;
         connection.query(sql1, (error, rows) => {
@@ -38,6 +37,16 @@ const paymentCtrl = {
                 console.log("좌석들감");
             });
         });
+
+        const sql4 = `SELECT max(payinfo_id) payinfoId FROM payinfo`
+
+        connection.query(sql4,(error,rows)=>{
+            if(error) throw error;
+            res.send(rows);
+        })
+
+
+
     },
 };
 

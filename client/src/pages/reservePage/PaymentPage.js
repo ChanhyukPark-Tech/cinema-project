@@ -152,13 +152,13 @@ const PaymentPage = (props) => {
   };
 
   let current = new Date();
-
+  const realMonth = current.getMonth() + 1;
   const data = {
     payMethod: "페이팔",
     payDt:
       current.getFullYear() +
       "-" +
-      current.getMonth() +
+        realMonth +
       "-" +
       current.getDate(),
     originalPrice: price.replace(/,/g, ""),
@@ -172,13 +172,18 @@ const PaymentPage = (props) => {
   };
 
   const tranSuccess = async (payment) => {
-    axios.post("/api/payment/payComplete", data).then((data) => {
-      console.log(data);
+    let payinfoId;
+    axios.post("/api/payment/payComplete", data).then((res) => {
+      payinfoId = res.data[0].payinfoId
     });
     setShowSuccess(true);
 
     setTimeout(() => {
-      history.push("/movie/reserve/success");
+      console.log("떳어요",payinfoId)
+      history.push({
+        pathname: "/movie/reserve/success",
+        state: {payinfo_id: payinfoId}
+      })
     }, 1000);
   };
 

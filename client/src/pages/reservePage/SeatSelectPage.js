@@ -98,7 +98,7 @@ function SeatSelectPage() {
             }
             if (gender > 2) setGender(gender - 2);
         }
-    }, [wantDate, curMovie, dateInfo, gender, seats]);
+    }, [wantDate, curMovie, dateInfo]);
 
     const [customerCount, setCustomerCount] = useState({
         adult: 0,

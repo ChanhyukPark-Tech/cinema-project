@@ -20,6 +20,7 @@ export const ScreenBlock = styled.div`
 
   input[id="check1"]:checked + label::after {
     content: '✔';
+    color: #97e683;
     font-size: 25px;
     width: 30px;
     height: 30px;
@@ -55,6 +56,7 @@ export const ScreenBlock = styled.div`
     text-align: center;
     color: #fff;
     padding: 5px 0;
+    margin-bottom: 30px;
   }
 `;
 

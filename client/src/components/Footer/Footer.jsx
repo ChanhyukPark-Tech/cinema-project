@@ -6,7 +6,7 @@ const Footer = () => {
     <footer className={classes.footer}>
       <div className="center">
         <p className={classes.copyright}>
-          COPYRIGHT &copy; CEO CINEMA ALL RIGHT RESERVED
+          COPYRIGHT &copy; CEO CINEMA ALL RIGHT RESERVED 딩동과 파라솔
         </p>
       </div>
     </footer>
