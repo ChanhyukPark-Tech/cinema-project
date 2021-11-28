@@ -91,50 +91,6 @@ function AdminMainPage({history}) {
                     data={topSalesData}
                 />
             </div>
-
-            <div className={"statistics"}>
-
-
-                <Row gutter={16}>
-                    <Col span={12}>
-                        <Card>
-
-                            <Statistic title="Active Users" value={totalUser}/>
-                        </Card>
-                    </Col>
-                    <Col span={12}>
-                        <Card>
-                            <Statistic title="우리지점 직원수" value={112893} precision={2}/>
-                        </Card>
-                    </Col>
-                </Row>
-            </div>
-
-            <ThreeChartContainer>
-                <div style={{width: '30%'}}>
-                    <Line
-                        data={salesData}
-                        width={1}
-                        height={1}
-                    />
-                </div>
-
-
-                <div style={{width: '30%'}}>
-                    <Bar
-                        data={salesDataGender}
-                        height={300}
-                    />
-                </div>
-
-                <div style={{width: '30%'}}>
-                    <Bar
-                        data={salesDataGender}
-                        height={300}
-                    />
-                </div>
-            </ThreeChartContainer>
-
         </AdminMainPageContainer>
     );
 }
