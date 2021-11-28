@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react";
 import Header from "../../components/header/Header";
 import Footer from "../../components/Footer/Footer";
-import {BackColor} from "./MovieDetailPageStyles";
+import {BackColor, MovieDetailInfoStyle, MovieDetailTitleStyle} from "./MovieDetailPageStyles";
 import {Button, Comment, Descriptions, List, Form, Avatar, Input} from "antd";
 import {useParams} from "react-router";
 import axios from "axios";
@@ -138,7 +138,7 @@ function MovieDetailPage(props) {
                     text={movie.openDt}
                 />
 
-                <div style={{display: "flex", alignItems: "center"}}>
+                <div style={{alignItems: "center"}}>
                     {/* PosterImage */}
 
                     {/* Body */}
