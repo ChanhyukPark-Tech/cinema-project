@@ -182,6 +182,20 @@ const adminCtrl = {
             if(error) throw error;
             res.send(rows);
         })
+    },
+
+    getStaffWage : async (req,res) => {   
+        const {place_id, month} = req.body;
+        const sql = `SELECT place_place_id as place_id, MONTH(Day) as month, class_class_id as class, sum((hour(end) - hour(attend)) * hourWage) as Wage
+        FROM workSchedule
+        left join staff on workSchedule.staff_staff_id = staff.staff_id
+        left join class on staff.class_class_id = class.class_id
+        WHERE place_place_id = ${place_id} AND MONTH(Day) = ${month}
+        group by class_class_id;`
+        connection.query(sql,(error,rows)=>{
+            if(error) throw error;
+            res.send(rows);
+        })
     }
 
 }
