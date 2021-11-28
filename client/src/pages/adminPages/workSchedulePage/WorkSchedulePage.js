@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import Header from "../../../components/header/Header";
 import EventTitle from "../../eventPage/EventTitle";
-import {Select, Table, Tag} from "antd";
+import {Card, Select, Statistic, Table, Tag} from "antd";
 import {Link} from "react-router-dom";
 import axios from "axios";
 import {WorkSchedulePageContainer} from "./workSchedulePageStyles";
@@ -9,13 +9,24 @@ import {dates, months} from "./DateTemplate";
 
 function WorkSchedulePage() {
     const [posts, setPosts] = useState([]);
+    const [totalWage, setTotalWage] = useState(0);
+    const [curMonth, setCurMonth] = useState(12);
     const {Option} = Select;
 
     useEffect(() => {
         axios.get("/api/util/marketPosts").then((data) => {
             setPosts(data.data);
         });
-    }, [])
+
+        axios.post('/api/admin/getStaffWage', {
+            place_id: localStorage.getItem("name").substring(3, localStorage.getItem("name").length),
+            month: curMonth
+
+        }).then(res => {
+            console.log(res.data)
+            setTotalWage(res.data)
+        })
+    }, [curMonth])
     const columns = [
 
         {
@@ -68,7 +79,11 @@ function WorkSchedulePage() {
             <Header/>
             <WorkSchedulePageContainer>
                 <EventTitle title={"근무표"}/>
-                <Select defaultValue="1월" style={{width: 120}} onChange={handleChange}>
+
+                <Select defaultValue="12월" style={{width: 120}} onChange={(value) => {
+                    const onlyNumber = value.replace(/월/g, "")
+                    setCurMonth(onlyNumber)
+                }}>
                     {
                         months.map(month => (
                             <Option value={month}>{month}</Option>
@@ -82,6 +97,15 @@ function WorkSchedulePage() {
                         ))
                     }
                 </Select>
+                <div className={'card-container'}>
+                    <Card size={"small"}>
+                        <Statistic title="금월 매니저 총임금" value={totalWage[0]?.Wage}/>
+                    </Card>
+                    <Card size={"small"}>
+
+                        <Statistic title="금월 아르바이트 총임금" value={totalWage[1]?.Wage}/>
+                    </Card>
+                </div>
                 <Table columns={columns} dataSource={posts}/>
             </WorkSchedulePageContainer>
         </>
