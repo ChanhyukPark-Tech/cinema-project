@@ -48,5 +48,5 @@ router.route('/getStoreMonthSale')
     .get(storeCtrl.getStoreMonthSale)
 
 router.route('/getStoreitemMonthSale')
-    .get(storeCtrl.getStoreitemMonthSale)
+    .post(storeCtrl.getStoreitemMonthSale)
 module.exports = router;

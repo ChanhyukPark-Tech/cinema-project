@@ -5,6 +5,7 @@ import {Select, Radio} from 'antd';
 import {SelectBarContainer} from "./salesPageStyles";
 import GenderTotalPay from "./GenderTotalPay";
 import AgeDivisionPay from "./AgeDivisionPay";
+import StoreTotalPay from "./StoreTotalPay";
 
 const {Option} = Select;
 
@@ -24,7 +25,7 @@ function SalesPage(props) {
                     <Radio.Button value="dayTotalPay">일별 매출</Radio.Button>
                     <Radio.Button value="genderPay">성별별 매출</Radio.Button>
                     <Radio.Button value="agePay">나이대별 매출</Radio.Button>
-                    <Radio.Button value="small">매점 상품별 매출</Radio.Button>
+                    <Radio.Button value="storePay">매점 상품별 매출</Radio.Button>
                 </Radio.Group>
 
             </SelectBarContainer>
@@ -39,7 +40,9 @@ function SalesPage(props) {
             {
                 wantToSee === "agePay" && <AgeDivisionPay/>
             }
-
+            {
+                wantToSee === "storePay" && <StoreTotalPay/>
+            }
         </div>
     );
 }

@@ -26,7 +26,8 @@ const storeCtrl = {
     },
 
     getStoreitemMonthSale : async (req,res)=>{
-        connection.query(`select place_id, store.storeitem_id ,itemNm, total sale , month from store left join storeitem on store.storeitem_id = storeitem.storeitem_id order by place_id asc ,month asc , storeitem_id asc;` ,(error,rows)=>{
+        const {place_id} = req.body;
+        connection.query(`select place_id, store.storeitem_id ,itemNm, total sale , month from store left join storeitem on store.storeitem_id = storeitem.storeitem_id WHERE place_id = ${place_id} AND month = 12 order by place_id asc ,month asc , storeitem_id asc;` ,(error,rows)=>{
             if(error) throw error;
             res.send(rows);
         })
