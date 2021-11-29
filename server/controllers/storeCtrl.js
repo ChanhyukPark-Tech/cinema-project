@@ -9,13 +9,11 @@ const storeCtrl = {
     },
 
     getOutstore : async (req,res)=>{
-        const sql = `select * from outstore;`
-        connection.query(
-            sql,(error,rows) => {
-                if(error) throw error;
-                res.send(rows);
-            }
-        )
+        const {place_id, quarter} = req.body;
+        connection.query(`select * from outstore where quarter = ${quarter} and place_place_id = ${place_id};` ,(error,rows)=>{
+            if(error) throw error;
+            res.send(rows);
+        })
     },
 
     getStoreMonthSale : async (req,res)=>{

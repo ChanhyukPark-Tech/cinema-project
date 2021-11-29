@@ -42,7 +42,7 @@ router.route('/')
     .get(storeCtrl.getStores)
 
 router.route('/outstore')
-    .get(storeCtrl.getOutstore)
+    .post(storeCtrl.getOutstore)
 
 router.route('/getStoreMonthSale')
     .get(storeCtrl.getStoreMonthSale)
