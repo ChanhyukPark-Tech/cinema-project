@@ -17,13 +17,36 @@ const router = require("express").Router();
  *    get:
  *      tags:
  *      - store
- *      description: outstore에서 지점 , 분기당 총 Rent 가격을 보여준다.
+ *      description: outstore에서 정보를 모둘 알 수 있다. 모든 분기별 총 임대료, 총 매출
+ */
+
+/**
+ * @swagger
+ *  /api/store/getStoreMonthSale:
+ *    get:
+ *      tags:
+ *      - store
+ *      description: store(매점)에서  place(지점), month 단위 총 매출
+ */
+
+/**
+ * @swagger
+ *  /api/store/getStoreitemMonthSale:
+ *    get:
+ *      tags:
+ *      - store
+ *      description: outstore에서 store(매점)에서  place(지점), month 단위 각각의 상품  매출
  */
 
 router.route('/')
     .get(storeCtrl.getStores)
 
 router.route('/outstore')
-    .get(storeCtrl.getOutstoreTotalrent)
+    .get(storeCtrl.getOutstore)
 
+router.route('/getStoreMonthSale')
+    .get(storeCtrl.getStoreMonthSale)
+
+router.route('/getStoreitemMonthSale')
+    .get(storeCtrl.getStoreitemMonthSale)
 module.exports = router;
