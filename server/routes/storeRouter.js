@@ -14,10 +14,10 @@ const router = require("express").Router();
 /**
  * @swagger
  *  /api/store/outstore:
- *    get:
+ *    post:
  *      tags:
  *      - store
- *      description: outstore에서 정보를 모둘 알 수 있다. 모든 분기별 총 임대료, 총 매출
+ *      description: 지점이랑 분기보내면 입점매장별 매출과 임대료
  */
 
 /**
