@@ -69,6 +69,7 @@ function MarketDetailPage() {
     const params = useParams();
     const [post, setPost] = useState([]);
     const [changeId, setChangeId] = useState("");
+    const [forPostUrl,setForPostUrl] = useState([]);
 
 
     useEffect(() => {
@@ -80,6 +81,16 @@ function MarketDetailPage() {
             });
         //setCurId(post.member_id);
     }, [params.id]);
+
+    useEffect(() => {
+        axios
+            .post("api/movie/movieDetail", {RepresentationMovieCode: post.RepresentationMovieCode})
+            .then((data) => {
+                setForPostUrl(data.data[0]);
+            });
+        //setCurId(post.member_id);
+    }, []);
+
 
     return (
         <>
