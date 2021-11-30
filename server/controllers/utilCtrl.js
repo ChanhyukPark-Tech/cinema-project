@@ -99,13 +99,13 @@ const utilCtrl = {
   marketPost: async (req, res) => {
     // 11/15 추가
     const { marketPost_id } = req.body;
-    const sql = `SELECT * FROM seat
-        left join member on seat.member_member_id = member.member_id 
-        natural join marketPost
-        natural join payinfo 
-        natural join ticket 
-        natural join schedule foo join movie on foo.movie_movie_id = movie.movie_id WHERE marketPost_id = ${marketPost_id}
-        GROUP BY seatNm`;
+    const sql = `SELECT * FROM (marketPost
+left join payinfo on marketPost.payinfo_id = payinfo.payinfo_id
+left join ticket on payinfo.payinfo_id = ticket.payinfo_payinfo_id
+left join seat on ticket.ticket_id = seat.ticket_ticket_id
+left join member on seat.member_member_id = member.member_id
+left join schedule on seat.schedule_schedule_id = schedule.schedule_id)
+WHERE marketPost.marketPost_id = ${marketPost_id}`;
 
     connection.query(sql, (error, rows) => {
       if (error) throw error;
