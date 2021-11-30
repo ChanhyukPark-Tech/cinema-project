@@ -7,6 +7,7 @@ import Title from "../../components/Title/Title";
 import axios from "axios";
 import sproutChar from "./sproutChar.gif";
 
+
 function MarketPage(props) {
   const [posts, setPosts] = useState([]);
   const [userName, setUserName] = useState("");
@@ -98,10 +99,10 @@ function MarketPage(props) {
   useEffect(() => {
     axios.get("/api/util/marketPosts").then((data) => {
       setPosts(data.data);
+      console.log(data.data);
     });
   }, []);
 
-  console.log(posts);
   return (
     <>
       <Header />
