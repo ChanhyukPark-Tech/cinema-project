@@ -53,6 +53,7 @@ function MarketPage(props) {
 
             {memberId * 1 === index.member_id * 1 && (
               <Button
+                  style={{marginLeft:10}}
                 onClick={(e) => deleteHandler(index.marketPost_id)}
                 danger
               >

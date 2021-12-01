@@ -1,7 +1,4 @@
 import React, {useEffect, useState} from "react";
-
-
-import sproutChar from "../marketPage/sproutChar.gif";
 import Header from "../../components/header/Header";
 import Footer from "../../components/Footer/Footer";
 import {BackColor} from "../eventPage/eventStyles";
@@ -43,6 +40,45 @@ import MoreVertIcon from '@mui/icons-material/MoreVert';
 
 function MarketDetailPage() {
     const [expanded, setExpanded] = React.useState(false);
+    const params = useParams();
+    const [post, setPost] = useState([]);
+    const [changeId, setChangeId] = useState("");
+    const [forPostUrl, setForPostUrl] = useState([]);
+    const [memberId, setMemberId] = useState(0);
+
+    useEffect(() => {
+        setMemberId(localStorage.getItem("member_id"));
+        //console.log(userName);
+    }, []);
+
+    useEffect(() => {
+        axios
+            .post("/api/util/marketPost", {marketPost_id: params.id})
+            .then((data) => {
+                setPost(data.data[0]);
+                axios
+                    .post("/api/movie/movieDetail", {RepresentationMovieCode: data.data[0].RepresentationMovieCode})
+                    .then((data) => {
+                        setForPostUrl(data.data[0]);
+                        console.log(data);
+                    });
+                console.log(data.data[0]);
+            });
+
+
+        //setCurId(post.member_id);
+    }, [params.id]);
+
+    // useEffect(() => {
+    //     axios
+    //         .post("api/movie/movieDetail", {RepresentationMovieCode: post.RepresentationMovieCode})
+    //         .then((data) => {
+    //             setForPostUrl(data.data[0]);
+    //             console.log(data.data[0]);
+    //         });
+    //     //setCurId(post.member_id);
+    // }, []);
+
 
     // const handleExpandClick = () => {
     //   setExpanded(!expanded);
@@ -64,32 +100,6 @@ function MarketDetailPage() {
                 alert(res.data);
             });
     };
-
-
-    const params = useParams();
-    const [post, setPost] = useState([]);
-    const [changeId, setChangeId] = useState("");
-    const [forPostUrl,setForPostUrl] = useState([]);
-
-
-    useEffect(() => {
-        axios
-            .post("/api/util/marketPost", {marketPost_id: params.id})
-            .then((data) => {
-                setPost(data.data[0]);
-                console.log(data.data[0]);
-            });
-        //setCurId(post.member_id);
-    }, [params.id]);
-
-    useEffect(() => {
-        axios
-            .post("api/movie/movieDetail", {RepresentationMovieCode: post.RepresentationMovieCode})
-            .then((data) => {
-                setForPostUrl(data.data[0]);
-            });
-        //setCurId(post.member_id);
-    }, []);
 
 
     return (
@@ -116,7 +126,7 @@ function MarketDetailPage() {
                 <CardMedia
                     component="img"
                     height="194"
-                    image={post.PosterURL}
+                    image={forPostUrl?.PosterURL}
                     alt="poster url"
                 />
                 <CardContent>
@@ -147,7 +157,7 @@ function MarketDetailPage() {
                     <Typography paragraph>🕘상영시간: &nbsp;&nbsp;{post.startDt}~{post.endDt} </Typography>
                     <Typography
                         paragraph>🪑좌석: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{post.seatNm}</Typography>
-                    <Typography paragraph>🎬상영지점: &nbsp;&nbsp;{post.theater_theater_id}점</Typography>
+                    <Typography paragraph>🎬상영지점: &nbsp;&nbsp;{post.CinemaNameKR}점</Typography>
                     <Typography paragraph>🎬상영관:  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{post.place_place_id}관</Typography>
                     <Typography style={{textAlign: "center"}}>
                         ⭐️CEO CINEMA는 본 거래에 대한 책임을 지지 않습니다⭐️
@@ -156,7 +166,7 @@ function MarketDetailPage() {
                 {/*</Collapse>*/}
             </Card>
 
-
+            {memberId * 1 === post.member_id * 1 &&
             <Input.Group compact style={{marginTop: 30, marginLeft: "auto", marginRight: "auto", textAlign: "center"}}>
                 <Input
                     style={{width: "calc(100% - 1300px)"}}
@@ -168,6 +178,7 @@ function MarketDetailPage() {
                     변경하기
                 </Button>
             </Input.Group>
+            }
         </>
     );
 }
