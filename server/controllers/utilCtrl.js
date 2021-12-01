@@ -173,7 +173,9 @@ WHERE marketPost.marketPost_id = ${marketPost_id}`;
             left join seat on ticket.ticket_id = seat.ticket_ticket_id
             left join schedule on seat.schedule_schedule_id = schedule.schedule_id
             left join movie on schedule.movie_movie_id = movie.movie_id)
-            WHERE payinfo.member_member_id = ${member_id};`;
+            WHERE payinfo.member_member_id = ${member_id}
+            ORDER BY payDt desc
+            `;
         connection.query(sql, (error, rows) => {
             if (error) throw error;
             res.send(rows);

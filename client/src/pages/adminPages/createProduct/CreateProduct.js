@@ -3,7 +3,6 @@ import Loading from "../../../components/loading/Loading";
 import './createProduct.css'
 import Header from "../../../components/header/Header";
 import axios from "axios";
-import * as url from "url";
 
 const initialState = {
     openDt: '',

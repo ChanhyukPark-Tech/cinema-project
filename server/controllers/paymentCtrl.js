@@ -14,6 +14,7 @@ const paymentCtrl = {
             seats,
             gender,
             place_id,
+            dateUrl
         } = req.body;
         const sql1 = `insert into payinfo(payMethod,payDt,originalPrice,totalPrice,cancel,member_member_id, place_id) 
         values ('${payMethod}', '${payDt}', ${originalPrice}, ${totalPrice}, 0, ${member_member_id}, ${place_id});`;
@@ -28,15 +29,26 @@ const paymentCtrl = {
             if (error) throw error;
             console.log("티켓들감");
         });
-
-        seats.map((seat) => {
-            const sql3 = `insert into seat(schedule_schedule_id, ticket_ticket_id, seatNm, eventGender, member_member_id)
-            values (${schedule_schedule_id}, (SELECT max(ticket_id) FROM ticket),'${seat}', ${gender} ,${member_member_id});`;
-            connection.query(sql3, (error, rows) => {
-                if (error) throw error;
-                console.log("좌석들감");
+        if(gender === 3 || gender === 4){
+            seats.map((seat) => {
+                const sql3 = `insert into seat(schedule_schedule_id, ticket_ticket_id, seatNm, eventGender, member_member_id, dateUrl)
+            values (${schedule_schedule_id}, (SELECT max(ticket_id) FROM ticket),'${seat}', ${gender} ,${member_member_id},'${dateUrl}');`;
+                connection.query(sql3, (error, rows) => {
+                    if (error) throw error;
+                    console.log("좌석들감");
+                });
             });
-        });
+        }else{
+
+            seats.map((seat) => {
+                const sql3 = `insert into seat(schedule_schedule_id, ticket_ticket_id, seatNm, eventGender, member_member_id)
+            values (${schedule_schedule_id}, (SELECT max(ticket_id) FROM ticket),'${seat}', ${gender} ,${member_member_id});`;
+                connection.query(sql3, (error, rows) => {
+                    if (error) throw error;
+                    console.log("좌석들감");
+                });
+            });
+        }
 
         const sql4 = `SELECT max(payinfo_id) payinfoId FROM payinfo`
 

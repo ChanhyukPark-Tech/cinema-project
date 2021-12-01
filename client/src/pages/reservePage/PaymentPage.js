@@ -131,6 +131,7 @@ const PaymentPage = (props) => {
     price,
     gender,
     place_id,
+    dateUrl
   } = props.location.state;
   const history = props.history;
   const [discountRate, setDiscountRate] = useState(0.0);
@@ -169,6 +170,7 @@ const PaymentPage = (props) => {
     seats: seatNoList,
     gender: gender,
     place_id: place_id,
+    dateUrl:dateUrl
   };
 
   const tranSuccess = async (payment) => {

@@ -22,9 +22,8 @@ function MyPage({history}) {
 
         axios.post('/api/util/getTicket', {member_id: memberId})
             .then(res => {
-                setReserveMovies(res.data);
-
                 console.log(res.data)
+                setReserveMovies(res.data);
             })
     }, [memberId])
 

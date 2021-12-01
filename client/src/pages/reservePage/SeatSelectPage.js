@@ -17,6 +17,7 @@ import axios from "axios";
 import {getViewGradeIconOptions, numberWithCommas} from "../../util";
 import ViewGradeIcon from "../../components/ViewGradeIcon/ViewGradeIcon";
 import CountUpDown from "./CountUpDown";
+import Loading from "../../components/loading/Loading";
 
 function SeatSelectPage() {
     const params = useParams();
@@ -28,6 +29,9 @@ function SeatSelectPage() {
     const [gender, setGender] = useState(1);
     const [userDetail, setUserDetail] = useState([]);
     const [curSeatNumber, setCurSeatNumber] = useState("");
+    const [loading, setLoading] = useState(false)
+    const [images, setImages] = useState(false)
+
     useEffect(() => {
         startInsert(setSeats);
         axios
@@ -72,8 +76,8 @@ function SeatSelectPage() {
                             setSeats([...seats, (seats[i].SeatStatusCode = 30)]);
                         if (dateInfo[j].eventGender === "4")
                             setSeats([...seats, (seats[i].SeatStatusCode = 40)]);
-
                         setSeats([...seats, (seats[i].selfPR = dateInfo[j].selfPR)])
+                        setSeats([...seats, (seats[i].dateUrl = dateInfo[j].dateUrl)])
 
                     }
                 }
@@ -92,7 +96,7 @@ function SeatSelectPage() {
                         if (dateInfo[j].eventGender === "4")
                             setSeats([...seats, (seats[i].SeatStatusCode = 10)]);
                         setSeats([...seats, (seats[i].selfPR = "")])
-
+                        setSeats([...seats, (seats[i].dateUrl = "")])
                     }
                 }
             }
@@ -216,7 +220,48 @@ function SeatSelectPage() {
             return acc + customerCount[key] * item.MovieFee;
         }, 0)
     );
+    const handleUpload = async e => {
+        e.preventDefault()
+        try {
+            const file = e.target.files[0]
+            if (!file) return alert("File not exist.")
 
+            if (file.size > 1024 * 1024) // 1mb
+                return alert("Size too large!")
+
+            if (file.type !== 'image/jpeg' && file.type !== 'image/png') // 1mb
+                return alert("File format is incorrect.")
+
+            let formData = new FormData()
+            formData.append('file', file)
+
+            setLoading(true)
+            console.log(formData)
+
+            const res = await axios.post('/api/upload/upload', formData, {
+                headers: {'content-type': 'multipart/form-data'}
+            })
+            setLoading(false)
+            setImages(res.data)
+        } catch (err) {
+            alert(err.response.data.msg)
+        }
+    }
+
+    const handleDestroy = async () => {
+        try {
+            setLoading(true)
+            await axios.post('/api/upload/destroy', {public_id: images.public_id})
+            setLoading(false)
+            setImages(false)
+        } catch (err) {
+            alert(err.response.data.msg)
+        }
+    }
+
+    const styleUpload = {
+        display: images ? "block" : "none"
+    }
     return (
         <div>
             <Header/>
@@ -280,8 +325,25 @@ function SeatSelectPage() {
                         />
                         <label htmlFor="check1"></label>
                         <span>소개팅 이벤트 신청하기</span>
+                        {wantDate &&
+
+                        <div className="upload">
+                            <input type="file" name="file" id="file_up" onChange={handleUpload}/>
+                            {
+                                loading ? <div id="file_img"><Loading/></div>
+
+                                    : <div id="file_img" style={styleUpload}>
+                                        <img src={images ? images.url : ''} alt=""/>
+                                        <span onClick={handleDestroy}>X</span>
+                                    </div>
+                            }
+
+                        </div>
+                        }
+
                     </div>}
                     <SeatsBlock width={seatsBlockWidth}>
+
                         {seats.length > 0 &&
                         seats.map(
                             (seat) =>
@@ -313,9 +375,15 @@ function SeatSelectPage() {
                                             {seat.SeatColumn}
                                             {
                                                 curSeatNumber === seat.SeatNo && seat.selfPR && seat.SeatStatusCode !== 10 &&
-                                            <p class="arrow_box">{seat.selfPR}</p>
+                                                <p class="arrow_box">{seat.selfPR}</p>
                                             }
                                         </Seat>
+                                        {
+                                            wantDate && (curSeatNumber === seat.SeatNo) && (seat.dateUrl !== "") && (seat.SeatStatusCode !== 10) && (seat.SeatStatusCode !== 0) &&
+                                            <div className="other-people">
+                                                <img src={seat.dateUrl} alt={seat.dateUrl}/>
+                                            </div>
+                                        }
                                     </React.Fragment>
                                 )
                         )}
@@ -369,6 +437,7 @@ function SeatSelectPage() {
                                     price: price.replace(/,/g, ""),
                                     gender: gender,
                                     place_id: curMovie.place_id,
+                                    dateUrl: images.url
                                 },
                             }}
                         >

@@ -195,6 +195,94 @@ export const StepBlock = styled.div`
       margin: 15px 0 25px 0;
     }
   }
+
+
+  .create_product{
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-around;
+  }
+  .upload{
+    max-width: 150px;
+    height: 150px;
+    width: 100%;
+    border: 1px solid #ddd;
+    padding: 15px;
+    margin: 20px;
+    position: absolute;
+    top: 400px;
+  }
+  #file_up{
+    position: relative;
+    width: 100%;
+    height: 100%;
+    outline: none;
+  }
+  #file_up::before{
+    content: "+";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top:0;
+    left: 0;
+    background: white;
+    color: rgb(250, 200, 107);
+    font-size: 17rem;
+    text-align: center;
+    cursor: pointer;
+    margin: auto;
+  }
+  #file_img{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top:0;
+    left: 0;
+    background: white;
+  }
+  #file_img img{
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+  }
+  #file_img span{
+    position: absolute;
+    top: -13px;
+    right: -13px;
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 50%;
+    padding: 6px 10px;
+    cursor: pointer;
+    font-weight: 900;
+    color: crimson;
+  }
+
+
+  .other-people{
+    background-color: black;
+    border-radius: 10px;
+    position: absolute;
+    top: 120px;
+    right:-200px;
+    width: 250px;
+    height: 250px;
+    border: none;
+    border:0px;
+    img{
+
+      
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+  
+  
+  
 `;
 
 
