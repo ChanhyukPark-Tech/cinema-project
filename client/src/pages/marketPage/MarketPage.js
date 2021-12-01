@@ -7,6 +7,7 @@ import Title from "../../components/Title/Title";
 import axios from "axios";
 import sproutChar from "./sproutChar.gif";
 
+
 function MarketPage(props) {
   const [posts, setPosts] = useState([]);
   const [userName, setUserName] = useState("");
@@ -52,6 +53,7 @@ function MarketPage(props) {
 
             {memberId * 1 === index.member_id * 1 && (
               <Button
+                  style={{marginLeft:10}}
                 onClick={(e) => deleteHandler(index.marketPost_id)}
                 danger
               >
@@ -98,10 +100,10 @@ function MarketPage(props) {
   useEffect(() => {
     axios.get("/api/util/marketPosts").then((data) => {
       setPosts(data.data);
+      console.log(data.data);
     });
   }, []);
 
-  console.log(posts);
   return (
     <>
       <Header />
