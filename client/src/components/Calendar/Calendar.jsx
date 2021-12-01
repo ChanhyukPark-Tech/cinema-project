@@ -41,7 +41,10 @@ const Calendar = ({ setSelectedDate}) => {
 
   const handleDateClick = (year, month, day, index) => {
     setCurrentDateIndex(index);
-    setSelectedDate(year + "-" + month + "-" + day);
+
+
+    let dayTemp = String(day).length === 1 ? `0${day}` : day
+    setSelectedDate(year + "-" + month + "-" + dayTemp);
   };
   return (
     <div className={classes["calendar"]}>
