@@ -22,7 +22,9 @@ import ReserveMovieCard from "../../components/ReserveMovieList/ReserveMovieList
 function ReservePage() {
     let current = new Date();
     let curRealMonth = current.getMonth()+1
-    const today = current.getFullYear() + "-" + curRealMonth + "-" + current.getDate()
+    let curRealDay = String(current.getDate()).length === 1 ? `0${current.getDate()}` : current.getDate()
+
+    const today = current.getFullYear() + "-" + curRealMonth + "-" + curRealDay
 
     const {Step} = Steps;
     const [divisions, setDivisions] = useState([]);
