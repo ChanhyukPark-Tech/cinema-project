@@ -175,6 +175,15 @@ const router = require("express").Router();
  *      description: 지점코드를 주면 해당지점의 게시판 내용보내줌
  */
 
+/**
+ * @swagger
+ *  /api/admin/roster:
+ *    post:
+ *      tags:
+ *      - admin
+ *      description: 날짜에 해당하는 근무표를 제공 
+ */
+
 router.route('/monthTotal')
     .post(adminCtrl.getmonthTotal)
 
@@ -233,5 +242,7 @@ router.route('/getstaffEmergency')
     .post(adminCtrl.getstaffEmergency)
 router.route('/getNotice')
     .post(adminCtrl.getNotice)
+router.route('/getRoster')
+    .post(adminCtrl.getRoster)
 
 module.exports = router;
