@@ -99,11 +99,11 @@ function WorkSchedulePage() {
                 </Select>
                 <div className={'card-container'}>
                     <Card size={"small"}>
-                        <Statistic title="금월 매니저 총임금" value={totalWage[0]?.Wage}/>
+                        <Statistic title="금월 매니저 총임금" value={totalWage[1]?.Wage}/>
                     </Card>
                     <Card size={"small"}>
 
-                        <Statistic title="금월 아르바이트 총임금" value={totalWage[1]?.Wage}/>
+                        <Statistic title="금월 아르바이트 총임금" value={totalWage[0]?.Wage}/>
                     </Card>
                 </div>
                 <Table columns={columns} dataSource={posts}/>

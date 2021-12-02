@@ -20,6 +20,7 @@ import SeatSelectPage from "./pages/reservePage/SeatSelectPage";
 import MenuPage from "./pages/menuPage/MenuPage";
 import PaymentPage from "./pages/reservePage/PaymentPage";
 import PaySuccessPage from "./pages/reservePage/paySuccessPage";
+import StaffPage from "./pages/staffPages/StaffPage";
 
 function App() {
   return (
@@ -59,6 +60,7 @@ function App() {
         <Route exact path="/mypage/:id" component={MyPage} />
         <Route exact path="/mypage/modify/:id" component={UserModifyPage} />
         <Route path="/admin" component={AdminPage} />
+        <Route path="/staff" component={StaffPage} />
         <Redirect from="*" to="/" />
       </Switch>
     </div>

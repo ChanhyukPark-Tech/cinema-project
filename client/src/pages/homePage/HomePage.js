@@ -11,7 +11,9 @@ import axios from "axios";
 
 const HomePage = ({history}) => {
   if(localStorage.getItem("name")?.substring(0,3) === "관리자") history.push('/admin')
-  const [movies, setMovies] = useState([]);
+    if(localStorage.getItem("name")?.includes("-")) history.push('/staff')
+
+    const [movies, setMovies] = useState([]);
   useEffect(() => {
     //데이터베이스에서 가져옴
     axios.get("/api/movie").then((data) => {

@@ -202,7 +202,7 @@ const adminCtrl = {
 
     getstaffEmergency : async (req,res) => {   // 11-28 지점과 월 주면 일별 매출
         const {place_id} = req.body;
-        const sql = `select Nm, phoneNb, classNm from staff left join class on staff.class_class_id = class.class_id where place_place_id = ${place_id};`
+        const sql = `select Nm, phoneNb, classNm from staff left join class on staff.class_class_id = class.class_id where place_place_id = ${place_id} ORDER BY classNm desc;`
         connection.query(sql,(error,rows)=>{
             if(error) throw error;
             res.send(rows);
