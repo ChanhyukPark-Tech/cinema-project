@@ -1,7 +1,5 @@
-// const staffCtrl = require("../controllers/staffCtrl")
+const staffCtrl = require("../controllers/staffCtrl")
 const router = require("express").Router();
-
-
 
 /**
  * @swagger
@@ -49,7 +47,29 @@ const router = require("express").Router();
  *      description: 수정하려는 음식과 수정값을 입력으로 받아서 그 제품에 대한 재고를 변경
  */
 
-// router.route('/roster')
-//     .post(staffCtrl.getSpecifyEvent)
+/**
+ * @swagger
+ *  /api/staff/getStaffWorkTime:
+ *    post:
+ *      tags:
+ *      - staff
+ *      description: staff_id와 월을주면 그 사람의 해당월의 근무한 기록들 보여줌
+ */
+
+/**
+ * @swagger
+ *  /api/staff/getStaffWage:
+ *    post:
+ *      tags:
+ *      - staff
+ *      description: staff_id 와 월을주면 그 사람의 해당월의 일반급여 , 초과로인한 급여 , 총급여 세개 보내줌 (초과급여 = 그냥 일반총근무시간 * 시급 / 초과수당시간 * 1.5 * 시급 / 왼쪽두개 합한거 총합)
+ */
+
+router.route('/getWorkTime')
+    .post(staffCtrl.getWorkTime)
+
+router.route('/getWage')
+    .post(staffCtrl.getWage)
+
 
 module.exports = router;
