@@ -55,6 +55,7 @@ function MarketDetailPage() {
         axios
             .post("/api/util/marketPost", {marketPost_id: params.id})
             .then((data) => {
+                console.log(data.data[0])
                 setPost(data.data[0]);
                 axios
                     .post("/api/movie/movieDetail", {RepresentationMovieCode: data.data[0].RepresentationMovieCode})
@@ -94,6 +95,7 @@ function MarketDetailPage() {
             .post("/api/util/updateMarketPost", {
                 member_id: changeId,
                 payinfo_id: post.payinfo_id,
+                ticket_id : post.ticket_id
             })
             .then((res) => {
                 console.log(res.data);

@@ -127,17 +127,22 @@ WHERE marketPost.marketPost_id = ${marketPost_id}`;
 
     updateMarketPost: async (req, res) => {
         // 11/15 추가
-        const {member_id, payinfo_id} = req.body;
+        const {member_id, payinfo_id,ticket_id} = req.body;
 
         const findId = `SELECT member_id FROM member WHERE Nm = '${member_id}';`;
 
         connection.query(findId, (error, rows) => {
             const sql = `UPDATE payinfo set member_member_id = ${rows[0].member_id} WHERE payinfo_id = ${payinfo_id};`;
             const sql2 = `UPDATE marketPost SET tag = "판매완료", member_member_id = ${rows[0].member_id} WHERE payinfo_id = ${payinfo_id}`;
-
+            const seatChangeSQL = `UPDATE seat SET member_member_id = ${rows[0].member_id} WHERE ticket_ticket_id = ${ticket_id};`
             connection.query(sql, (error, rows) => {
                 if (error) throw error;
             });
+
+            connection.query(seatChangeSQL,(error,rows)=>{
+                if(error) throw error;
+            })
+
 
             connection.query(sql2, (error, rows) => {
                 if (error) throw error;

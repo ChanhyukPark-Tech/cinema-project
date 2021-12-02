@@ -46,7 +46,7 @@ function SeatSelectPage() {
             })
             .then((data) => {
                 setUserDetail(data.data[0])
-                if (data.data[0].gender === "여성") setGender(1);
+                if (data.data[0]?.gender === "여성") setGender(1);
                 else {
                     setGender(2);
                 }
@@ -315,7 +315,7 @@ function SeatSelectPage() {
                 </PersonSeatCount>
                 <ScreenBlock>
                     <div className="screen">SCREEN</div>
-                    {userDetail.dateEventAgree === "동의" && <div style={{display: "flex", alignItems: "center"}}>
+                    {userDetail?.dateEventAgree === "동의" && <div style={{display: "flex", alignItems: "center"}}>
                         <input
                             id="check1"
                             type="checkbox"
