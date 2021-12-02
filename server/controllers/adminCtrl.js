@@ -74,8 +74,10 @@ const adminCtrl = {
     },
 
     staffMonthDay : async (req,res) => {
-        const {month,day} = req.body;
-        const sql = `SELECT * FROM workSchedule where month(Day) = ${month} AND day(Day) = ${day} order by attend ASC;`
+        const {place_id,month,day} = req.body;
+        const sql = `SELECT * FROM workSchedule left join staff on workSchedule.staff_staff_id = staff.staff_id
+        where place_place_id = ${place_id} AND month(Day) = ${month} AND day(Day) = ${day}
+        order by class_class_id desc, attend ASC;`
         connection.query(sql,(error,rows)=>{
             if(error) throw error;
             res.send(rows);
@@ -192,6 +194,24 @@ const adminCtrl = {
         left join class on staff.class_class_id = class.class_id
         WHERE place_place_id = ${place_id} AND MONTH(Day) = ${month}
         group by class_class_id;`
+        connection.query(sql,(error,rows)=>{
+            if(error) throw error;
+            res.send(rows);
+        })
+    },
+
+    getstaffEmergency : async (req,res) => {   // 11-28 지점과 월 주면 일별 매출
+        const {place_id} = req.body;
+        const sql = `select Nm, phoneNb, classNm from staff left join class on staff.class_class_id = class.class_id where place_place_id = ${place_id};`
+        connection.query(sql,(error,rows)=>{
+            if(error) throw error;
+            res.send(rows);
+        })
+    },
+
+    getNotice : async (req,res) => {   // 11-28 지점과 월 주면 일별 매출
+        const {place_id} = req.body;
+        const sql = `SELECT * FROM notice where place_place_id = ${place_id};`
         connection.query(sql,(error,rows)=>{
             if(error) throw error;
             res.send(rows);

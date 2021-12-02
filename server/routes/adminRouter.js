@@ -157,6 +157,24 @@ const router = require("express").Router();
  *      description: place_id, month을 주면 그 지점의 해당하는 달에 직급별 인건비계산
  */
 
+/**
+ * @swagger
+ *  /api/admin/getstaffEmergency:
+ *    post:
+ *      tags:
+ *      - admin
+ *      description: 지점코드를주면 해당지점의 직원 이름, 핸드폰번호, 계급 한글명으로 보내줌
+ */
+
+/**
+ * @swagger
+ *  /api/admin/getNotice:
+ *    post:
+ *      tags:
+ *      - admin
+ *      description: 지점코드를 주면 해당지점의 게시판 내용보내줌
+ */
+
 router.route('/monthTotal')
     .post(adminCtrl.getmonthTotal)
 
@@ -210,5 +228,10 @@ router.route('/getStaffWage')
 // month = 3 , currentMv = '독전' < state
 // month = 3 , currnetMv = '보이스'
 // month = 4 , currnetMv = '보이스'
+
+router.route('/getstaffEmergency')
+    .post(adminCtrl.getstaffEmergency)
+router.route('/getNotice')
+    .post(adminCtrl.getNotice)
 
 module.exports = router;

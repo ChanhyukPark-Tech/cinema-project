@@ -1,8 +1,12 @@
 const connection = require('../dbConfig')
 
 const propsCtrl = {
-    getprops : async (req,res)=>{
-        connection.query(`SELECT * FROM props` ,(error,rows)=>{
+    getProps : async (req,res) => { // 11/15 추가
+        const {place_id} = req.body;
+        const sql = `SELECT * FROM props left join propsType on props.propsType_propsType_id = propsType.propsType_id
+        WHERE place_place_id = ${place_id};`
+        
+        connection.query(sql,(error,rows) => {
             if(error) throw error;
             res.send(rows);
         })
@@ -28,8 +32,37 @@ const propsCtrl = {
             if(error) throw error;
             res.send(rows);
         })
+    },
+
+   updateProp : async (req,res) => { // 11/15 추가
+        const {place_id,damage,modelNm} = req.body;
+        const sql = `UPDATE props SET damage = '${damage}' WHERE place_place_id = ${place_id} and modelNm = '${modelNm}';`
+        
+        connection.query(sql,(error,rows) => {
+            if(error) throw error;
+            res.send(rows);
+        })
+    },
+
+    updatePropNull : async (req,res) => { // 11/15 추가
+        const {place_id,modelNm} = req.body;
+        const sql = `UPDATE props SET damage = null WHERE place_place_id = ${place_id} and modelNm = '${modelNm}';`
+        
+        connection.query(sql,(error,rows) => {
+            if(error) throw error;
+            res.send(rows);
+        })
+    },
+    
+    getPropsNN : async (req,res) => { // 11/15 추가
+        const {place_id} = req.body;
+        const sql = `select * from props left join propsType on props.propsType_propsType_id = propsType.propsType_id where place_place_id = ${place_id} and damage IS NOT NULL;`
+        
+        connection.query(sql,(error,rows) => {
+            if(error) throw error;
+            res.send(rows);
+        })
     }
 
-    
 }
 module.exports = propsCtrl
