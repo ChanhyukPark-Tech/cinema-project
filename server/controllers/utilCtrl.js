@@ -89,7 +89,14 @@ const utilCtrl = {
     },
 
     getMarketPosts: async (req, res) => {
-        const sql = `SELECT * FROM marketPost left join member on marketPost.member_member_id = member.member_id natural join payinfo natural join ticket natural join schedule foo join movie on foo.movie_movie_id = movie.movie_id GROUP BY payinfo_id`;
+        const sql = `SELECT * FROM (marketPost 
+            left join member on marketPost.member_member_id = member.member_id 
+            left join payinfo on marketPost.payinfo_id = payinfo.payinfo_id
+            left join ticket on payinfo.payinfo_id = ticket.payinfo_payinfo_id
+            left join seat on ticket.ticket_id = seat.ticket_ticket_id
+            left join schedule on seat.schedule_schedule_id = schedule.schedule_id
+            left join movie on schedule.movie_movie_id = movie.movie_id)
+            GROUP BY payinfo.payinfo_id;`;
         connection.query(sql, (error, rows) => {
             if (error) throw error;
             res.send(rows);
