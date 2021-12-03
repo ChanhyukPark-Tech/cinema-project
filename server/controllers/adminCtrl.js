@@ -216,6 +216,19 @@ const adminCtrl = {
             if(error) throw error;
             res.send(rows);
         })
+    },
+
+    getRoster : async (req,res)=>{ //12-02 근무표
+        const {place_place_id,month,day} = req.body;
+        const sql = `SELECT * FROM workSchedule 
+        left join staff on workSchedule.staff_staff_id = staff.staff_id
+        WHERE place_place_id = ${place_place_id} AND MONTH(Day) = ${month} AND day(Day) = ${day};`
+        connection.query(
+            sql,(error,rows) => {
+                if(error) throw error;
+                res.send(rows);
+            }
+        )
     }
 
 }
