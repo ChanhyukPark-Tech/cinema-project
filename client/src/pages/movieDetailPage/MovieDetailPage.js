@@ -10,6 +10,7 @@ import Modal from "react-modal";
 import EventTitle from "../eventPage/EventTitle";
 import {Rate} from 'antd';
 import {FrownOutlined, MehOutlined, SmileOutlined} from '@ant-design/icons';
+import {Link} from "react-router-dom";
 
 const {TextArea} = Input;
 const customIcons = {
@@ -138,7 +139,7 @@ function MovieDetailPage(props) {
                     text={movie.openDt}
                 />
                 <br/>
-                <Button style={{width:'20%',height:'40px',margin:'0 auto',backgroundColor: "#748D69",color: "white"}}>예매하기</Button>
+                <Button style={{width:'20%',height:'40px',margin:'0 auto',backgroundColor: "#748D69",color: "white"}}><Link to={'/movie/reserve'}>예매하기</Link></Button>
 
                 <div style={{alignItems: "center"}}>
                     {/* PosterImage */}

@@ -4,6 +4,7 @@ import StaffMainPage from "./StaffMainPage";
 import StaffSalaryPage from "./StaffSalaryPage";
 import StaffNoticePage from "./StaffNoticePage";
 import StaffContact from "./StaffContact";
+import StaffSchedulePage from "./StaffSchedulePage";
 
 
 function StaffPage({match}) {
@@ -15,6 +16,7 @@ function StaffPage({match}) {
             <Route path={`${path}/notice`} component={StaffNoticePage}/>
             <Route path={`${path}/salary`} component={StaffSalaryPage}/>
             <Route path={`${path}/contact`} component={StaffContact}/>
+            <Route path={`${path}/schedule`} component={StaffSchedulePage}/>
         </Switch>
     );
 }
