@@ -7,6 +7,7 @@ import PropsDetailPage from "./facilityPage/PropsDetailPage";
 import SalesPage from "./salesPage/SalesPage";
 import WorkSchedulePage from "./workSchedulePage/WorkSchedulePage";
 import CreateProduct from "./createProduct/CreateProduct";
+import PropsPage from "./propsPage/PropsPage";
 
 
 function AdminPage({match,history}) {
@@ -18,6 +19,8 @@ function AdminPage({match,history}) {
             <Route exact path={`${path}`} component={AdminMainPage}/>
             <Route path={`${path}/facility`} component={FacilityPage}/>
             <Route path={`${path}/sales`} component={SalesPage}/>
+            <Route path={`${path}/props`} component={PropsPage}/>
+
             <Route path={`${path}/props/addProp`} component={AddPropPage}/>
             <Route path={`${path}/propsDetail`} component={PropsDetailPage}/>
             <Route path={`${path}/schedule`} component={WorkSchedulePage}/>

@@ -17,7 +17,7 @@ import axios from "axios";
 import {getViewGradeIconOptions, numberWithCommas} from "../../util";
 import ViewGradeIcon from "../../components/ViewGradeIcon/ViewGradeIcon";
 import CountUpDown from "./CountUpDown";
-import Loading from "../../components/loading/Loading";
+import {LoadingOutlined} from "@ant-design/icons";
 
 function SeatSelectPage() {
     const params = useParams();
@@ -330,9 +330,11 @@ function SeatSelectPage() {
                         <div className="upload">
                             <input type="file" name="file" id="file_up" onChange={handleUpload}/>
                             {
-                                loading ? <div id="file_img"><Loading/></div>
+                                loading ? <div id="file_img"><LoadingOutlined
+                                        /></div>
 
-                                    : <div id="file_img" style={styleUpload}>
+                                    :
+                                    <div id="file_img" style={styleUpload}>
                                         <img src={images ? images.url : ''} alt=""/>
                                         <span onClick={handleDestroy}>X</span>
                                     </div>

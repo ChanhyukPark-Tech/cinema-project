@@ -2,17 +2,15 @@ import React, {useEffect, useState} from 'react';
 import Header from "../../../components/header/Header";
 import Footer from "../../../components/Footer/Footer";
 import EventTitle from "../../eventPage/EventTitle";
-import {months} from "../workSchedulePage/DateTemplate";
-import {Select, Table, Tag} from "antd";
+import {Select, Table} from "antd";
 import axios from "axios";
-import {Link} from "react-router-dom";
-import { numberWithCommas } from "../../../util"
+import {numberWithCommas} from "../../../util"
 
-const { Option } = Select;
+const {Option} = Select;
 
 function FacilityPage(props) {
 
-    const [selected, setSelected] = useState(0);
+    const [selected, setSelected] = useState(1);
     const [store, setStore] = useState([]);
 
     useEffect(() => {
@@ -20,7 +18,6 @@ function FacilityPage(props) {
             place_id: localStorage.getItem("name").substring(3, localStorage.getItem("name").length),
             quarter: selected
         }).then(res => {
-            console.log(res.data)
             setStore(res.data)
         })
     }, [selected])
@@ -59,24 +56,26 @@ function FacilityPage(props) {
 
 
     function handleChange(value) {
-        setSelected(value*1);
+        setSelected(value * 1);
         console.log(selected);
 
     }
 
     return (
         <>
-            <Header/>
-            <EventTitle title={"입점시설관리"}/>
-            <Select defaultValue="1분기" style={{width: 120, marginLeft:50}} onChange={handleChange}>
+            <div style={{margin: '30px'}}>
+                <Header/>
+                <EventTitle title={"입점시설관리"}/>
+                <Select defaultValue="1분기" style={{width: 120}} onChange={handleChange}>
 
-                <Option value="1">1분기</Option>
-                <Option value="2">2분기</Option>
-                <Option value="3">3분기</Option>
-                <Option value="4">4분기</Option>
+                    <Option value="1">1분기</Option>
+                    <Option value="2">2분기</Option>
+                    <Option value="3">3분기</Option>
+                    <Option value="4">4분기</Option>
 
-            </Select>
-            <Table columns={columns} dataSource={store}/>
+                </Select>
+                <Table columns={columns} dataSource={store}/>
+            </div>
             <Footer/>
         </>
     );

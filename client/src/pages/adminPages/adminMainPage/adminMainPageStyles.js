@@ -18,4 +18,5 @@ export const AdminMainPageContainer = styled.div`
 export const ThreeChartContainer = styled.div`
   display: flex;
   justify-content: space-evenly;
+  margin-bottom: 50px;
 `

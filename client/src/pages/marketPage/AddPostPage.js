@@ -119,7 +119,6 @@ function AddPostPage(props) {
                 onChange={handleChange}
               >
                 <Option value="판매">판매</Option>
-                <Option value="구매">구매</Option>
               </Select>
               {sent ? (
                 <div className="success-message">

@@ -5,6 +5,7 @@ import axios from "axios";
 import {makeGenderData, makeTopSalesData, makeTotalSalesData} from "./chartConfig";
 import {AdminMainPageContainer, ThreeChartContainer} from "./adminMainPageStyles";
 import {Card, Col, Row, Statistic} from "antd";
+import Footer from "../../../components/Footer/Footer";
 
 function AdminMainPage({history}) {
     const [topSalesTotal, setTopSalesTotal] = useState([])
@@ -16,7 +17,8 @@ function AdminMainPage({history}) {
     const [genderDatas, setGenderDatas] = useState([]);
     const [topSalesLabels, setTopSalesLabels] = useState([])
     const [topSalesDatas, setTopSalesDatas] = useState([]);
-    const [totalUser, setTotalUser] = useState(0);
+    const [totalMember, setTotalMember] = useState(0);
+    const [ourPlaceTotalStaff, setOurPlaceTotalStaff] = useState(0);
     // const [myMember,setMyMember]= useState(0);
     // const [recentFive,setRecentFive] = useState([]);
 
@@ -35,11 +37,16 @@ function AdminMainPage({history}) {
                 setTopSalesTotal(data.data)
             })
         axios.get('/api/admin/countMember').then(data => {
-            setTotalUser(data.data[0].memberNumber)
+            setTotalMember(data.data[0].memberNumber)
         })
 
         axios.get('/api/admin/getRecentTicketTop5').then(data => {
         })
+
+        axios.post('/api/admin/countStaff', {place_place_id: localStorage.getItem("name").substring(3, localStorage.getItem("name").length)})
+            .then(res => {
+                setOurPlaceTotalStaff(res.data[0].staffNumber)
+            })
 
     }, [])
 
@@ -98,12 +105,12 @@ function AdminMainPage({history}) {
                     <Col span={12}>
                         <Card>
 
-                            <Statistic title="Active Users" value={totalUser}/>
+                            <Statistic title="전체 고객수" value={totalMember}/>
                         </Card>
                     </Col>
                     <Col span={12}>
                         <Card>
-                            <Statistic title="우리지점 직원수" value={112893} precision={2}/>
+                            <Statistic title="우리지점 직원수" value={ourPlaceTotalStaff}/>
                         </Card>
                     </Col>
                 </Row>
@@ -126,14 +133,9 @@ function AdminMainPage({history}) {
                     />
                 </div>
 
-                <div style={{width: '30%'}}>
-                    <Bar
-                        data={salesDataGender}
-                        height={300}
-                    />
-                </div>
-            </ThreeChartContainer>
 
+            </ThreeChartContainer>
+            <Footer/>
         </AdminMainPageContainer>
     );
 }

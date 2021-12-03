@@ -122,7 +122,7 @@ function MarketDetailPage() {
                             <MoreVertIcon/>
                         </IconButton>
                     }
-                    title={post.movieNm}
+                    title={forPostUrl.movieNm}
                     subheader={post.ymd}
                 />
                 <CardMedia

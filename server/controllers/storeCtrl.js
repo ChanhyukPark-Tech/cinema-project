@@ -10,7 +10,7 @@ const storeCtrl = {
 
     getOutstore : async (req,res)=>{
         const {place_id, quarter} = req.body;
-        connection.query(`select * from outstore where quarter = ${quarter} and place_place_id = ${place_id};` ,(error,rows)=>{
+        connection.query(`select * from outstore where quarter = ${quarter} and place_place_id = ${place_id} ORDER BY sales desc;` ,(error,rows)=>{
             if(error) throw error;
             res.send(rows);
         })
