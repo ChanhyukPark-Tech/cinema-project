@@ -8,71 +8,81 @@ import {WorkSchedulePageContainer} from "./workSchedulePageStyles";
 import {dates, months} from "./DateTemplate";
 
 function WorkSchedulePage() {
-    const [posts, setPosts] = useState([]);
+    const current = new Date()
     const [totalWage, setTotalWage] = useState(0);
     const [curMonth, setCurMonth] = useState(12);
+    const [curDay, setCurDay] = useState(current.getDate());
+    const [workSchedule, setWorkSchedule] = useState([]);
     const {Option} = Select;
 
     useEffect(() => {
-        axios.get("/api/util/marketPosts").then((data) => {
-            setPosts(data.data);
-        });
+
+
+        axios.post('/api/admin/getRoster', {
+            place_place_id: localStorage.getItem("name").substring(3, localStorage.getItem("name").length),
+            month: curMonth,
+            day: curDay
+        }).then(res => {
+            setWorkSchedule(res.data)
+        })
+
 
         axios.post('/api/admin/getStaffWage', {
             place_id: localStorage.getItem("name").substring(3, localStorage.getItem("name").length),
             month: curMonth
 
         }).then(res => {
-            console.log(res.data)
             setTotalWage(res.data)
         })
-    }, [curMonth])
+    }, [curMonth,curDay])
     const columns = [
 
         {
-            title: "근무자",
+            title: "사원번호",
+            dataIndex: "accountNb",
+            key: "accountNb",
+        },
+        {
+            title: "이름",
             dataIndex: "Nm",
             key: "Nm",
         },
 
+        {
+            title: "출근",
+            dataIndex: "attend",
+            key: "attend",
+        },
+        {
+            title: "퇴근",
+            dataIndex: "end",
+            key: "end",
+        },
 
         {
-            title: "태그",
-            key: "tag",
-            dataIndex: "tag",
-            render: (tag) => {
-                let color = tag.length > 5 ? "geekblue" : "green";
-                if (tag === "구매") {
+            title: "배정근무명",
+            key: "workContent",
+            dataIndex: "workContent",
+            render: (workContent,index) => {
+                let color = workContent?.length > 5 ? "geekblue" : "green";
+                if (workContent === "티켓관리") {
                     color = "volcano";
                 }
-                if (tag === "판매완료") {
-                    color = "darkgray";
+                if (workContent === "매점관리") {
+                    color = "geekblue";
                 }
                 return (
                     <>
-                        <Tag color={color} key={tag}>
-                            {tag}
+                        <Tag color={color} key={index}>
+                            {workContent}
                         </Tag>
                     </>
                 );
             },
         },
 
-        {
-            title: "비고",
-            dataIndex: "title",
-            key: "title",
-            render: (text, index) => {
-                return (
-                    <Link to={`/market/marketDetail/`}>{text}</Link>
-                );
-            },
-        },
-    ];
 
-    function handleChange(value) {
-        console.log(`selected ${value}`);
-    }
+    ];
 
     return (
         <>
@@ -90,7 +100,10 @@ function WorkSchedulePage() {
                         ))
                     }
                 </Select>
-                <Select defaultValue="1일" style={{width: 120}} onChange={handleChange}>
+                <Select defaultValue={current.getDate() + "일"} style={{width: 120}} onChange={(value) => {
+                    const onlyNumber = value.replace(/일/g, "")
+                    setCurDay(onlyNumber)
+                }}>
                     {
                         dates.map(date => (
                             <Option value={date}>{date}</Option>
@@ -106,7 +119,7 @@ function WorkSchedulePage() {
                         <Statistic title="금월 아르바이트 총임금" value={totalWage[0]?.Wage}/>
                     </Card>
                 </div>
-                <Table columns={columns} dataSource={posts}/>
+                <Table columns={columns} dataSource={workSchedule}/>
             </WorkSchedulePageContainer>
         </>
     );

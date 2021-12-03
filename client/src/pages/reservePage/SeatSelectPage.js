@@ -67,7 +67,7 @@ function SeatSelectPage() {
 
             for (let i = 0; i < seats.length; i++) {
                 for (let j = 0; j < dateInfo.length; j++) {
-                    if (seats[i].SeatNo === dateInfo[j].seatNm) {
+                    if (seats[i]?.SeatNo === dateInfo[j].seatNm) {
                         if (dateInfo[j].eventGender === "1")
                             setSeats([...seats, (seats[i].SeatStatusCode = 10)]);
                         if (dateInfo[j].eventGender === "2")
@@ -86,7 +86,7 @@ function SeatSelectPage() {
         } else {
             for (let i = 0; i < seats.length; i++) {
                 for (let j = 0; j < dateInfo.length; j++) {
-                    if (seats[i].SeatNo === dateInfo[j].seatNm) {
+                    if (seats[i]?.SeatNo === dateInfo[j].seatNm) {
                         if (dateInfo[j].eventGender === "1")
                             setSeats([...seats, (seats[i].SeatStatusCode = 10)]);
                         if (dateInfo[j].eventGender === "2")
@@ -344,30 +344,30 @@ function SeatSelectPage() {
                         }
 
                     </div>}
-                    <SeatsBlock width={seatsBlockWidth}>
+                    <SeatsBlock width={620}>
 
                         {seats.length > 0 &&
                         seats.map(
                             (seat) =>
-                                seat.SeatXCoordinate && (
+                                seat?.SeatXCoordinate && (
                                     <React.Fragment key={seat.SeatNo}>
                                         <SeatRow
                                             x={0}
-                                            y={seat.SeatYCoordinate / yScaleRatio - 60}
+                                            y={seat?.SeatYCoordinate / yScaleRatio - 60}
                                         >
-                                            {seat.SeatRow}
+                                            {seat?.SeatRow}
                                         </SeatRow>
                                         <Seat
-                                            x={seat.SeatXCoordinate / xScaleRatio}
-                                            y={seat.SeatYCoordinate / yScaleRatio - 60}
+                                            x={seat?.SeatXCoordinate / xScaleRatio}
+                                            y={seat?.SeatYCoordinate / yScaleRatio - 60}
                                             status={seat.SeatStatusCode}
                                             sweetSpot={seat.SweetSpotYN === "Y" ? true : false}
                                             active={activeSeats.includes(seat.SeatNo)}
                                             onClick={() =>
-                                                handleSeatClick(seat.SeatNo, seat.SeatStatusCode)
+                                                handleSeatClick(seat?.SeatNo, seat.SeatStatusCode)
                                             }
                                             onMouseEnter={(e) => {
-                                                setCurSeatNumber(seat.SeatNo)
+                                                setCurSeatNumber(seat?.SeatNo)
                                             }}
 
                                             onMouseLeave={(e) => {
@@ -376,12 +376,12 @@ function SeatSelectPage() {
                                         >
                                             {seat.SeatColumn}
                                             {
-                                                curSeatNumber === seat.SeatNo && seat.selfPR && seat.SeatStatusCode !== 10 &&
+                                                curSeatNumber === seat?.SeatNo && seat.selfPR && seat.SeatStatusCode !== 10 &&
                                                 <p class="arrow_box">{seat.selfPR}</p>
                                             }
                                         </Seat>
                                         {
-                                            wantDate && (curSeatNumber === seat.SeatNo) && (seat.dateUrl !== "") && (seat.SeatStatusCode !== 10) && (seat.SeatStatusCode !== 0) &&
+                                            wantDate && (curSeatNumber === seat?.SeatNo) && (seat.dateUrl !== "") && (seat.SeatStatusCode !== 10) && (seat.SeatStatusCode !== 0) &&
                                             <div className="other-people">
                                                 <img src={seat.dateUrl} alt={seat.dateUrl}/>
                                             </div>
