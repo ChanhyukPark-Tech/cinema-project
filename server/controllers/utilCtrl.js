@@ -96,7 +96,7 @@ const utilCtrl = {
             left join seat on ticket.ticket_id = seat.ticket_ticket_id
             left join schedule on seat.schedule_schedule_id = schedule.schedule_id
             left join movie on schedule.movie_movie_id = movie.movie_id)
-            GROUP BY payinfo.payinfo_id;`;
+            GROUP BY payinfo.payinfo_id order by marketPost_id desc;`;
         connection.query(sql, (error, rows) => {
             if (error) throw error;
             res.send(rows);
