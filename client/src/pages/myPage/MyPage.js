@@ -7,6 +7,7 @@ import {Button, Space, Table, Tag} from "antd";
 import EventTitle from "../eventPage/EventTitle";
 
 function MyPage({history}) {
+    const current = new Date();
     const params = useParams();
     const memberId = params.id;
     const [userDetail, setUserDetail] = useState([]);
@@ -22,8 +23,12 @@ function MyPage({history}) {
 
         axios.post('/api/util/getTicket', {member_id: memberId})
             .then(res => {
-                console.log(res.data)
-                setReserveMovies(res.data);
+                console.log(res.data.filter(data => {
+                    return data.movieNm
+                }))
+                setReserveMovies(res.data.filter(data => {
+                    return data.movieNm
+                }));
             })
     }, [memberId])
 
@@ -87,8 +92,31 @@ function MyPage({history}) {
             ),
         },
     ];
+    const deleteHandler = (payinfo_id) => {
+        axios.post("/api/reserve/getReserveDelete", {
+            payinfo_id: payinfo_id,
+        });
+        alert("예매 취소되었습니다 영업일 기준 3~4일 이내에 결제하신 수단에 따라 환불됩니다.")
+        axios.post('/api/util/getTicket', {member_id: memberId})
+            .then(res => {
+                setReserveMovies(res.data.filter(data => {
+                    return data.movieNm
+                }));
+            })
+    };
 
+    function dateFormat(date) {
+        let month = date.getMonth() + 1;
+        let day = date.getDate();
+        let hour = date.getHours();
+        let minute = date.getMinutes();
+        let second = date.getSeconds();
 
+        month = month >= 10 ? month : '0' + month;
+        day = day >= 10 ? day : '0' + day;
+
+        return date.getFullYear() + '-' + month + '-' + day;
+    }
     const reserveColumns = [
         {
             title: '결제일',
@@ -124,7 +152,20 @@ function MyPage({history}) {
             title: '영화제목',
             dataIndex: 'movieNm',
             key: 'movieNm',
-            render: text => <span key={text}>{text}</span>,
+            render: (text, index) => <><span key={text}>{text}</span>
+
+                {
+                    new Date(dateFormat(current)) <= new Date(index.ymd) &&
+                    <Button
+                        style={{marginLeft: 50}}
+                        onClick={(e) => {
+                            deleteHandler(index.payinfo_id)
+                        }}
+                        danger
+                    >
+                        예매취소
+                    </Button>}
+            </>,
         }
 
     ];
@@ -143,7 +184,7 @@ function MyPage({history}) {
     return (
         <>
             <Header/>
-            <div style={{margin:'0 2vw'}}>
+            <div style={{margin: '0 2vw'}}>
 
                 <Title title={`${userDetail.Nm}`}/>
 

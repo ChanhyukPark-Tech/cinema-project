@@ -339,6 +339,9 @@ function SeatSelectPage() {
                                         <span onClick={handleDestroy}>X</span>
                                     </div>
                             }
+                            <div style={{position:'absolute', left:'-55px',top:'120px',color:'#6d8e65',marginTop:'50px',display:'inline-block',whiteSpace:'nowrap'}}>
+                                자신을 어필하기 위한 사진을 업로드 해주세요!
+                            </div>
 
                         </div>
                         }

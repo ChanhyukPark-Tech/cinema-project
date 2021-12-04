@@ -60,6 +60,6 @@ router.route('/getSeats')
     .post(reserveCtrl.getSeats)
 
 router.route('/getReserveDelete')
-    .delete(reserveCtrl.getReserveDelete)
+    .post(reserveCtrl.getReserveDelete)
     
 module.exports = router;

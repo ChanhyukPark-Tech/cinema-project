@@ -274,7 +274,8 @@ export const StepBlock = styled.div`
     border:0px;
     img{
 
-      
+      border: #6d8e65 3px solid;
+      border-radius: 5px;
       width: 100%;
       height: 100%;
       object-fit: cover;
