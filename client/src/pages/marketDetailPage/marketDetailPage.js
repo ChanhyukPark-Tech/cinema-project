@@ -38,8 +38,7 @@ import MoreVertIcon from '@mui/icons-material/MoreVert';
 //   }),
 // }));
 
-function MarketDetailPage() {
-    const [expanded, setExpanded] = React.useState(false);
+function MarketDetailPage({history}) {
     const params = useParams();
     const [post, setPost] = useState([]);
     const [changeId, setChangeId] = useState("");
@@ -98,8 +97,8 @@ function MarketDetailPage() {
                 ticket_id : post.ticket_id
             })
             .then((res) => {
-                console.log(res.data);
                 alert(res.data);
+                history.push('/market')
             });
     };
 

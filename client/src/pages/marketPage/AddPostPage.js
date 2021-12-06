@@ -4,11 +4,10 @@ import PrimaryButton from "../../components/PrimaryButton/PrimaryButton";
 import axios from "axios";
 import { ContactPageStyled } from "../contactPage/ContactPage";
 import { Select } from "antd";
-import { MarketContainer, MarketTitleContainer } from "./marketStyles";
 
 const { Option } = Select;
 
-function AddPostPage(props) {
+function AddPostPage({history}) {
   const [payinfoId, setPayinfoId] = useState("");
   const [content, setContent] = useState("");
   const [title, setTitle] = useState("");
@@ -63,8 +62,10 @@ function AddPostPage(props) {
           setTitle("");
         }
         setTimeout(() => {
+
           setSent(false);
-        }, 3000);
+          history.push('/market')
+        }, 1500);
       })
       .catch(() => {
         console.log("message not sent");
