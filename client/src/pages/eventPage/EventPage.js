@@ -54,7 +54,7 @@ function EventPage(props) {
     <>
       <BackColor>
         <Header />
-        <EventTitle title={"November Event"} />
+        <EventTitle title={"December Event"} />
         <div
           style={{ display: "flex", justifyContent: "center", padding: "2rem" }}
         >

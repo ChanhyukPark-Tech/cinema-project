@@ -4,9 +4,11 @@ import axios from "axios";
 import Header from "../../components/header/Header";
 import Title from "../../components/Title/Title";
 import {Button, Space, Table, Tag} from "antd";
-import EventTitle from "../eventPage/EventTitle";
+import {Typography, Divider} from 'antd';
+
 
 function MyPage({history}) {
+const { Text} = Typography;
     const current = new Date();
     const params = useParams();
     const memberId = params.id;
@@ -117,6 +119,7 @@ function MyPage({history}) {
 
         return date.getFullYear() + '-' + month + '-' + day;
     }
+
     const reserveColumns = [
         {
             title: '결제일',
@@ -186,14 +189,15 @@ function MyPage({history}) {
             <Header/>
             <div style={{margin: '0 2vw'}}>
 
-                <Title title={`${userDetail.Nm}`}/>
+                <Title title={`마이페이지`}/>
 
                 <Table columns={columns} dataSource={data}/>
-                <Title title={'회원한마디'}/>
-                <h3 style={{textAlign: 'center', fontSize: '30px', margin: '40px 0'}}>
+                <Title title={'소개팅문구'} small={"small"}/>
+                
+                <h3 style={{border:'3px solid black', textAlign: 'center', fontSize: '30px', margin: '40px 0'}}>
                     {userDetail.selfPR}
                 </h3>
-                <EventTitle title={"예매내역"}/>
+                <Title title={"예매내역"} small={"small"}/>
                 <Table columns={reserveColumns} dataSource={reserveMovies}/>
             </div>
 
