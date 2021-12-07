@@ -30,7 +30,7 @@ const HomePage = ({history}) => {
         <Movies theme="dark" movies={movies} activeNum={5} />
       </SectionMovies>
       <Title title={"진행중인 이벤트"} />
-      <Carousel theme="dark" height={500} items={eventItems} />
+      <Carousel theme="dark" height={773} items={eventItems} />
       <Footer />
     </>
   );

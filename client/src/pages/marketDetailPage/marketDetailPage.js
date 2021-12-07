@@ -1,42 +1,18 @@
 import React, {useEffect, useState} from "react";
 import Header from "../../components/header/Header";
-import Footer from "../../components/Footer/Footer";
-import {BackColor} from "../eventPage/eventStyles";
 import {useParams} from "react-router-dom";
-import {DetailInfoStyle, OneContentContainer} from "./marketDetailStyles";
-import {
-    MarketContainer,
-    MarketTitleContainer,
-} from "../marketPage/marketStyles";
 import axios from "axios";
 import {Input, Button} from "antd";
-import {styled} from '@mui/material/styles';
 import Card from '@mui/material/Card';
 import CardHeader from '@mui/material/CardHeader';
 import CardMedia from '@mui/material/CardMedia';
 import CardContent from '@mui/material/CardContent';
 import CardActions from '@mui/material/CardActions';
-import Collapse from '@mui/material/Collapse';
-import Avatar from '@mui/material/Avatar';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
-import {red} from '@mui/material/colors';
-import FavoriteIcon from '@mui/icons-material/Favorite';
-import ShareIcon from '@mui/icons-material/Share';
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 
 
-// const Expand = styled((props) => {
-//   const { expand, ...other } = props;
-//   return <IconButton {...other} />;
-// })(({ theme, expand }) => ({
-//   transform: !expand ? 'rotate(0deg)' : 'rotate(180deg)',
-//   marginLeft: 'auto',
-//   transition: theme.transitions.create('transform', {
-//     duration: theme.transitions.duration.shortest,
-//   }),
-// }));
 
 function MarketDetailPage({history}) {
     const params = useParams();
@@ -44,7 +20,7 @@ function MarketDetailPage({history}) {
     const [changeId, setChangeId] = useState("");
     const [forPostUrl, setForPostUrl] = useState([]);
     const [memberId, setMemberId] = useState(0);
-
+    const [seats,setSeats] = useState([]);
     useEffect(() => {
         setMemberId(localStorage.getItem("member_id"));
         //console.log(userName);
@@ -54,39 +30,22 @@ function MarketDetailPage({history}) {
         axios
             .post("/api/util/marketPost", {marketPost_id: params.id})
             .then((data) => {
-                console.log(data.data[0])
                 setPost(data.data[0]);
+                setSeats(data.data);
                 axios
                     .post("/api/movie/movieDetail", {RepresentationMovieCode: data.data[0].RepresentationMovieCode})
                     .then((data) => {
                         setForPostUrl(data.data[0]);
-                        console.log(data);
                     });
-                console.log(data.data[0]);
             });
 
 
-        //setCurId(post.member_id);
     }, [params.id]);
 
-    // useEffect(() => {
-    //     axios
-    //         .post("api/movie/movieDetail", {RepresentationMovieCode: post.RepresentationMovieCode})
-    //         .then((data) => {
-    //             setForPostUrl(data.data[0]);
-    //             console.log(data.data[0]);
-    //         });
-    //     //setCurId(post.member_id);
-    // }, []);
 
-
-    // const handleExpandClick = () => {
-    //   setExpanded(!expanded);
-    // };
 
     const handleChange = (e) => {
         setChangeId(e.target.value);
-        console.log(changeId);
     };
 
     const changeIdHandler = (e) => {
@@ -157,7 +116,9 @@ function MarketDetailPage({history}) {
                     <Typography paragraph>📱연락처: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{post.phoneNm}</Typography>
                     <Typography paragraph>🕘상영시간: &nbsp;&nbsp;{post.startDt}~{post.endDt} </Typography>
                     <Typography
-                        paragraph>🪑좌석: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{post.seatNm}</Typography>
+                        paragraph>🪑좌석: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{seats.map(seat => (
+                            seat.seatNm + " | "
+                    ))}</Typography>
                     <Typography paragraph>🎬상영지점: &nbsp;&nbsp;{post.CinemaNameKR}점</Typography>
                     <Typography paragraph>🎬상영관:  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{post.place_place_id}관</Typography>
                     <Typography style={{textAlign: "center"}}>

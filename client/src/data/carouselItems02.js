@@ -1,10 +1,10 @@
 const carouselItems = [
   {
-    img: 'https://image.freepik.com/free-vector/modern-music-event-poster-template_1361-1292.jpg',
+    img: 'https://res.cloudinary.com/dvrcr0hkb/image/upload/v1638863612/test/001_zctz3s.jpg',
     video: '/img/ad/TimeFreak.mp4',
   },
   {
-    img: 'http://m.cjone.com/cjmweb/upfile/2020/07/21/2007_cgv_evt1_cgv200720.jpg',
+    img: 'https://res.cloudinary.com/dvrcr0hkb/image/upload/v1638863612/test/002_vnuu1o.jpg',
     video: '/img/ad/MySpy.mp4',
   },
   {

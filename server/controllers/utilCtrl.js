@@ -134,7 +134,7 @@ WHERE marketPost.marketPost_id = ${marketPost_id}`;
 
     updateMarketPost: async (req, res) => {
         // 11/15 추가
-        const {member_id, payinfo_id,ticket_id} = req.body;
+        const {member_id, payinfo_id, ticket_id} = req.body;
 
         const findId = `SELECT member_id FROM member WHERE Nm = '${member_id}';`;
 
@@ -146,8 +146,8 @@ WHERE marketPost.marketPost_id = ${marketPost_id}`;
                 if (error) throw error;
             });
 
-            connection.query(seatChangeSQL,(error,rows)=>{
-                if(error) throw error;
+            connection.query(seatChangeSQL, (error, rows) => {
+                if (error) throw error;
             })
 
 
@@ -186,6 +186,8 @@ WHERE marketPost.marketPost_id = ${marketPost_id}`;
             left join schedule on seat.schedule_schedule_id = schedule.schedule_id
             left join movie on schedule.movie_movie_id = movie.movie_id)
             WHERE payinfo.member_member_id = ${member_id}
+                        GROUP BY payinfo_id
+
             ORDER BY payDt desc
             `;
         connection.query(sql, (error, rows) => {

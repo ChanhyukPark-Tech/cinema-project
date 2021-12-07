@@ -4,11 +4,9 @@ import axios from "axios";
 import Header from "../../components/header/Header";
 import Title from "../../components/Title/Title";
 import {Button, Space, Table, Tag} from "antd";
-import {Typography, Divider} from 'antd';
 
 
 function MyPage({history}) {
-const { Text} = Typography;
     const current = new Date();
     const params = useParams();
     const memberId = params.id;
@@ -25,9 +23,7 @@ const { Text} = Typography;
 
         axios.post('/api/util/getTicket', {member_id: memberId})
             .then(res => {
-                console.log(res.data.filter(data => {
-                    return data.movieNm
-                }))
+
                 setReserveMovies(res.data.filter(data => {
                     return data.movieNm
                 }));
@@ -110,9 +106,6 @@ const { Text} = Typography;
     function dateFormat(date) {
         let month = date.getMonth() + 1;
         let day = date.getDate();
-        let hour = date.getHours();
-        let minute = date.getMinutes();
-        let second = date.getSeconds();
 
         month = month >= 10 ? month : '0' + month;
         day = day >= 10 ? day : '0' + day;
