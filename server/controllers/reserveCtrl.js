@@ -62,16 +62,14 @@ on foo.theater_theater_id = theater.theater_id ) poo join place on poo.place_pla
             if (error) throw error;
         });
 
-        const sq3 = `DELETE FROM seat WHERE ticket_ticket_id = 
-        (SELECT ticket_id FROM ticket where payinfo_payinfo_id = ${payinfo_id});`
+        const sq3 = `DELETE FROM ticket WHERE payinfo_payinfo_id = ${payinfo_id};`
         connection.query(
             sq3,(error,rows) => {
                 if(error) throw error;
             }
         );
 
-        const sql2 = `DELETE FROM seat WHERE ticket_ticket_id = 
-        (SELECT ticket_id FROM ticket where payinfo_payinfo_id = ${payinfo_id});`;
+        const sql2 = `DELETE FROM payinfo WHERE payinfo_id = ${payinfo_id};`
         connection.query(sql2, (error, rows) => {
             if (error) throw error;
         });
