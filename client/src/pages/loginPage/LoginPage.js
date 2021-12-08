@@ -57,7 +57,7 @@ const LoginPage = ({error,history}) => {
                                 <input
                                     type="text"
                                     name="email"
-                                    placeholder="이메일을 입력해주세요"
+                                    placeholder="아이디를 입력해주세요"
                                     value={inputs.email}
                                     onChange={handleChange}
                                 />

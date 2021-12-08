@@ -42,7 +42,7 @@ const Header = ({theme}) => {
                         </li>
                     </ul>
                     <ul className={`${classes.menu} ${classes.menu2}`}>
-                        {userName?.substring(0, 3) === "관리자" ? (
+                        {userName?.substring(0, 3) === "관리자" || userName?.includes("-") ? (
                             <></>
                         ) : (
                             <>
