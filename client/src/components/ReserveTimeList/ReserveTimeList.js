@@ -9,7 +9,7 @@ function ReserveTimeList({
   times,
 }) {
   const [curHoverd, setCurHoverd] = useState(0);
-
+  const current = new Date();
   return (
     <div>
       <Calendar  setSelectedDate={setSelectedDate} />
@@ -19,7 +19,7 @@ function ReserveTimeList({
 
           <Button
             style={{ width: 200, alignItems: "center" }}
-            disabled={!localStorage.getItem("name")}
+            disabled={!localStorage.getItem("name") || time?.startDt.substring(0,2) < current.getHours()}
             onMouseEnter={(e) => {
               e.preventDefault();
               setCurHoverd(time.schedule_id);
