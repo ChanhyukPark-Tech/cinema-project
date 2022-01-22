@@ -53,3 +53,9 @@
 
 
 기획, 데이터베이스 모델링, 실제 웹사이트 구축까지 `one cycle`을 경험 해본 프로젝트
+
+
+## Contributors
+
+![image](https://user-images.githubusercontent.com/69495129/150632894-e24063f4-4f4c-4d22-8f16-bac4b19919f4.png)
+
